@@ -45,6 +45,7 @@
 
                 <Button
                     android:id="@+id/btn_masa"
+                    android:onClick="clickBtnMasa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/Siguiente" />
@@ -158,10 +159,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:onClick="clickBtnIngrediente"
                     android:text="@string/Siguiente" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tv_ingrediente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/textos"
@@ -215,7 +217,8 @@
                     android:id="@+id/btn_tamano"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Siguiente"
+                    android:text="@string/Finalizar"
+                    android:onClick="clickBtnTamano"
                     android:enabled="false"/>
 
                 <TextView
