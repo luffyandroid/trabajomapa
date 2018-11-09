@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">U3_EjercicioSpinner2pizzeria</string>
+    <string name="app_name">ZPruebGoogleMaps</string>
+    <string name="title_activity_maps">Map</string>
 
-    <string name="masa">Masa</string>
-    <string name="Siguiente">Siguiente</string>
-    <string name="Finalizar">Finalizar pedido</string>
+    <string name="opciones">Opciones</string>
+    <string name="mover">Mover</string>
+    <string name="animar">Animar</string>
+    <string name="pos">Pos</string>
 </resources>

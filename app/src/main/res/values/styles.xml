@@ -1,17 +1,30 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- BASE FONDO CABECERA -->
+    <style name="Cabecera">
+        <item name="android:background">@color/verde</item>
+    </style>
 
-    <style name="textos">
-        <item name="android:textColor">#0d0c0c</item>
-        <item name="android:textSize">@dimen/d20</item>
+    <!-- TEXTO CABECERA -->
+    <style name="txtcabecera">
+        <item name="android:textColor">@color/blanco</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- TXT INGRESAR-->
+    <style name="txtingresar">
+        <item name="android:textSize">@dimen/txtingresardimens</item>
+        <item name="android:textColor">@color/verde</item>
+        <item name="android:textColorHint">@color/gris</item>
     </style>
 
 </resources>
