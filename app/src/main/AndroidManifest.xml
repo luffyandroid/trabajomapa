@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CAPublicarOfertaActivity" />
+        <activity
+            android:name=".BAMapaActivity"
+            android:label="@string/title_activity_bamapa"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
