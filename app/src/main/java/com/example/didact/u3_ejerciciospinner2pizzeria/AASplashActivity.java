@@ -1,4 +1,4 @@
-package com.example.didact.u3_ejerciciospinner2pizzeria;
+package com.example.fl.trabajomapa;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

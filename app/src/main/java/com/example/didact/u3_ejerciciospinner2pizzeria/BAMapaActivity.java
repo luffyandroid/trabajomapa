@@ -1,4 +1,4 @@
-package com.example.didact.u3_ejerciciospinner2pizzeria;
+package com.example.fl.trabajomapa;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

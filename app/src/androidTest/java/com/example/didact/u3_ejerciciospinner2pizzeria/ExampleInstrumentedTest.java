@@ -1,4 +1,4 @@
-package com.example.didact.u3_ejerciciospinner2pizzeria;
+package com.example.fl.trabajomapa;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.didact.u3_ejerciciospinner2pizzeria", appContext.getPackageName());
+        assertEquals("com.example.fl.trabajomapa", appContext.getPackageName());
     }
 }

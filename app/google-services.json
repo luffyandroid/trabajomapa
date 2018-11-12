@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1018962536927:android:fe40e65866a191a5",
         "android_client_info": {
-          "package_name": "com.example.didact.u3_ejerciciospinner2pizzeria"
+          "package_name": "com.example.fl.trabajomapa"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1018962536927-9qhebqhgj9ndflune521q0bp59drjpl5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.didact.u3_ejerciciospinner2pizzeria",
+            "package_name": "com.example.fl.trabajomapa",
             "certificate_hash": "09f78eb2fdb8dc983406c710689b66edcc6b87ec"
           }
         },

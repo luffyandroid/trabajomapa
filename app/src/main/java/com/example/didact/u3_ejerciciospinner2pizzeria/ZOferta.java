@@ -1,4 +1,4 @@
-package com.example.didact.u3_ejerciciospinner2pizzeria;
+package com.example.fl.trabajomapa;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.didact.u3_ejerciciospinner2pizzeria">
+    package="com.example.fl.trabajomapa">
 
     <application
         android:allowBackup="true"
