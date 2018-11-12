@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1018962536927",
+    "firebase_url": "https://geowork-6d19d.firebaseio.com",
+    "project_id": "geowork-6d19d",
+    "storage_bucket": "geowork-6d19d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018962536927:android:fe40e65866a191a5",
+        "android_client_info": {
+          "package_name": "com.example.didact.u3_ejerciciospinner2pizzeria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018962536927-9qhebqhgj9ndflune521q0bp59drjpl5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.didact.u3_ejerciciospinner2pizzeria",
+            "certificate_hash": "09f78eb2fdb8dc983406c710689b66edcc6b87ec"
+          }
+        },
+        {
+          "client_id": "1018962536927-1s16qdms8649k19816vdlbejkdpc3ont.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJjMFYmvNsL5lAqlDfD3Uzd2XDkGq62eo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018962536927-1s16qdms8649k19816vdlbejkdpc3ont.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
