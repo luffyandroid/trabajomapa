@@ -7,5 +7,14 @@
     android:orientation="vertical"
     tools:context="com.example.fl.trabajomapa.AASplashActivity">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieaa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="as_splash_trabajarapp.json"
+        app:lottie_imageAssetsFolder="assets"
+        app:lottie_loop="true"/>
+
 
 </LinearLayout>
