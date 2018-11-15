@@ -30,6 +30,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.google.firebase:firebase-core:16.0.1'
 
+    //LOTTIE
     implementation 'com.airbnb.android:lottie:2.7.0'
+    implementation 'com.sun.mail:android-mail:1.5.5'
+    implementation 'com.sun.mail:android-activation:1.5.5'
+
+    //MAIL
 }
 apply plugin: 'com.google.gms.google-services'

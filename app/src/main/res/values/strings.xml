@@ -13,4 +13,33 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-- TEXTO EMAIL -->
+
+    <string name="AsuntoEmailPagoRealizado">
+        Pago realizado correctamente, Publicación anuncio en GeoWork
+    </string>
+
+    <string name="CuerpoEmail01">
+                <![CDATA[
+        Pago realizado correctamente.
+        <br>-Concepto: Publicación oferta de empleo en GeoWork</br>
+        <br>-Importe del pago: 3 Euros</br>
+        <br>-Expedido por: GeoWork</br>
+]]>
+    </string>
+
+    <string name="CuerpoEmail02">
+            <![CDATA[
+<br></br>
+
+<br>Cualquier problema con la cuenta o duda nos puedes enviar un email a <a href="mailto:didact@didact.es">didact@didact.es</a></br>
+<br>o si lo prefieres llamarnos al teléfono: <a href="tel:+34956336613">956336613</a>
+<br></br>
+<br>Un saludo :)</br>
+
+<center><a href="http://www.didact.es" target="_blank"><img src="http://www.didact.es/almacen/l1_didact1.png" width="200" height="87" /><img src="http://www.didact.es/almacen/l2_blanco.png" width="50" height="43" /></a><a href="http://www.manipuladoronline.com" target="_blank"><img src="http://www.didact.es/almacen/l3_manipulador.png" width="200" height="69" /></a></center>
+
+ ]]>
+    </string>
 </resources>
