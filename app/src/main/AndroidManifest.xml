@@ -21,7 +21,8 @@
             android:name=".BAMapaActivity"
             android:label="@string/title_activity_bamapa"
             android:theme="@style/AppTheme" />
-        <activity android:name=".CCPublicadoActivity"></activity>
+        <activity android:name=".CCPublicadoActivity" />
+        <activity android:name=".CBPayPalActivity"></activity>
     </application>
 
 </manifest>
