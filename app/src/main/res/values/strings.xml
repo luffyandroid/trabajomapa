@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ZPruebGoogleMaps</string>
+    <string name="app_name">GeoWork</string>
     <string name="title_activity_maps">Map</string>
 
     <string name="opciones">Opciones</string>
