@@ -24,7 +24,6 @@ public class AASplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_aasplash);
 
-
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -39,5 +38,10 @@ public class AASplashActivity extends AppCompatActivity {
         };
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
+
+
     }
+
+
+
 }

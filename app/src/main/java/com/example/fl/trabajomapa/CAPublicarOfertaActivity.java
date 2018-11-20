@@ -30,7 +30,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
 
     //DECLARO VARIANTES
     TextView tvocultoCA;
-    
+
     EditText etnombrepuestoCA, etdetallespuestoCA, etsalariopuestoCA,
             etdireccionnegocioCA, ettelefononegocioCA, etcorreonegocioCA;
 
@@ -68,6 +68,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
         String salariopuestoCA = etsalariopuestoCA.getText().toString();
         String direccionnegocioCA = etdireccionnegocioCA.getText().toString();
         String telefononegocioCA = ettelefononegocioCA.getText().toString();
+        String correonegocioCA = etcorreonegocioCA.getText().toString();
 
         //COMPROBAR SI LOS CAMPOS NO ESTAN VACIOS
         if (nombrepuestoCA.equals("") || direccionnegocioCA.equals("")) {
@@ -80,7 +81,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
 
             boolean error = false;
 
-            //VALIDAR SALARIO Y TELEFONO
+            //VALIDAR SALARIO, TELEFONO E MAIL
 
             //VALIDAR SALARIO
             if (!Pattern.matches("^[0-9]{9}$", salariopuestoCA)) {
@@ -93,6 +94,15 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
                 ettelefononegocioCA.setError("Teléfono no válido");
                 error = true;
             }
+
+            //VALIDAR MAIL
+            if (!Pattern.matches("[a-zA-Z0-9._-]+@[a-z0-9]+[.]+[a-z]+", correonegocioCA)) {
+                etcorreonegocioCA.setError("Correo no válido");
+                error = true;
+            }
+
+
+
 
             if (error) {
 
@@ -196,6 +206,4 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }
