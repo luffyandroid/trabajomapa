@@ -45,7 +45,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
     Spinner spincategoriaCA;
 
     TextView tvocultoCA;
-    
+
     EditText etnombrepuestoCA, etdetallespuestoCA, etsalariopuestoCA,
             etdireccionnegocioCA, ettelefononegocioCA, etcorreonegocioCA;
 
@@ -174,7 +174,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
 
             boolean error = false;
 
-            //VALIDAR SALARIO, TELEFONO E MAIL
+            //VALIDAR SALARIO Y TELEFONO
 
             //VALIDAR SALARIO
             if (!Pattern.matches("^[0-9]{9}$", salariopuestoCA)) {
@@ -300,8 +300,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
 
 }
