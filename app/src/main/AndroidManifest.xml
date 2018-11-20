@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/appicon_circulo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AASplashActivity">
+        <activity android:name=".CAPublicarOfertaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CAPublicarOfertaActivity"
+        <activity android:name=".AASplashActivity"
             android:screenOrientation="portrait" />
 
         <activity

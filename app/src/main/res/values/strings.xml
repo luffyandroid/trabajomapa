@@ -42,4 +42,39 @@
 
  ]]>
     </string>
+
+    <!-- TEXTO CATEGORIAS -->
+    <string name="Otros">Otros</string>
+    <string name="Administracion">Administración</string>
+    <string name="Agricultura">Agricultura</string>
+    <string name="Animacion">Animación</string>
+    <string name="Atencionalcliente">Atención al cliente</string>
+    <string name="CalidadID">Calidad I+D</string>
+    <string name="Comercial">Comercial</string>
+    <string name="Construccion">Construcción</string>
+    <string name="DisenoyArtesgraficas">Diseño y Artes gráficas</string>
+    <string name="Educacion">Educación</string>
+    <string name="Farmaceutica">Farmaceutica</string>
+    <string name="Finanzasybanca">Finanzas y banca</string>
+    <string name="Funerarias">Funerarias</string>
+    <string name="Hosteleria">Hostelería</string>
+    <string name="Informatica">Informática</string>
+    <string name="Ingenieriaytecnico">Ingeniería y técnico</string>
+    <string name="Legal">Legal</string>
+    <string name="Limpeza">Limpeza</string>
+    <string name="Logisticayalmacen">Logística y almacén</string>
+    <string name="Marketingycomunicaciones">"Marketing y comunicaciones</string>
+    <string name="Musica">Música</string>
+    <string name="Profesionesyoficios">Profesiones y oficios</string>
+    <string name="Recursoshumanos">Recursos humanos</string>
+    <string name="Sanidad">Sanidad</string>
+    <string name="Transportes">Transportes</string>
+    <string name="Turismo">Turismo</string>
+    <string name="Venta">Venta</string>
+    <string name="Veterinaria">Veterinaria</string>
+
+
+
+
+
 </resources>

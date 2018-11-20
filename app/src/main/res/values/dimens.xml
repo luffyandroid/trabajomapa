@@ -21,6 +21,10 @@
     <dimen name="paddinginterior">15dp</dimen>
     <dimen name="espaciointeor">50dp</dimen>
 
+    <!-- TAMAÑOS SPINNER -->
+    <dimen name="txtspinner">21dp</dimen>
+    <dimen name="paddingspinner">10dp</dimen>
+
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>

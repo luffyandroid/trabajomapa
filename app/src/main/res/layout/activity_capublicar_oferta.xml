@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
-                    android:hint="Nombre del puesto"
+                    android:hint="Nombre del puesto (obligatorio)"
                     app:hintTextAppearance="@style/etflotante">
 
                     <android.support.design.widget.TextInputEditText
@@ -91,7 +91,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Detalles del puesto"
+                    android:hint="Salario mensual"
                     app:hintTextAppearance="@style/etflotante">
 
                     <android.support.design.widget.TextInputEditText
@@ -103,6 +103,14 @@
                         android:inputType="number" />
 
                 </android.support.design.widget.TextInputLayout>
+
+                <Spinner
+                    android:id="@+id/spincategoriaCA"
+                    android:spinnerMode="dialog"
+                    android:layout_weight="0.15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Spinner>
 
                 <Space
                     android:layout_width="match_parent"
@@ -118,7 +126,7 @@
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Dirección"
+                        android:hint="Dirección (Obligatorio)"
                         app:hintTextAppearance="@style/etflotante">
 
                         <android.support.design.widget.TextInputEditText
