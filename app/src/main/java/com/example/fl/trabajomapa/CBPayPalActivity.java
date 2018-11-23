@@ -22,7 +22,7 @@ public class CBPayPalActivity extends AppCompatActivity {
     public static final int PAYPAL_REQUEST_CODE = 7171;
 
     private static PayPalConfiguration config = new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION)
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
 
     //CREO QUE ES PARA ELIMINAR LA ACTIVIDAD DE PAYPAL CUANDO FINALIZA

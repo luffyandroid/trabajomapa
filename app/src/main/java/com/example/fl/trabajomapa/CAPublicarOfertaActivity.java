@@ -1,7 +1,9 @@
 package com.example.fl.trabajomapa;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -13,24 +15,46 @@ import android.location.LocationProvider;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 import android.widget.AdapterView.OnItemSelectedListener;
+
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.AutocompletePredictionBufferResponse;
+import com.google.android.gms.location.places.Places;
+
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.tasks.Task;
 
 
 import java.io.IOException;
@@ -38,18 +62,34 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-public class CAPublicarOfertaActivity extends AppCompatActivity {
+public class CAPublicarOfertaActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+    //PARTE CODIGO AUTOOMPLETE
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
 
     //DECLARO VARIANTES
 
     Spinner spincategoriaCA;
-
-    TextView tvocultoCA;
-
+    TextView tvocultoCA, tvocultofechaCA;
     EditText etnombrepuestoCA, etdetallespuestoCA, etsalariopuestoCA,
             etdireccionnegocioCA, ettelefononegocioCA, etcorreonegocioCA;
-
     CheckBox checkpoliticaCA;
+
+
+
+    private static final String TAG = "CAPublicaOfertaActivity";
+
+    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
+            new LatLng(39.906374, -105.122337), new LatLng(39.949552, -105.068779));
+
+    //PARTE CODIGO AUTOOMPLETE
+    AutoCompleteTextView etdireccionnegocioAutoCA;
+    PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
+    GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +102,12 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
                     "Comprueba tu conexión a Internet", Toast.LENGTH_LONG)
                     .show();
         }
+
+        //00 AUTOCOMPLETE
+        etdireccionnegocioAutoCA = (AutoCompleteTextView) findViewById(R.id.etdireccionnegocioAutoCA);
+        //INICIAR PROCESO AUTOOMPLETE
+        init();
+
 
         //VARIANTES DEL SPINNER
         List<ZSpinnerCategoria> items = new ArrayList<ZSpinnerCategoria>(15);
@@ -96,23 +142,33 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
 
         //TODAS LAS MIERDAS DEL SPINNER
         spincategoriaCA = (Spinner) findViewById(R.id.spincategoriaCA);
-        spincategoriaCA.setAdapter(new ZSpinnerCategoriaAdaptador(this,items));
-        spincategoriaCA.setOnItemSelectedListener(new OnItemSelectedListener()
-        {
+        spincategoriaCA.setAdapter(new ZSpinnerCategoriaAdaptador(this, items));
+        spincategoriaCA.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id)
-            {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Toast.makeText(adapterView.getContext(), ((ZSpinnerCategoria) adapterView.getItemAtPosition(position)).getNombre(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView)
-            {
+            public void onNothingSelected(AdapterView<?> adapterView) {
                 //nothing
             }
         });
 
 
+        //PROTOCOLO FECHA Y HORA
+        Date d = new Date();
+
+        //HORA
+        SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
+        String horaString = ho.format(d);
+
+        //FECHA
+        SimpleDateFormat fecc = new SimpleDateFormat("d MMMM yyyy");
+        String fechacComplString = fecc.format(d);
+
+        //HORA + FECHA
+        //00 tvocultofechaCA.setText(fechacComplString + horaString);
 
         //ENLAZO VARIANTES
         etnombrepuestoCA = (EditText) findViewById(R.id.etnombrepuestoCA);
@@ -123,11 +179,14 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
         etcorreonegocioCA = (EditText) findViewById(R.id.etcorreonegocioCA);
 
         tvocultoCA = (TextView) findViewById(R.id.tvocultoCA);
+        tvocultofechaCA = (TextView) findViewById(R.id.tvocultofechaCA);
 
         checkpoliticaCA = (CheckBox) findViewById(R.id.checkpoliticaCA);
 
-    }//FIN ONCREATE
+        //00 AUTOCOMPLETE
+        //etdireccionnegocioAutoCA = (AutoCompleteTextView) findViewById(R.id.etdireccionnegocioAutoCA);
 
+    }//FIN ONCREATE
 
 
     //COMPROBACIÓN CONEXIÓN INTERNET
@@ -148,8 +207,9 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
         return bConectado;
     }
 
+
     //BOTON OBTENER DIRECCION
-    public void obtenerdireccion (View view){
+    public void obtenerdireccion(View view) {
         locationStart();
     }
 
@@ -177,7 +237,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
             //VALIDAR SALARIO Y TELEFONO
 
             //VALIDAR SALARIO
-            if (!Pattern.matches("^[0-9]{9}$", salariopuestoCA)) {
+            if (!Pattern.matches("^[0-9]", salariopuestoCA)) {
                 etsalariopuestoCA.setError("Valores en € completos");
                 error = true;
             }
@@ -197,12 +257,20 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
             //00 AQUI PONER COMPROBACIÓN CHECK
 
 
+            if (!error) {
+                if (!checkpoliticaCA.isChecked()) {
 
-            if (error) {
+                    //Si el CheckBox no esta chekeado:
+                    Toast.makeText(getApplicationContext(),
+                            "Debes aceptar la Política de Privacidad",
+                            Toast.LENGTH_LONG).show();
+                }
 
-                Toast.makeText(getApplicationContext(), "Comprueba que los datos son correctos datos", Toast.LENGTH_LONG).show();
 
+                if (error) {
 
+                    Toast.makeText(getApplicationContext(), "Comprueba que los datos son correctos datos", Toast.LENGTH_LONG).show();
+                }
             }
 
 
@@ -228,6 +296,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
         tvocultoCA.setText("Localizacion agregada");
         etdireccionnegocioCA.setText("");
     }
+
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 1000) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -236,6 +305,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
             }
         }
     }
+
     public void setLocation(Location loc) {
         //OBTENER LA DIRECCION DE LA CALLE A PARTIR DE LA LATITUD Y LA LONGITUD
         if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
@@ -256,33 +326,39 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
     //COMIENZA GESTION DE LOCALIZACION
     public class Localizacion implements LocationListener {
         CAPublicarOfertaActivity CAPublicarOfertaActivity;
+
         public CAPublicarOfertaActivity getCAPublicarOfertaActivity() {
             return CAPublicarOfertaActivity;
         }
+
         public void setMainActivity(CAPublicarOfertaActivity CAPublicarOfertaActivity) {
             this.CAPublicarOfertaActivity = CAPublicarOfertaActivity;
         }
+
         @Override
         public void onLocationChanged(Location loc) {
 
             // ESTE METODO SE EJECUTA CADA VEZ QUE EL GPS RECIBE NUEVAS COORDENADAS DEBIDO A LA DETECCION DE UN CAMBIO DE UBICACION
             loc.getLatitude();
             loc.getLongitude();
-            String Text = "Lat = "+ loc.getLatitude() + "\n Long = " + loc.getLongitude();
+            String Text = "Lat = " + loc.getLatitude() + "\n Long = " + loc.getLongitude();
             tvocultoCA.setText(Text);
             this.CAPublicarOfertaActivity.setLocation(loc);
         }
+
         @Override
         public void onProviderDisabled(String provider) {
             // AVISO DE GPS DESACTIVADO
             tvocultoCA.setText("GPS Desactivado");
         }
+
         @Override
         public void onProviderEnabled(String provider) {
 
             // AVISO DE GPS ACTIVO
             tvocultoCA.setText("GPS Activado");
         }
+
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             switch (status) {
@@ -302,4 +378,91 @@ public class CAPublicarOfertaActivity extends AppCompatActivity {
     }
 
 
+    //DIALOGO DE POLITICA
+    public void dialogopolitica(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("POLITICAS DE PRIVACIDAD Y CONDICIONES");
+        builder.setMessage(R.string.Politicamensaje);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                checkpoliticaCA.setChecked(true);
+
+
+            }
+        });
+
+        builder.setNegativeButton("Rechazar", null);
+        Dialog dialog = builder.create();
+        dialog.show();
+
+
+    }
+
+
+    //PROTOCOLO AUTOCOMPLETE
+    private void init() {
+        Log.d(TAG, "init: initializing");
+
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, this)
+                .build();
+
+        mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient,
+                LAT_LNG_BOUNDS, null);
+
+        etdireccionnegocioAutoCA.setAdapter(mPlaceAutocompleteAdapter);
+
+        etdireccionnegocioAutoCA.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER) {
+
+                }
+
+                return false;
+            }
+        });
+
+        hideSoftKeyboard();
+    }
+
+    private void hideSoftKeyboard(){
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
+    /*
+    //00
+
+    AutocompleteFilter filter = new AutocompleteFilter.Builder()
+            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_REGIONS)
+            .build();
+
+
+    public int getTypeFilter () TYPE_COUNTRY
+    Constant Value: 1005
 }
+
+*/
+/*
+
+    AutocompleteFilter.Builder filterBuilder = new AutocompleteFilter.Builder();
+	filterBuilder.setCountry("ES");
+            filterBuilder.setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS);
+
+            Intent intent =
+            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+            .setFilter(filterBuilder.build())
+            .build(this);
+
+*/
+
+
+            }

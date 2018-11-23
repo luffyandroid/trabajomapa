@@ -41,11 +41,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="@dimen/paddinginterior">
+
+                //00 AUTOCOMPLETE
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/ic_magnify"
+                    android:layout_centerVertical="true"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:id="@+id/etdireccionnegocioAutoCA"
+                    android:background="@null"
+                    android:hint="Enter Address, City or Zip Code"
+                    android:imeOptions="actionSearch"/>
+
 
                 //EditText NOMBRE PUESTO:
 
@@ -126,7 +141,7 @@
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Dirección (Obligatorio)"
+                        android:hint="Escribe la dirección o pinchar (Obligatorio)"
                         app:hintTextAppearance="@style/etflotante">
 
                         <android.support.design.widget.TextInputEditText
@@ -201,29 +216,38 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                //Texto FECHA
+                <TextView
+                    android:id="@+id/tvocultofechaCA"
+                    style="@style/txtingresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="visible"/>
+
                 //EditText POLITICA:
 
                 <CheckBox
                     android:id="@+id/checkpoliticaCA"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Política de privacidad y condiciones del anuncio" />
+                    android:text="Política de privacidad y condiciones del anuncio"
+                    android:onClick="dialogopolitica"/>
 
 
             </LinearLayout>
         </ScrollView>
 
+        //Boton PUBLICAR
+
+        <ImageView
+            android:id="@+id/imgpublicarCA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:onClick="publicaroferta"
+            app:srcCompat="@drawable/boton_publicar_c_selector" />
+
     </RelativeLayout>
-
-    //Boton PUBLICAR
-
-    <ImageView
-        android:id="@+id/imgpublicarCA"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:onClick="publicaroferta"
-        app:srcCompat="@drawable/boton_publicar_c_selector" />
-
 
 </LinearLayout>

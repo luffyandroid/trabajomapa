@@ -12,8 +12,8 @@ public class ZOferta implements Parcelable {
     String salario;
     String tipopuesto;
     String direccion;
-    String latitud;
-    String longitud;
+    Double latitud;
+    Double longitud;
     String telefono;
     String correo;
     String fecha;
@@ -32,7 +32,7 @@ public class ZOferta implements Parcelable {
                 }
             };
 
-    public ZOferta(String uidempresa, String uid, String nombre, String detalle, String salario, String tipopuesto, String direccion, String latitud, String longitud, String telefono, String correo, String fecha, String disponible) {
+    public ZOferta(String uidempresa, String uid, String nombre, String detalle, String salario, String tipopuesto, String direccion, Double latitud, Double longitud, String telefono, String correo, String fecha, String disponible) {
         this.uidempresa = uidempresa;
         this.uid = uid;
         this.nombre = nombre;
@@ -112,19 +112,19 @@ public class ZOferta implements Parcelable {
         this.direccion = direccion;
     }
 
-    public String getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(String latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
-    public String getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(String longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 
@@ -174,8 +174,8 @@ public class ZOferta implements Parcelable {
         dest.writeString(this.salario);
         dest.writeString(this.tipopuesto);
         dest.writeString(this.direccion);
-        dest.writeString(this.latitud);
-        dest.writeString(this.longitud);
+        dest.writeDouble(this.latitud);
+        dest.writeDouble(this.longitud);
         dest.writeString(this.telefono);
         dest.writeString(this.correo);
         dest.writeString(this.fecha);
@@ -190,8 +190,8 @@ public class ZOferta implements Parcelable {
         this.salario = p.readString();
         this.tipopuesto = p.readString();
         this.direccion = p.readString();
-        this.latitud = p.readString();
-        this.longitud = p.readString();
+        this.latitud = p.readDouble();
+        this.longitud = p.readDouble();
         this.telefono = p.readString();
         this.correo = p.readString();
         this.fecha = p.readString();

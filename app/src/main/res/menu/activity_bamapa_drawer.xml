@@ -4,6 +4,13 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
+        <!-- SECCION VACIA-->
+        <item
+            android:id="@+id/seccion01BA"
+            android:title=""/>
+
+
         <item
             android:id="@+id/nav_satelite"
             android:icon="@drawable/ic_menu_camera"
@@ -12,6 +19,22 @@
             android:id="@+id/nav_calles"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Gallery" />
+
+        <!-- SECCION VACIA-->
+        <item
+            android:id="@+id/seccion03BA"
+            android:title=""/>
+
+        <item
+            android:id="@+id/seccion04BA"
+            android:title=""/>
+
+
+        <item
+            android:id="@+id/seccion05BA"
+            android:title=""/>
+
+
         <item
             android:id="@+id/nav_hibrido"
             android:icon="@drawable/ic_menu_slideshow"

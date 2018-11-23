@@ -6,7 +6,7 @@
     <string name="mover">Mover</string>
     <string name="animar">Animar</string>
     <string name="pos">Pos</string>
-    <string name="title_activity_bamapa">BAMapaActivity</string>
+    <string name="title_activity_bamapa"></string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -29,6 +29,7 @@
         Pago realizado correctamente.
         <br>-Concepto: Publicación oferta de empleo en GeoWork</br>
         <br>-Importe del pago: 3 Euros</br>
+        <br>-La oferta de empleo caducará en 30 días</br>
         <br>-Expedido por: GeoWork</br>
 ]]>
     </string>
@@ -48,6 +49,7 @@
     </string>
 
     <!-- TEXTO CATEGORIAS -->
+
     <string name="Otros">Otros</string>
     <string name="Administracion">Administración</string>
     <string name="Agricultura">Agricultura</string>
@@ -76,6 +78,15 @@
     <string name="Turismo">Turismo</string>
     <string name="Venta">Venta</string>
     <string name="Veterinaria">Veterinaria</string>
+
+    <!-- TEXTO CATEGORIAS -->
+    <string name="Politicamensaje">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+
 
 
 
