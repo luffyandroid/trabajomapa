@@ -47,7 +47,8 @@
         <activity
             android:name=".BAMapaActivity"
             android:label="@string/title_activity_bamapa"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".CCPublicadoActivity"
             android:screenOrientation="portrait" />

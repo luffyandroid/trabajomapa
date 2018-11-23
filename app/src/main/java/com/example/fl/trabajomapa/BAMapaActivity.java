@@ -23,8 +23,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class BAMapaActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class BAMapaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,13 @@ public class BAMapaActivity extends AppCompatActivity
             android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.ftMain, new BBHibridoFragment());
             ft.commit();
-        } else if (id == R.id.nav_publicar) {
+        } else if (id == R.id.nav_localizar) {
+            Intent mainIntent = new Intent().setClass(getApplicationContext(), CAPublicarOfertaActivity.class);
+            startActivity(mainIntent);
+        }else if (id == R.id.nav_publicar) {
+            Intent mainIntent = new Intent().setClass(getApplicationContext(), CAPublicarOfertaActivity.class);
+            startActivity(mainIntent);
+        }else if (id == R.id.nav_info) {
             Intent mainIntent = new Intent().setClass(getApplicationContext(), CAPublicarOfertaActivity.class);
             startActivity(mainIntent);
         }

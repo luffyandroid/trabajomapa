@@ -38,6 +38,13 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -49,9 +56,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.AutocompletePredictionBufferResponse;
+
 import com.google.android.gms.location.places.Places;
 
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.tasks.Task;
@@ -60,6 +70,7 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class CAPublicarOfertaActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -72,12 +83,16 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
 
     //DECLARO VARIANTES
+    TextView tvocultoCA, tvocultofechaCA, tvocultolatitudCA, tvocultolongitudCA;
 
     Spinner spincategoriaCA;
-    TextView tvocultoCA, tvocultofechaCA;
+
+
+
     EditText etnombrepuestoCA, etdetallespuestoCA, etsalariopuestoCA,
             etdireccionnegocioCA, ettelefononegocioCA, etcorreonegocioCA;
     CheckBox checkpoliticaCA;
+    DatabaseReference dbRef;
 
 
 
@@ -180,6 +195,8 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
         tvocultoCA = (TextView) findViewById(R.id.tvocultoCA);
         tvocultofechaCA = (TextView) findViewById(R.id.tvocultofechaCA);
+        tvocultolatitudCA = (TextView) findViewById(R.id.tvocultolatitudCA);
+        tvocultolongitudCA = (TextView) findViewById(R.id.tvocultolongitudCA);
 
         checkpoliticaCA = (CheckBox) findViewById(R.id.checkpoliticaCA);
 
@@ -187,6 +204,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         //etdireccionnegocioAutoCA = (AutoCompleteTextView) findViewById(R.id.etdireccionnegocioAutoCA);
 
     }//FIN ONCREATE
+
 
 
     //COMPROBACIÓN CONEXIÓN INTERNET
@@ -209,19 +227,28 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
 
     //BOTON OBTENER DIRECCION
-    public void obtenerdireccion(View view) {
+    public void obtenerdireccion (View view){
         locationStart();
     }
 
     //MANDAR OFERTA
     public void publicaroferta(View view) {
 
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         //ENLAZO VARIANTES CAMPOS OBLIGATORIOS
         String nombrepuestoCA = etnombrepuestoCA.getText().toString();
+        String detallespuestoCA = etdetallespuestoCA.getText().toString();
         String salariopuestoCA = etsalariopuestoCA.getText().toString();
         String direccionnegocioCA = etdireccionnegocioCA.getText().toString();
         String telefononegocioCA = ettelefononegocioCA.getText().toString();
         String correonegocioCA = etcorreonegocioCA.getText().toString();
+        String latitudnegocioCA = tvocultolatitudCA.getText().toString();
+        //TODO es double porque tiene decimales so retraso de hombre
+        Double latitudint = Double.parseDouble(latitudnegocioCA);
+        String longitudnegocioCA = tvocultolongitudCA.getText().toString();
+        Double longitudint = Double.parseDouble(longitudnegocioCA);
+        String uidempresa = "empresamolongui";
 
         //COMPROBAR SI LOS CAMPOS NO ESTAN VACIOS
         if (nombrepuestoCA.equals("") || direccionnegocioCA.equals("")) {
@@ -270,6 +297,35 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 if (error) {
 
                     Toast.makeText(getApplicationContext(), "Comprueba que los datos son correctos datos", Toast.LENGTH_LONG).show();
+
+
+                }else {
+
+                    dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
+
+                    Map<String, Object> creacion = new HashMap<>();
+                    creacion.put("uidempresa/", uidempresa);
+                    creacion.put("uid/", uidempresa + "fecha" + "hora");
+                    creacion.put("nombre/", nombrepuestoCA);
+                    creacion.put("detalles/", detallespuestoCA);
+                    creacion.put("salario/", salariopuestoCA);
+                    creacion.put("tipopuesto/", "tipodepuesto");
+                    creacion.put("direccion/", direccionnegocioCA);
+                    creacion.put("latitud/", latitudint);
+                    creacion.put("longitud/", longitudint);
+                    creacion.put("telefono/", telefononegocioCA);
+                    creacion.put("correo/", correonegocioCA);
+                    creacion.put("fecha/", "fecha");
+                    creacion.put("disponible/", "disponible");
+
+                    dbRef.child(uidempresa + "fecha" + "hora").updateChildren(creacion);
+
+                    //{
+                    //if (user != null){
+
+                    //}
+                    //}
+                    Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -313,9 +369,12 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 List<Address> list = geocoder.getFromLocation(
                         loc.getLatitude(), loc.getLongitude(), 1);
+                tvocultolatitudCA.setText(String.valueOf(loc.getLatitude()));
+                tvocultolongitudCA.setText(String.valueOf(loc.getLongitude()));
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
                     etdireccionnegocioCA.setText(DirCalle.getAddressLine(0));
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();

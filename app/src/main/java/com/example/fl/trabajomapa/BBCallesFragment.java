@@ -8,13 +8,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 /**
@@ -23,6 +32,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class BBCallesFragment extends Fragment implements OnMapReadyCallback{
 
     GoogleMap calles;
+    ZOferta usu=null;
+
+    ArrayList<ZOferta> listaRecetas = new ArrayList<ZOferta>();
+
+    DatabaseReference dbRef;
+    ValueEventListener valueEventListener;
 
     public BBCallesFragment() {
         // Required empty public constructor
@@ -51,10 +66,29 @@ public class BBCallesFragment extends Fragment implements OnMapReadyCallback{
 
         //PUNTO DE INICIO DEL MAPA
         LatLng inicio = new LatLng(36.6178533,-6.3685917);
-        MarkerOptions option = new MarkerOptions();
-        option.position(inicio).title("Inicio");
-        calles.addMarker(option);
+        CameraUpdate inicioCalles =
+                CameraUpdateFactory.newLatLngZoom(new LatLng(36.6178533,-6.3685917),5);
+        dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/");
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ZOferta oferta = dataSnapshot.getValue(ZOferta.class);
+                Double latitud = oferta.getLatitud();
+                Double longitud = oferta.getLongitud();
+                LatLng prueba = new LatLng(latitud, longitud);
+                //Toast.makeText(getContext(), oferta.nombre, Toast.LENGTH_SHORT).show();
+                MarkerOptions option = new MarkerOptions();
+                option.position(prueba).title(oferta.getNombre());
+                calles.addMarker(option);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
         calles.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        calles.moveCamera(CameraUpdateFactory.newLatLng(inicio));
+        calles.moveCamera(inicioCalles);
     }
 }

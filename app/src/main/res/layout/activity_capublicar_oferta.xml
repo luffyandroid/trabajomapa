@@ -163,6 +163,22 @@
                         android:text=""
                         android:visibility="gone"/>
 
+                    <TextView
+                        android:id="@+id/tvocultolatitudCA"
+                        style="@style/txtingresar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/tvocultolongitudCA"
+                        style="@style/txtingresar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:visibility="gone"/>
+
                     //EditText GEO NEGOCIO:
 
                     <ImageView
@@ -234,20 +250,25 @@
                     android:text="Política de privacidad y condiciones del anuncio"
                     android:onClick="dialogopolitica"/>
 
+                //Boton PUBLICAR
+
+                <ImageView
+                    android:id="@+id/imgpublicarCA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:onClick="publicaroferta"
+                    app:srcCompat="@drawable/boton_publicar_c_selector" />
+
 
             </LinearLayout>
         </ScrollView>
 
-        //Boton PUBLICAR
-
-        <ImageView
-            android:id="@+id/imgpublicarCA"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:onClick="publicaroferta"
-            app:srcCompat="@drawable/boton_publicar_c_selector" />
-
     </RelativeLayout>
+
+
+
 
 </LinearLayout>

@@ -13,6 +13,7 @@
     <!-- CABECERA -->
     <dimen name="paddingcabecera">7dp</dimen>
     <dimen name="txtcabecera">30dp</dimen>
+    <dimen name="txtcabeceradialogomarker">21dp</dimen>
 
     <!-- EDIT TEXT -->
     <dimen name="txtingresardimens">21dp</dimen>

@@ -20,6 +20,21 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- TEXTO CABECERA DIALOGO MARKER -->
+    <style name="txtcabeceradialogo" parent="txtcabecera">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/txtcabeceradialogomarker</item>
+    </style>
+
+    <!-- LINEAL LAYOUT DIALOGO MARKER -->
+    <style name="layoutmarker">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">left</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_margin">@dimen/paddingcabecera</item>
+    </style>
+
+
     <!-- TXT INGRESAR-->
     <style name="txtingresar">
         <item name="android:textSize">@dimen/txtingresardimens</item>

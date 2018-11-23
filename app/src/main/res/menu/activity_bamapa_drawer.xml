@@ -13,10 +13,12 @@
 
         <item
             android:id="@+id/nav_satelite"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:icon="@drawable/ico_menu_nav_1"
+            android:title="SATELITE" />
         <item
             android:id="@+id/nav_calles"
+            android:icon="@drawable/ico_menu_nav_2"
+            android:title="CALLES" />
             android:icon="@drawable/ic_menu_gallery"
             android:title="Gallery" />
 
@@ -37,12 +39,20 @@
 
         <item
             android:id="@+id/nav_hibrido"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:icon="@drawable/ico_menu_nav_3"
+            android:title="HIBRIDO" />
+        <item
+            android:id="@+id/nav_localizar"
+            android:icon="@drawable/ico_menu_nav_4"
+            android:title="GEOLOCALIZAR" />
         <item
             android:id="@+id/nav_publicar"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:icon="@drawable/ico_menu_nav_5"
+            android:title="PUBLICAR ANUNCIO" />
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ico_menu_nav_6"
+            android:title="MÁS INFO" />
 
     </group>
 
