@@ -111,9 +111,6 @@ public class BAMapaActivity extends AppCompatActivity implements NavigationView.
             android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.ftMain, new BBHibridoFragment());
             ft.commit();
-        } else if (id == R.id.nav_localizar) {
-            Intent mainIntent = new Intent().setClass(getApplicationContext(), CAPublicarOfertaActivity.class);
-            startActivity(mainIntent);
         }else if (id == R.id.nav_publicar) {
             Intent mainIntent = new Intent().setClass(getApplicationContext(), CAPublicarOfertaActivity.class);
             startActivity(mainIntent);

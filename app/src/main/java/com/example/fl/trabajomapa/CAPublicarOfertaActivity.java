@@ -30,7 +30,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +37,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -54,20 +52,12 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import com.google.android.gms.location.places.AutocompleteFilter;
-import com.google.android.gms.location.places.AutocompletePredictionBufferResponse;
-
 import com.google.android.gms.location.places.Places;
-
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.tasks.Task;
 
-
-import java.io.IOException;
 
 import java.util.Locale;
 import java.util.Map;
@@ -83,7 +73,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
 
     //DECLARO VARIANTES
-    TextView tvocultoCA, tvocultofechaCA, tvocultolatitudCA, tvocultolongitudCA;
+    TextView tvocultoCA, tvocultofechahoraCA, tvocultolatitudCA, tvocultolongitudCA, tvocultofechaCA;
 
     Spinner spincategoriaCA;
 
@@ -99,7 +89,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     private static final String TAG = "CAPublicaOfertaActivity";
 
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
-            new LatLng(39.906374, -105.122337), new LatLng(39.949552, -105.068779));
+            new LatLng(27.666172, -18.273932), new LatLng(42.772283, 4.747570));
 
     //PARTE CODIGO AUTOOMPLETE
     AutoCompleteTextView etdireccionnegocioAutoCA;
@@ -166,24 +156,33 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                //nothing
+
             }
         });
 
 
         //PROTOCOLO FECHA Y HORA
-        Date d = new Date();
+        Date d=new Date();
 
-        //HORA
-        SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
+        tvocultofechahoraCA= (TextView) findViewById(R.id.tvocultofechahoraCA);
+        SimpleDateFormat ho=new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+
         String horaString = ho.format(d);
+        tvocultofechahoraCA.setText(horaString);
 
-        //FECHA
-        SimpleDateFormat fecc = new SimpleDateFormat("d MMMM yyyy");
-        String fechacComplString = fecc.format(d);
 
-        //HORA + FECHA
-        //00 tvocultofechaCA.setText(fechacComplString + horaString);
+        //PROTOCOLO FECHA
+        Date f=new Date();
+        tvocultofechaCA= (TextView) findViewById(R.id.tvocultofechaCA);
+        SimpleDateFormat fe=new SimpleDateFormat("dd/MM/yyyy");
+
+        String fechaString = fe.format(f);
+        tvocultofechaCA.setText(fechaString);
+
+
+
+
+
 
         //ENLAZO VARIANTES
         etnombrepuestoCA = (EditText) findViewById(R.id.etnombrepuestoCA);
@@ -194,14 +193,11 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         etcorreonegocioCA = (EditText) findViewById(R.id.etcorreonegocioCA);
 
         tvocultoCA = (TextView) findViewById(R.id.tvocultoCA);
-        tvocultofechaCA = (TextView) findViewById(R.id.tvocultofechaCA);
+
         tvocultolatitudCA = (TextView) findViewById(R.id.tvocultolatitudCA);
         tvocultolongitudCA = (TextView) findViewById(R.id.tvocultolongitudCA);
 
         checkpoliticaCA = (CheckBox) findViewById(R.id.checkpoliticaCA);
-
-        //00 AUTOCOMPLETE
-        //etdireccionnegocioAutoCA = (AutoCompleteTextView) findViewById(R.id.etdireccionnegocioAutoCA);
 
     }//FIN ONCREATE
 
@@ -234,8 +230,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     //MANDAR OFERTA
     public void publicaroferta(View view) {
 
-        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         //ENLAZO VARIANTES CAMPOS OBLIGATORIOS
         String nombrepuestoCA = etnombrepuestoCA.getText().toString();
         String detallespuestoCA = etdetallespuestoCA.getText().toString();
@@ -250,6 +244,9 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         Double longitudint = Double.parseDouble(longitudnegocioCA);
         String uidempresa = "empresamolongui";
 
+        //ETIQUETA SPINNER PARA SUBIR, IDENTIFICAR
+        String tipodepuesto = spincategoriaCA.getSelectedItem().toString();
+
         //COMPROBAR SI LOS CAMPOS NO ESTAN VACIOS
         if (nombrepuestoCA.equals("") || direccionnegocioCA.equals("")) {
 
@@ -263,17 +260,24 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
             //VALIDAR SALARIO Y TELEFONO
 
+            //01 QUE NO SEA OBLIGATORIO
+
             //VALIDAR SALARIO
-            if (!Pattern.matches("^[0-9]", salariopuestoCA)) {
+            if (!Pattern.matches("^[0-9]{9}$", salariopuestoCA)) {
                 etsalariopuestoCA.setError("Valores en € completos");
                 error = true;
             }
+
+
+            //01 QUE NO SEA OBLIGATORIO
 
             //VALIDAR TELEFONO
             if (!Pattern.matches("^[0-9]{9}$", telefononegocioCA)) {
                 ettelefononegocioCA.setError("Teléfono no válido");
                 error = true;
             }
+
+            //01  QUE NO SEA OBLIGATORIO
 
             //VALIDAR MAIL
             if (!Pattern.matches("[a-zA-Z0-9._-]+@[a-z0-9]+[.]+[a-z]+", correonegocioCA)) {
@@ -303,32 +307,28 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
                     dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
 
+
                     Map<String, Object> creacion = new HashMap<>();
                     creacion.put("uidempresa/", uidempresa);
-                    creacion.put("uid/", uidempresa + "fecha" + "hora");
+                    creacion.put("uid/", uidempresa + tvocultofechahoraCA);
                     creacion.put("nombre/", nombrepuestoCA);
                     creacion.put("detalles/", detallespuestoCA);
                     creacion.put("salario/", salariopuestoCA);
-                    creacion.put("tipopuesto/", "tipodepuesto");
+                    creacion.put("tipopuesto/", tipodepuesto);
                     creacion.put("direccion/", direccionnegocioCA);
                     creacion.put("latitud/", latitudint);
                     creacion.put("longitud/", longitudint);
                     creacion.put("telefono/", telefononegocioCA);
                     creacion.put("correo/", correonegocioCA);
-                    creacion.put("fecha/", "fecha");
+                    creacion.put("fecha/", tvocultofechaCA);
                     creacion.put("disponible/", "disponible");
 
-                    dbRef.child(uidempresa + "fecha" + "hora").updateChildren(creacion);
 
-                    //{
-                    //if (user != null){
+                    dbRef.child(uidempresa + "horaString").updateChildren(creacion);
 
-                    //}
-                    //}
                     Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
                 }
             }
-
 
         }
     }
@@ -497,31 +497,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
-    /*
-    //00
-
-    AutocompleteFilter filter = new AutocompleteFilter.Builder()
-            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_REGIONS)
-            .build();
-
-
-    public int getTypeFilter () TYPE_COUNTRY
-    Constant Value: 1005
-}
-
-*/
-/*
-
-    AutocompleteFilter.Builder filterBuilder = new AutocompleteFilter.Builder();
-	filterBuilder.setCountry("ES");
-            filterBuilder.setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS);
-
-            Intent intent =
-            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-            .setFilter(filterBuilder.build())
-            .build(this);
-
-*/
 
 
             }

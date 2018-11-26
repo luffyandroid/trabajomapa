@@ -232,14 +232,23 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                //Texto FECHA+HORA
+                <TextView
+                    android:id="@+id/tvocultofechahoraCA"
+                    android:textSize="@dimen/d18"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="FECHA"
+                    android:visibility="invisible"/>
+
                 //Texto FECHA
                 <TextView
                     android:id="@+id/tvocultofechaCA"
-                    style="@style/txtingresar"
+                    android:textSize="@dimen/d18"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:visibility="visible"/>
+                    android:layout_height="match_parent"
+                    android:text="FECHA"
+                    android:visibility="gone"/>
 
                 //EditText POLITICA:
 

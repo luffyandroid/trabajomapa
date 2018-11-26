@@ -10,7 +10,6 @@
             android:id="@+id/seccion01BA"
             android:title=""/>
 
-
         <item
             android:id="@+id/nav_satelite"
             android:icon="@drawable/ico_menu_nav_1"
@@ -19,10 +18,18 @@
             android:id="@+id/nav_calles"
             android:icon="@drawable/ico_menu_nav_2"
             android:title="CALLES" />
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+
+        <item
+            android:id="@+id/nav_hibrido"
+            android:icon="@drawable/ico_menu_nav_3"
+            android:title="HIBRIDO" />
 
         <!-- SECCION VACIA-->
+
+        <item
+            android:id="@+id/seccion02BA"
+            android:title=""/>
+
         <item
             android:id="@+id/seccion03BA"
             android:title=""/>
@@ -31,20 +38,10 @@
             android:id="@+id/seccion04BA"
             android:title=""/>
 
-
         <item
             android:id="@+id/seccion05BA"
             android:title=""/>
 
-
-        <item
-            android:id="@+id/nav_hibrido"
-            android:icon="@drawable/ico_menu_nav_3"
-            android:title="HIBRIDO" />
-        <item
-            android:id="@+id/nav_localizar"
-            android:icon="@drawable/ico_menu_nav_4"
-            android:title="GEOLOCALIZAR" />
         <item
             android:id="@+id/nav_publicar"
             android:icon="@drawable/ico_menu_nav_5"
