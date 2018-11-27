@@ -36,7 +36,7 @@
             android:layout_weight="0"
             android:adjustViewBounds="false"
             android:cropToPadding="true"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ico_dialog_descripcion" />
 
         <Space
             android:layout_width="15dp"
@@ -64,7 +64,7 @@
             android:layout_weight="0"
             android:adjustViewBounds="false"
             android:cropToPadding="true"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ico_dialog_salario" />
 
         <Space
             android:layout_width="15dp"
@@ -92,7 +92,7 @@
             android:layout_weight="0"
             android:adjustViewBounds="false"
             android:cropToPadding="true"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ico_dialog_direccion" />
 
         <Space
             android:layout_width="15dp"
@@ -120,7 +120,7 @@
             android:layout_weight="0"
             android:adjustViewBounds="false"
             android:cropToPadding="true"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ico_dialog_telefono" />
 
         <Space
             android:layout_width="15dp"
@@ -148,7 +148,7 @@
             android:layout_weight="0"
             android:adjustViewBounds="false"
             android:cropToPadding="true"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ico_dialog_correo" />
 
         <Space
             android:layout_width="15dp"

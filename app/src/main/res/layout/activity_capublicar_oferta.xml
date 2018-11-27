@@ -45,28 +45,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="@dimen/paddinginterior">
-
-                //00 AUTOCOMPLETE
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toRightOf="@+id/ic_magnify"
-                    android:layout_centerVertical="true"
-                    android:textSize="15sp"
-                    android:textColor="#000"
-                    android:id="@+id/etdireccionnegocioAutoCA"
-                    android:background="@null"
-                    android:hint="Enter Address, City or Zip Code"
-                    android:imeOptions="actionSearch"/>
-
+                android:orientation="vertical">
 
                 //EditText NOMBRE PUESTO:
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
                     android:focusableInTouchMode="true"
                     android:hint="Nombre del puesto (obligatorio)"
                     app:hintTextAppearance="@style/etflotante">
@@ -86,6 +72,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
                     android:hint="Detalles del puesto"
                     app:hintTextAppearance="@style/etflotante"
                     >
@@ -106,6 +93,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
                     android:hint="Salario mensual"
                     app:hintTextAppearance="@style/etflotante">
 
@@ -122,36 +110,30 @@
                 <Spinner
                     android:id="@+id/spincategoriaCA"
                     android:spinnerMode="dialog"
-                    android:layout_weight="0.15"
+                    android:paddingHorizontal="@dimen/paddinginterior"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </Spinner>
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/espaciointeor" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
                     //EditText DIRECCION NEGOCIO:
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Escribe la dirección o pinchar (Obligatorio)"
+                        android:paddingHorizontal="@dimen/paddinginterior"
+                        android:hint="                                                         "
                         app:hintTextAppearance="@style/etflotante">
 
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/etdireccionnegocioCA"
-                            style="@style/etnormal"
+                        <AutoCompleteTextView
+                            android:id="@+id/etdireccionnegocioAutoCA"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.15"
-                            android:ems="10"
-                            android:inputType="textPersonName" />
+                            android:layout_centerVertical="true"
+                            android:hint="Escribe la dirección o pinchar en el icono de abajo (Obligatorio)"
+                            android:layout_toRightOf="@+id/ic_magnify"
+                            android:background="@null"
+                            android:imeOptions="actionSearch" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -183,23 +165,20 @@
 
                     <ImageView
                         android:id="@+id/imggeonegocioCA"
-                        android:layout_width="29dp"
+                        android:paddingHorizontal="@dimen/paddinginterior"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.85"
-                        app:srcCompat="@drawable/icono_localizacion_c"
+                        app:srcCompat="@drawable/boton_geolocalizacion_c"
                         android:onClick="obtenerdireccion"/>
-
-
-                </LinearLayout>
 
                 //EditText TELEFONO NEGOCIO:
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
                     android:hint="Teléfono"
-                    app:hintTextAppearance="@style/etflotante"
-                    >
+                    app:hintTextAppearance="@style/etflotante">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/ettelefononegocioCA"
@@ -217,6 +196,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
                     android:hint="Correo electrónico"
                     app:hintTextAppearance="@style/etflotante"
                     >
@@ -256,11 +236,12 @@
                     android:id="@+id/checkpoliticaCA"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
                     android:text="Política de privacidad y condiciones del anuncio"
                     android:onClick="dialogopolitica"/>
 
-                //Boton PUBLICAR
 
+                //Boton PUBLICAR
                 <ImageView
                     android:id="@+id/imgpublicarCA"
                     android:layout_width="match_parent"
@@ -271,8 +252,9 @@
                     android:onClick="publicaroferta"
                     app:srcCompat="@drawable/boton_publicar_c_selector" />
 
-
             </LinearLayout>
+
+
         </ScrollView>
 
     </RelativeLayout>

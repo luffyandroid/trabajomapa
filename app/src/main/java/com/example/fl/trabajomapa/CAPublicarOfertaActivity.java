@@ -80,7 +80,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
 
     EditText etnombrepuestoCA, etdetallespuestoCA, etsalariopuestoCA,
-            etdireccionnegocioCA, ettelefononegocioCA, etcorreonegocioCA;
+            ettelefononegocioCA, etcorreonegocioCA;
     CheckBox checkpoliticaCA;
     DatabaseReference dbRef;
 
@@ -188,7 +188,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         etnombrepuestoCA = (EditText) findViewById(R.id.etnombrepuestoCA);
         etdetallespuestoCA = (EditText) findViewById(R.id.etdetallespuestoCA);
         etsalariopuestoCA = (EditText) findViewById(R.id.etsalariopuestoCA);
-        etdireccionnegocioCA = (EditText) findViewById(R.id.etdireccionnegocioCA);
+        //01 etdireccionnegocioCA = (EditText) findViewById(R.id.etdireccionnegocioCA);
         ettelefononegocioCA = (EditText) findViewById(R.id.ettelefononegocioCA);
         etcorreonegocioCA = (EditText) findViewById(R.id.etcorreonegocioCA);
 
@@ -234,7 +234,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         String nombrepuestoCA = etnombrepuestoCA.getText().toString();
         String detallespuestoCA = etdetallespuestoCA.getText().toString();
         String salariopuestoCA = etsalariopuestoCA.getText().toString();
-        String direccionnegocioCA = etdireccionnegocioCA.getText().toString();
+        String direccionnegocioCA = etdireccionnegocioAutoCA.getText().toString();
         String telefononegocioCA = ettelefononegocioCA.getText().toString();
         String correonegocioCA = etcorreonegocioCA.getText().toString();
         String latitudnegocioCA = tvocultolatitudCA.getText().toString();
@@ -350,7 +350,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
         tvocultoCA.setText("Localizacion agregada");
-        etdireccionnegocioCA.setText("");
+        etdireccionnegocioAutoCA.setText("");
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -373,7 +373,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 tvocultolongitudCA.setText(String.valueOf(loc.getLongitude()));
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
-                    etdireccionnegocioCA.setText(DirCalle.getAddressLine(0));
+                    etdireccionnegocioAutoCA.setText(DirCalle.getAddressLine(0));
 
                 }
             } catch (IOException e) {
