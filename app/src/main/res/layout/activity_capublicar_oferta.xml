@@ -47,6 +47,27 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+
+
+                //EditText NOMBRE EMPRESA:
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:hint="Nombre de la empresa (obligatorio)"
+                    app:hintTextAppearance="@style/etflotante">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etnombreempresaCA"
+                    style="@style/etnormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textIsSelectable="false" />
+
+                </android.support.design.widget.TextInputLayout>
+
                 //EditText NOMBRE PUESTO:
 
                 <android.support.design.widget.TextInputLayout
@@ -139,6 +160,14 @@
 
                     <TextView
                         android:id="@+id/tvocultoCA"
+                        style="@style/txtingresar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/tvocultopuestoCA"
                         style="@style/txtingresar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -242,6 +271,14 @@
 
 
                 //Boton PUBLICAR
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/googleBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                </com.google.android.gms.common.SignInButton>
+
                 <ImageView
                     android:id="@+id/imgpublicarCA"
                     android:layout_width="match_parent"

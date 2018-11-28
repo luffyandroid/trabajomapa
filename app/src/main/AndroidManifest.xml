@@ -23,10 +23,7 @@
          sign the APK for publishing.
          You can define the keys for the debug and release targets in src/debug/ and src/release/.
     -->
-
-
     <application
-
         android:allowBackup="true"
         android:icon="@drawable/appicon_cuadrado"
         android:label="@string/app_name"
@@ -40,26 +37,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".CAPublicarOfertaActivity"
+        <activity
+            android:name=".CAPublicarOfertaActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".BAMapaActivity"
             android:label="@string/title_activity_bamapa"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".CCPublicadoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".CCPublicadoActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".CBPayPalActivity"
+        <activity
+            android:name=".CBPayPalActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCqvcbMXwR12clzymdCJa3JqMPAdLLA4GE" />
 
+        <activity android:name=".CBPegoteActivity"></activity>
     </application>
 
 </manifest>

@@ -17,6 +17,7 @@ import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +39,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -52,12 +65,20 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.AutocompletePredictionBufferResponse;
+
 import com.google.android.gms.location.places.Places;
+
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.tasks.Task;
 
+
+import java.io.IOException;
 
 import java.util.Locale;
 import java.util.Map;
@@ -73,16 +94,31 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
 
     //DECLARO VARIANTES
-    TextView tvocultoCA, tvocultofechahoraCA, tvocultolatitudCA, tvocultolongitudCA, tvocultofechaCA;
+    TextView tvocultoCA, tvocultopuestoCA, tvocultofechahoraCA, tvocultolatitudCA, tvocultolongitudCA, tvocultofechaCA;
 
     Spinner spincategoriaCA;
 
 
 
-    EditText etnombrepuestoCA, etdetallespuestoCA, etsalariopuestoCA,
-            ettelefononegocioCA, etcorreonegocioCA;
+    EditText etnombreempresaCA, etnombrepuestoCA, etdetallespuestoCA, etsalariopuestoCA,
+            etdireccionnegocioCA, ettelefononegocioCA, etcorreonegocioCA;
+
     CheckBox checkpoliticaCA;
+
+
+    SignInButton button;
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthListener;
+    GoogleSignInClient mGoogleSignInClient;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference dbRef;
+
+    private static final String TAGGOOGLE = "GoogleActivity";
+    private static final int RC_SIGN_IN = 1;
+    private int STORAGE_PERMISSION_CODE= 1;//Para los permisos
+
+
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 111;
 
 
 
@@ -107,6 +143,23 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                     "Comprueba tu conexión a Internet", Toast.LENGTH_LONG)
                     .show();
         }
+
+        tvocultopuestoCA = (TextView)findViewById(R.id.tvocultopuestoCA);
+        //COSAS DEL BOTTON DE GOOGLE SIGN IN
+        button = (SignInButton)findViewById(R.id.googleBtn);
+        mAuth = FirebaseAuth.getInstance();
+
+        button.setSize(SignInButton.SIZE_WIDE);
+        button.setColorScheme(SignInButton.COLOR_DARK);
+
+        //Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //00 AUTOCOMPLETE
         etdireccionnegocioAutoCA = (AutoCompleteTextView) findViewById(R.id.etdireccionnegocioAutoCA);
@@ -152,6 +205,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Toast.makeText(adapterView.getContext(), ((ZSpinnerCategoria) adapterView.getItemAtPosition(position)).getNombre(), Toast.LENGTH_SHORT).show();
+                tvocultopuestoCA.setText(((ZSpinnerCategoria) adapterView.getItemAtPosition(position)).getNombre());
             }
 
             @Override
@@ -185,6 +239,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
 
         //ENLAZO VARIANTES
+        etnombreempresaCA = (EditText) findViewById(R.id.etnombreempresaCA);
         etnombrepuestoCA = (EditText) findViewById(R.id.etnombrepuestoCA);
         etdetallespuestoCA = (EditText) findViewById(R.id.etdetallespuestoCA);
         etsalariopuestoCA = (EditText) findViewById(R.id.etsalariopuestoCA);
@@ -193,7 +248,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         etcorreonegocioCA = (EditText) findViewById(R.id.etcorreonegocioCA);
 
         tvocultoCA = (TextView) findViewById(R.id.tvocultoCA);
-
+        tvocultofechaCA = (TextView) findViewById(R.id.tvocultofechaCA);
         tvocultolatitudCA = (TextView) findViewById(R.id.tvocultolatitudCA);
         tvocultolongitudCA = (TextView) findViewById(R.id.tvocultolongitudCA);
 
@@ -231,6 +286,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     public void publicaroferta(View view) {
 
         //ENLAZO VARIANTES CAMPOS OBLIGATORIOS
+        String nombreempresaCA = etnombreempresaCA.getText().toString();
         String nombrepuestoCA = etnombrepuestoCA.getText().toString();
         String detallespuestoCA = etdetallespuestoCA.getText().toString();
         String salariopuestoCA = etsalariopuestoCA.getText().toString();
@@ -239,16 +295,13 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         String correonegocioCA = etcorreonegocioCA.getText().toString();
         String latitudnegocioCA = tvocultolatitudCA.getText().toString();
         //TODO es double porque tiene decimales so retraso de hombre
-        Double latitudint = Double.parseDouble(latitudnegocioCA);
+        //Double latitudint = Double.parseDouble(latitudnegocioCA);
         String longitudnegocioCA = tvocultolongitudCA.getText().toString();
-        Double longitudint = Double.parseDouble(longitudnegocioCA);
+        //Double longitudint = Double.parseDouble(longitudnegocioCA);
         String uidempresa = "empresamolongui";
 
-        //ETIQUETA SPINNER PARA SUBIR, IDENTIFICAR
-        String tipodepuesto = spincategoriaCA.getSelectedItem().toString();
-
         //COMPROBAR SI LOS CAMPOS NO ESTAN VACIOS
-        if (nombrepuestoCA.equals("") || direccionnegocioCA.equals("")) {
+        if (nombreempresaCA.equals("")||nombrepuestoCA.equals("") || direccionnegocioCA.equals("")) {
 
             Toast.makeText(getApplicationContext(),
                     "Rellena los campos obligatorios",
@@ -263,10 +316,10 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
             //01 QUE NO SEA OBLIGATORIO
 
             //VALIDAR SALARIO
-            if (!Pattern.matches("^[0-9]{9}$", salariopuestoCA)) {
+            /*if (!Pattern.matches("^[0-9]", salariopuestoCA)) {
                 etsalariopuestoCA.setError("Valores en € completos");
                 error = true;
-            }
+            }*/
 
 
             //01 QUE NO SEA OBLIGATORIO
@@ -305,33 +358,120 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
                 }else {
 
-                    dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
+                        signIn();
 
+                    //PA PUBLICAR ACTIVITY
+                    /*dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
 
                     Map<String, Object> creacion = new HashMap<>();
                     creacion.put("uidempresa/", uidempresa);
-                    creacion.put("uid/", uidempresa + tvocultofechahoraCA);
+                    creacion.put("uid/", uidempresa + "fecha" + "hora");
                     creacion.put("nombre/", nombrepuestoCA);
                     creacion.put("detalles/", detallespuestoCA);
                     creacion.put("salario/", salariopuestoCA);
-                    creacion.put("tipopuesto/", tipodepuesto);
+                    creacion.put("tipopuesto/", "tipodepuesto");
                     creacion.put("direccion/", direccionnegocioCA);
                     creacion.put("latitud/", latitudint);
                     creacion.put("longitud/", longitudint);
                     creacion.put("telefono/", telefononegocioCA);
                     creacion.put("correo/", correonegocioCA);
-                    creacion.put("fecha/", tvocultofechaCA);
+                    creacion.put("fecha/", "fecha");
                     creacion.put("disponible/", "disponible");
 
+                    dbRef.child(uidempresa + "fecha" + "hora").updateChildren(creacion);
 
-                    dbRef.child(uidempresa + "horaString").updateChildren(creacion);
+                    //{
+                    //if (user != null){
 
-                    Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
+                    //}
+                    //}
+                    Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();*/
                 }
             }
 
+
         }
     }
+
+    //Metodo por el que se loguea con la cuenta de google
+    ////////////////////////////////////////////////////
+    private void signIn() {
+
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e);
+                // ...
+            }
+        }
+    }
+    /////////////////////////////////////////////////////////////////////
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+
+                            String nombreempresaCA = etnombreempresaCA.getText().toString();
+                            String nombrepuestoCA = etnombrepuestoCA.getText().toString();
+                            String detallespuestoCA = etdetallespuestoCA.getText().toString();
+                            String salariopuestoCA = etsalariopuestoCA.getText().toString();
+                            String tipodepuesto = tvocultopuestoCA.getText().toString();
+                            String direccionnegocioCA = etdireccionnegocioCA.getText().toString();
+                            String telefononegocioCA = ettelefononegocioCA.getText().toString();
+                            String correonegocioCA = etcorreonegocioCA.getText().toString();
+                            String latitudnegocioCA = tvocultolatitudCA.getText().toString();
+                            //Double latitudint = Double.parseDouble(latitudnegocioCA);
+                            String longitudnegocioCA = tvocultolongitudCA.getText().toString();
+                            //Double longitudint = Double.parseDouble(longitudnegocioCA);
+
+                            Intent intent = new Intent().setClass(getApplicationContext(),CBPegoteActivity.class);
+                            intent.putExtra("NOMBRE EMPRESA",nombreempresaCA);
+                            intent.putExtra("NOMBRE PUESTO",nombrepuestoCA);
+                            intent.putExtra("DETALLE PUESTO",detallespuestoCA);
+                            intent.putExtra("SALARIO PUESTO",salariopuestoCA);
+                            intent.putExtra("TIPO PUESTO",tipodepuesto);
+                            intent.putExtra("DIRECCION PUESTO",direccionnegocioCA);
+                            intent.putExtra("TELEFONO PUESTO",telefononegocioCA);
+                            intent.putExtra("CORREO PUESTO",correonegocioCA);
+                            intent.putExtra("LATITUD PUESTO",latitudnegocioCA);
+                            intent.putExtra("LONGITUD PUESTO",longitudnegocioCA);
+                            startActivity(intent);
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(CAPublicarOfertaActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+                        // ...
+                    }
+                });
+    }
+
+
 
     //PROTOCOLO PARA OBTENER DIRECCION ▼
     private void locationStart() {
