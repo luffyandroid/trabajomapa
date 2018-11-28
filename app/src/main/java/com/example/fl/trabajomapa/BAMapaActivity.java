@@ -114,6 +114,9 @@ public class BAMapaActivity extends AppCompatActivity implements NavigationView.
         }else if (id == R.id.nav_publicar) {
             Intent mainIntent = new Intent().setClass(getApplicationContext(), CAPublicarOfertaActivity.class);
             startActivity(mainIntent);
+        }else if (id == R.id.nav_renovar) {
+            Intent mainIntent = new Intent().setClass(getApplicationContext(), DAListaAnunciosActivity.class);
+            startActivity(mainIntent);
         }else if (id == R.id.nav_info) {
             Intent mainIntent = new Intent().setClass(getApplicationContext(), CAPublicarOfertaActivity.class);
             startActivity(mainIntent);
