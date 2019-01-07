@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -72,8 +73,10 @@ public class BBSateliteFragment extends Fragment implements OnMapReadyCallback {
         MarkerOptions option = new MarkerOptions();
         option
                 .position(inicio)
-                .title("Inicio");
-        dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/");
+                .title("Inicio")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_limpeza));
+
+        /*dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/");
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -85,11 +88,23 @@ public class BBSateliteFragment extends Fragment implements OnMapReadyCallback {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        };
+        };*/
         satelite.addMarker(option);
         satelite.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        satelite.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getActivity())));
         satelite.moveCamera(inicioSatelite);
-        satelite.setInfoWindowAdapter(new ZDialog(LayoutInflater.from(getActivity())));
+
+        /*ZOferta info = new ZOferta();
+        info.setNombre(info.getNombre());
+        info.setDetalle(info.getDetalle());
+        info.setSalario(info.getSalario());
+        info.setDireccion(info.getDireccion());
+        info.setTelefono(info.getTelefono());
+        info.setCorreo(info.getCorreo());
+        ZDialog custominfowindow = new ZDialog(LayoutInflater.from(getActivity()));
+        satelite.setInfoWindowAdapter(custominfowindow);*/
+
+        //satelite.setInfoWindowAdapter(new ZDialog(LayoutInflater.from(getActivity())));
 
 
     }

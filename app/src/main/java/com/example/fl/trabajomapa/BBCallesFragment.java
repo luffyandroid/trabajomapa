@@ -2,6 +2,7 @@ package com.example.fl.trabajomapa;
 
 
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -68,7 +70,11 @@ public class BBCallesFragment extends Fragment implements OnMapReadyCallback{
         LatLng inicio = new LatLng(36.6178533,-6.3685917);
         CameraUpdate inicioCalles =
                 CameraUpdateFactory.newLatLngZoom(new LatLng(36.6178533,-6.3685917),5);
-        dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/");
+        MarkerOptions option = new MarkerOptions();
+        option.position(inicio)
+                .title("Inicio")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_limpeza));
+        /*dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/");
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -86,9 +92,10 @@ public class BBCallesFragment extends Fragment implements OnMapReadyCallback{
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        };
-
+        };*/
+        calles.addMarker(option);
         calles.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        calles.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getActivity())));
         calles.moveCamera(inicioCalles);
     }
 }

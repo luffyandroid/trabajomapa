@@ -60,7 +60,11 @@
             android:value="AIzaSyCqvcbMXwR12clzymdCJa3JqMPAdLLA4GE" />
 
         <activity android:name=".DAListaAnunciosActivity"></activity>
-        <activity android:name=".CBPegoteActivity"></activity>
+        <activity android:name=".CBPegoteActivity" />
+        <activity
+            android:name=".BAMapaFinalActivity"
+            android:label="@string/title_activity_bamapa_final"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

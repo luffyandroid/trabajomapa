@@ -45,6 +45,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -124,6 +127,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
     private static final String TAG = "CAPublicaOfertaActivity";
 
+    //COORDENADAS ENTRE LAS QUE BUSCA EL AUTOCOMPLETE
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
             new LatLng(27.666172, -18.273932), new LatLng(42.772283, 4.747570));
 
@@ -438,7 +442,8 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                             String detallespuestoCA = etdetallespuestoCA.getText().toString();
                             String salariopuestoCA = etsalariopuestoCA.getText().toString();
                             String tipodepuesto = tvocultopuestoCA.getText().toString();
-                            String direccionnegocioCA = etdireccionnegocioCA.getText().toString();
+                            //TODO poner el autocompletar aqui
+                            String direccionnegocioCA = etdireccionnegocioAutoCA.getText().toString();
                             String telefononegocioCA = ettelefononegocioCA.getText().toString();
                             String correonegocioCA = etcorreonegocioCA.getText().toString();
                             String latitudnegocioCA = tvocultolatitudCA.getText().toString();
@@ -528,6 +533,31 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
             }
         }
     }
+
+    //OBTENER LAT LANG DE PRUEBA
+    /*public GeoPoint getLocationFromAddress(String strAddress){
+
+        Geocoder coder = new Geocoder(this);
+        List<Address> address;
+        GeoPoint p1 = null;
+
+        try {
+            address = coder.getFromLocationName(strAddress,5);
+            if (address==null) {
+                return null;
+            }
+            Address location=address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new GeoPoint((double) (location.getLatitude() * 1E6),
+                    (double) (location.getLongitude() * 1E6));
+
+            return p1;
+        }
+    }*/
+
+
 
     //COMIENZA GESTION DE LOCALIZACION
     public class Localizacion implements LocationListener {
@@ -645,5 +675,4 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     }
 
 
-
-            }
+}

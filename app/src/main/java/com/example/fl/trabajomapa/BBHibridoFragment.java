@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fl.trabajomapa.Config.ZDialog;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -78,7 +79,7 @@ public class BBHibridoFragment extends Fragment implements OnMapReadyCallback{
 
         SupportMapFragment vistaHibrido = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.vistaHibrido);
         vistaHibrido.getMapAsync(this);
-        dbRef = FirebaseDatabase.getInstance().getReference();
+        //dbRef = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -86,18 +87,20 @@ public class BBHibridoFragment extends Fragment implements OnMapReadyCallback{
         hibrido = googleMap;
 
         //PUNTO DE INICIO DEL MAPA
-        /*LatLng inicio = new LatLng(36.6178533,-6.3685917);
+        LatLng inicio = new LatLng(36.6178533,-6.3685917);
         CameraUpdate inicioHibrido =
                 CameraUpdateFactory.newLatLngZoom(new LatLng(36.6178533,-6.3685917),5);
         MarkerOptions option = new MarkerOptions();
-        option.position(inicio).title("Inicio");
+        option.position(inicio).title("Inicio").icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_limpeza));
+
         hibrido.addMarker(option);
         hibrido.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        hibrido.moveCamera(inicioHibrido);*/
+        hibrido.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getActivity())));
+        hibrido.moveCamera(inicioHibrido);
 
 
         //00ORIGINAL
-        dbRef.child("anuncios").addValueEventListener(new ValueEventListener() {
+        /*dbRef.child("anuncios").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -111,7 +114,18 @@ public class BBHibridoFragment extends Fragment implements OnMapReadyCallback{
                     ZOferta ofe = snapshot.getValue(ZOferta.class);
                     latitud = ofe.getLatitud();
                     longitud = ofe.getLongitud();
-                    MarkerOptions markerOptions = new MarkerOptions();
+
+                    /*ZOferta info = new ZOferta();
+                    info.setNombre(ofe.getNombre());
+                    info.setDetalle(ofe.getDetalle());
+                    info.setSalario(ofe.getSalario());
+                    info.setDireccion(ofe.getDireccion());
+                    info.setTelefono(ofe.getTelefono());
+                    info.setCorreo(ofe.getCorreo());
+                    ZDialog custominfowindow = new ZDialog(getA);
+                    hibrido.setInfoWindowAdapter(custominfowindow);*/
+
+                    /*MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(new LatLng(latitud, longitud));
                     tmpRealTimeMarkers.add(hibrido.addMarker(markerOptions));
 
