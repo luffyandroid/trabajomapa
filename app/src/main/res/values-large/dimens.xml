@@ -11,25 +11,25 @@
     <dimen name="d100">100dp</dimen>
 
     <!-- CABECERA -->
-    <dimen name="paddingcabecera">7dp</dimen>
-    <dimen name="paddingcabeceradialog">11dp</dimen>
-    <dimen name="txtcabecera">30dp</dimen>
-    <dimen name="txtfooter">15dp</dimen>
-    <dimen name="txtcabeceradialogomarker">21dp</dimen>
+    <dimen name="paddingcabecera">11dp</dimen>
+    <dimen name="paddingcabeceradialog">15dp</dimen>
+    <dimen name="txtcabecera">38dp</dimen>
+    <dimen name="txtfooter">30dp</dimen>
+    <dimen name="txtcabeceradialogomarker">29dp</dimen>
 
     <!-- EDIT TEXT -->
-    <dimen name="txtingresardimens">21dp</dimen>
+    <dimen name="txtingresardimens">29dp</dimen>
 
     <!-- PADDING INTERIORES -->
-    <dimen name="paddinginterior">15dp</dimen>
-    <dimen name="espaciointeor">50dp</dimen>
+    <dimen name="paddinginterior">30dp</dimen>
+    <dimen name="espaciointeor">65dp</dimen>
 
     <!-- TAMAÑOS SPINNER -->
-    <dimen name="txtspinner">21dp</dimen>
-    <dimen name="paddingspinner">10dp</dimen>
+    <dimen name="txtspinner">29dp</dimen>
+    <dimen name="paddingspinner">16dp</dimen>
 
     <!-- TAMAÑOS BOTONES -->
-    <dimen name="txtboton">15dp</dimen>
+    <dimen name="txtboton">30dp</dimen>
 
 
 

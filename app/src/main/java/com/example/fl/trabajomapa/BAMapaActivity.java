@@ -1,6 +1,8 @@
 package com.example.fl.trabajomapa;
 
+import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,17 +16,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fl.trabajomapa.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class BAMapaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    //001
+    private GoogleMap mapa;
+
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +47,7 @@ public class BAMapaActivity extends AppCompatActivity implements NavigationView.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                obtenerPosicion();
             }
         });
 
@@ -118,8 +126,21 @@ public class BAMapaActivity extends AppCompatActivity implements NavigationView.
             Intent mainIntent = new Intent().setClass(getApplicationContext(), DAListaAnunciosActivity.class);
             startActivity(mainIntent);
         }else if (id == R.id.nav_info) {
-            Intent mainIntent = new Intent().setClass(getApplicationContext(), CAPublicarOfertaActivity.class);
-            startActivity(mainIntent);
+
+            final Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.dialog_bamapa_info);
+
+            TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+
+                        volvermenu.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+            dialog.show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -127,5 +148,16 @@ public class BAMapaActivity extends AppCompatActivity implements NavigationView.
         return true;
     }
 
+    //001
+    private void obtenerPosicion()
+    {
 
+        CameraPosition camPos = mapa.getCameraPosition();
+
+        LatLng coordenadas = camPos.target;
+        double latitud = coordenadas.latitude;
+        double longitud = coordenadas.longitude;
+
+        Toast.makeText(this, "Lat: " + latitud + " | Long: " + longitud, Toast.LENGTH_SHORT).show();
+    }
 }

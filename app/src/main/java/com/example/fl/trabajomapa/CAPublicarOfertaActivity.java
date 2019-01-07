@@ -490,7 +490,12 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
         tvocultoCA.setText("Localizacion agregada");
-        etdireccionnegocioAutoCA.setText("");
+
+
+        onStop();
+        //002 onPause();
+        //001 finish();
+
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -509,8 +514,10 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 List<Address> list = geocoder.getFromLocation(
                         loc.getLatitude(), loc.getLongitude(), 1);
-                tvocultolatitudCA.setText(String.valueOf(loc.getLatitude()));
-                tvocultolongitudCA.setText(String.valueOf(loc.getLongitude()));
+
+                //004
+
+
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
                     etdireccionnegocioAutoCA.setText(DirCalle.getAddressLine(0));

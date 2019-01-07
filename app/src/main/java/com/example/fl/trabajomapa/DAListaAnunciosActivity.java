@@ -1,8 +1,12 @@
 package com.example.fl.trabajomapa;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -68,5 +72,15 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
 
     }//FIN ONCREATE
 
+    //BOTONES DE ELIMINAR Y O MODIFICAR
+
+    private void clickRenovar() {
+
+    }
+
+
+    private void clickBorrar() {
+
+    }
 }
 
