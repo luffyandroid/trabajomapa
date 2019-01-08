@@ -95,8 +95,9 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                     info.setTelefono(ofe.getTelefono());
                     info.setCorreo(ofe.getCorreo());
 
-                    ZAdaptadorVentanaInfo custominfowindow = new ZAdaptadorVentanaInfo(getApplicationContext());
-                    mMap.setInfoWindowAdapter(custominfowindow);
+                    //ZAdaptadorVentanaInfo custominfowindow = new ZAdaptadorVentanaInfo(getApplicationContext());
+                    //mMap.setInfoWindowAdapter(custominfowindow);
+                    mMap.setInfoWindowAdapter(new ZAdaptadorVentanaInfo(BAMapaFinalActivity.this));
 
 
 

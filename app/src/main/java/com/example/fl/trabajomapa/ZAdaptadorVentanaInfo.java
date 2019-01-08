@@ -26,7 +26,6 @@ public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
     ZOferta oferta = null;
     TextView nombre, detalles, salario, direccion, telefono, correo;
 
-
     public ZAdaptadorVentanaInfo(Context ctx){
         context = ctx;
         mWindow = LayoutInflater.from(ctx).inflate(R.layout.infowindow_layout, null);
@@ -53,6 +52,14 @@ public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
 
                 oferta = dataSnapshot.getValue(ZOferta.class);
 
+                nombre.setText(oferta.getNombre());
+                detalles.setText(oferta.getDetalle());
+                salario.setText(oferta.getSalario());
+                direccion.setText(oferta.getDireccion());
+                telefono.setText(oferta.getTelefono());
+                correo.setText(oferta.getCorreo());
+
+                //rellenardatos();
             }
 
             @Override
@@ -62,12 +69,8 @@ public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
         };
         dbRef.addValueEventListener(valueEventListener);
 
-        nombre.setText(oferta.getNombre());
-        detalles.setText(oferta.getDetalle());
-        salario.setText(oferta.getSalario());
-        direccion.setText(oferta.getDireccion());
-        telefono.setText(oferta.getTelefono());
-        correo.setText(oferta.getCorreo());
+
+
 
 
 
@@ -76,6 +79,14 @@ public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
 
     }
 
+    /* void rellenardatos() {
+        nombre.setText(oferta.getNombre());
+        detalles.setText(oferta.getDetalle());
+        salario.setText(oferta.getSalario());
+        direccion.setText(oferta.getDireccion());
+        telefono.setText(oferta.getTelefono());
+        correo.setText(oferta.getCorreo());
+    }*/
 
     @Override
     public View getInfoWindow(Marker marker) {
