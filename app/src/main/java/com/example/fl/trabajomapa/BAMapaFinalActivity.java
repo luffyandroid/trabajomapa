@@ -76,9 +76,9 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for(Marker marker:realTimeMarkers){
-                    marker.remove();
-                }
+                //for(Marker marker:realTimeMarkers){
+                    //marker.remove();
+                //}
 
 
 
@@ -192,8 +192,8 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
                 }
 
-                realTimeMarkers.clear();
-                realTimeMarkers.addAll(tmpRealTimeMarkers);
+                //realTimeMarkers.clear();
+                //realTimeMarkers.addAll(tmpRealTimeMarkers);
 
 
             }

@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -115,6 +116,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     GoogleSignInClient mGoogleSignInClient;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference dbRef;
+    Geocoder geocoder = null;
 
     private static final String TAGGOOGLE = "GoogleActivity";
     private static final int RC_SIGN_IN = 1;
@@ -156,9 +158,12 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         button.setSize(SignInButton.SIZE_WIDE);
         button.setColorScheme(SignInButton.COLOR_DARK);
 
+        geocoder = new Geocoder(this);
+
         //Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                //.requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("1018962536927-si5rp3qad920e4vca23vmn5gkeq0ev62.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -208,8 +213,9 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         spincategoriaCA.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(adapterView.getContext(), ((ZSpinnerCategoria) adapterView.getItemAtPosition(position)).getNombre(), Toast.LENGTH_SHORT).show();
+
                 tvocultopuestoCA.setText(((ZSpinnerCategoria) adapterView.getItemAtPosition(position)).getNombre());
+                Toast.makeText(adapterView.getContext(), tvocultopuestoCA.getText().toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -294,15 +300,39 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         String nombrepuestoCA = etnombrepuestoCA.getText().toString();
         String detallespuestoCA = etdetallespuestoCA.getText().toString();
         String salariopuestoCA = etsalariopuestoCA.getText().toString();
+
+        try {
+            String direccionnegocioCA = etdireccionnegocioAutoCA.getText().toString();
+
+            List<Address> addressList = geocoder.getFromLocationName(
+                    direccionnegocioCA, 5);
+            if (addressList != null && addressList.size() > 0) {
+                Double lat = (Double) (addressList.get(0).getLatitude() );
+                Double lng = (Double) (addressList.get(0).getLongitude() );
+                String latitudint = Double.toString(lat);
+                tvocultolatitudCA.setText(latitudint);
+                String longitudint = Double.toString(lng);
+                tvocultolongitudCA.setText(longitudint);
+
+                Toast.makeText(CAPublicarOfertaActivity.this, "Latitud:"+latitudint+" y longitud:"+longitudint, Toast.LENGTH_LONG).show();
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
         String direccionnegocioCA = etdireccionnegocioAutoCA.getText().toString();
         String telefononegocioCA = ettelefononegocioCA.getText().toString();
         String correonegocioCA = etcorreonegocioCA.getText().toString();
         String latitudnegocioCA = tvocultolatitudCA.getText().toString();
         //TODO es double porque tiene decimales so retraso de hombre
-        //Double latitudint = Double.parseDouble(latitudnegocioCA);
+        Double latitudint = Double.parseDouble(latitudnegocioCA);
         String longitudnegocioCA = tvocultolongitudCA.getText().toString();
-        //Double longitudint = Double.parseDouble(longitudnegocioCA);
+        Double longitudint = Double.parseDouble(longitudnegocioCA);
         String uidempresa = "empresamolongui";
+        String hora = new SimpleDateFormat("H:M").format(new Date());
+        String fecha = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
 
         //COMPROBAR SI LOS CAMPOS NO ESTAN VACIOS
         if (nombreempresaCA.equals("")||nombrepuestoCA.equals("") || direccionnegocioCA.equals("")) {
@@ -365,31 +395,31 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                         signIn();
 
                     //PA PUBLICAR ACTIVITY
-                    /*dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
+                    dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
 
                     Map<String, Object> creacion = new HashMap<>();
-                    creacion.put("uidempresa/", uidempresa);
-                    creacion.put("uid/", uidempresa + "fecha" + "hora");
+                    creacion.put("uidempresa/", nombreempresaCA);
+                    creacion.put("uid/", nombreempresaCA + fecha + hora);
                     creacion.put("nombre/", nombrepuestoCA);
                     creacion.put("detalles/", detallespuestoCA);
                     creacion.put("salario/", salariopuestoCA);
-                    creacion.put("tipopuesto/", "tipodepuesto");
+                    creacion.put("tipopuesto/", tvocultopuestoCA.getText().toString());
                     creacion.put("direccion/", direccionnegocioCA);
                     creacion.put("latitud/", latitudint);
                     creacion.put("longitud/", longitudint);
                     creacion.put("telefono/", telefononegocioCA);
                     creacion.put("correo/", correonegocioCA);
-                    creacion.put("fecha/", "fecha");
+                    creacion.put("fecha/", fecha);
                     creacion.put("disponible/", "disponible");
 
-                    dbRef.child(uidempresa + "fecha" + "hora").updateChildren(creacion);
+                    dbRef.child(nombreempresaCA + fecha + hora).updateChildren(creacion);
 
-                    //{
-                    //if (user != null){
+                    {
+                    if (user != null){
 
-                    //}
-                    //}
-                    Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();*/
+                    }
+                    }
+                    Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -443,7 +473,28 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                             String salariopuestoCA = etsalariopuestoCA.getText().toString();
                             String tipodepuesto = tvocultopuestoCA.getText().toString();
                             //TODO poner el autocompletar aqui
-                            String direccionnegocioCA = etdireccionnegocioAutoCA.getText().toString();
+                            //prueba de pillar latitud y longitud INICIO
+                            try {
+                                String direccionnegocioCA = etdireccionnegocioAutoCA.getText().toString();
+
+                                List<Address> addressList = geocoder.getFromLocationName(
+                                        direccionnegocioCA, 5);
+                                if (addressList != null && addressList.size() > 0) {
+                                    int lat = (int) (addressList.get(0).getLatitude() * 1e6);
+                                    int lng = (int) (addressList.get(0).getLongitude() * 1e6);
+                                    String latitudint = Integer.toString(lat);
+                                    tvocultolatitudCA.setText(latitudint);
+                                    String longitudint = Integer.toString(lng);
+                                    tvocultolongitudCA.setText(longitudint);
+
+                                    //Toast.makeText(CAPublicarOfertaActivity.this, "Latitud:"+latitudint+" y longitud:"+longitudint, Toast.LENGTH_LONG).show();
+
+                                }
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            //prueba de pillar latitud y longitud FIN
+                            String direccionnegocioCA =etdireccionnegocioAutoCA.getText().toString();
                             String telefononegocioCA = ettelefononegocioCA.getText().toString();
                             String correonegocioCA = etcorreonegocioCA.getText().toString();
                             String latitudnegocioCA = tvocultolatitudCA.getText().toString();
@@ -520,12 +571,17 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 List<Address> list = geocoder.getFromLocation(
                         loc.getLatitude(), loc.getLongitude(), 1);
 
+
                 //004
 
 
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
                     etdireccionnegocioAutoCA.setText(DirCalle.getAddressLine(0));
+                    String latitudauto = String.valueOf(DirCalle.getLatitude());
+                    tvocultolatitudCA.setText(latitudauto);
+                    String longitudauto = String.valueOf(DirCalle.getLongitude());
+                    tvocultolongitudCA.setText(longitudauto);
 
                 }
             } catch (IOException e) {
@@ -534,28 +590,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         }
     }
 
-    //OBTENER LAT LANG DE PRUEBA
-    /*public GeoPoint getLocationFromAddress(String strAddress){
 
-        Geocoder coder = new Geocoder(this);
-        List<Address> address;
-        GeoPoint p1 = null;
-
-        try {
-            address = coder.getFromLocationName(strAddress,5);
-            if (address==null) {
-                return null;
-            }
-            Address location=address.get(0);
-            location.getLatitude();
-            location.getLongitude();
-
-            p1 = new GeoPoint((double) (location.getLatitude() * 1E6),
-                    (double) (location.getLongitude() * 1E6));
-
-            return p1;
-        }
-    }*/
 
 
 
@@ -652,6 +687,8 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 LAT_LNG_BOUNDS, null);
 
         etdireccionnegocioAutoCA.setAdapter(mPlaceAutocompleteAdapter);
+
+
 
         etdireccionnegocioAutoCA.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
