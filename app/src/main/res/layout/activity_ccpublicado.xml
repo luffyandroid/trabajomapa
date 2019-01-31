@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".CCPublicadoActivity">
+
+    //TEXT UID (para enviar el email):
+
+    <TextView
+        android:id="@+id/tvuidcc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="uid"/>
+
+    <TextView
+        android:id="@+id/tvmailempresacc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="mailempresa"/>
+
+    <TextView
+        android:id="@+id/tvnombreempresaCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="nombreempresa"/>
+
+    <TextView
+        android:id="@+id/tvnombrepuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="nombrepuesto"/>
+
+    <TextView
+        android:id="@+id/tvdetallepuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="detallepuesto"/>
+
+    <TextView
+        android:id="@+id/tvsalariopuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="salariopuesto"/>
+
+    <TextView
+        android:id="@+id/tvtipopuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="tipopuesto"/>
+
+    <TextView
+        android:id="@+id/tvtelefonopuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="telefono"/>
+
+    <TextView
+        android:id="@+id/tvcorreopuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="correo"/>
+
+    <TextView
+        android:id="@+id/tvdireccionpuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="direccion"/>
+
+    <TextView
+        android:id="@+id/tvlatitudpuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="latitud"/>
+
+    <TextView
+        android:id="@+id/tvlongitudpuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="longitud"/>
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottiecc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="as_enviado_trabajarapp.json"
+        app:lottie_imageAssetsFolder="assets"
+        app:lottie_loop="false"/>
+
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DAListaAnunciosActivity">
+
+    <LinearLayout
+        style="@style/cabecera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/paddingcabecera">
+
+        <ImageView
+            android:id="@+id/imgcabeceraDA"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/icono_superior_publicar" />
+
+        <TextView
+            android:id="@+id/tvcabeceraDA"
+            style="@style/txtcabecera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TUS ANUNCIOS"
+            android:textSize="@dimen/txtcabecera" />
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listanunciosDA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

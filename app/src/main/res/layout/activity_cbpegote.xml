@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".CBPegoteActivity">
+
+    <Button
+        android:id="@+id/botonpegote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="pegote"
+        android:text="a publicado" />
+
+    <TextView
+        android:id="@+id/tvuidCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="uid"/>
+
+    <TextView
+        android:id="@+id/tvnombreempresaCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="empresanombre"/>
+
+    <TextView
+        android:id="@+id/tvnombrepuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="nombrepuesto"/>
+
+    <TextView
+        android:id="@+id/tvdetallepuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="detallepuesto"/>
+
+    <TextView
+        android:id="@+id/tvsalariopuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="salariopuesto"/>
+
+    <TextView
+        android:id="@+id/tvtipopuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="tipopuesto"/>
+
+    <TextView
+        android:id="@+id/tvtelefonopuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="telefono"/>
+
+    <TextView
+        android:id="@+id/tvcorreopuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="correopuesto"/>
+
+    <TextView
+        android:id="@+id/tvdireccionpuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="direccion puesto"/>
+
+    <TextView
+        android:id="@+id/tvlatitudpuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="latitud"/>
+
+    <TextView
+        android:id="@+id/tvlongitudpuestoCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="longitud"/>
+</LinearLayout>

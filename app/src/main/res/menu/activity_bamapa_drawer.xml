@@ -4,35 +4,56 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+        <!-- SECCION VACIA-->
+        <item
+            android:id="@+id/seccion01BA"
+            android:title=""/>
+
+        <item
+            android:id="@+id/nav_satelite"
+            android:icon="@drawable/ico_menu_nav_1"
+            android:title="SATELITE" />
+        <item
+            android:id="@+id/nav_calles"
+            android:icon="@drawable/ico_menu_nav_2"
+            android:title="CALLES" />
+
+        <item
+            android:id="@+id/nav_hibrido"
+            android:icon="@drawable/ico_menu_nav_3"
+            android:title="HIBRIDO" />
+
+        <!-- SECCION VACIA-->
+
+        <item
+            android:id="@+id/seccion02BA"
+            android:title=""/>
+
+        <item
+            android:id="@+id/seccion03BA"
+            android:title=""/>
+
+        <item
+            android:id="@+id/seccion04BA"
+            android:title=""/>
+
+
+        <item
+            android:id="@+id/nav_publicar"
+            android:icon="@drawable/ico_menu_nav_5"
+            android:title="PUBLICAR ANUNCIO" />
+
+        <item
+            android:id="@+id/nav_renovar"
+            android:icon="@drawable/ico_menu_nav_8"
+            android:title="RENOVAR/BORRAR ANUNCIO" />
+
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ico_menu_nav_6"
+            android:title="MÁS INFO" />
+
+    </group>
 
 </menu>

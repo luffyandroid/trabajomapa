@@ -1,16 +1,102 @@
 <resources>
-    <string name="app_name">ZPruebGoogleMaps</string>
+    <string name="app_name">GeoWork</string>
     <string name="title_activity_maps">Map</string>
 
     <string name="opciones">Opciones</string>
     <string name="mover">Mover</string>
     <string name="animar">Animar</string>
     <string name="pos">Pos</string>
-    <string name="title_activity_bamapa">BAMapaActivity</string>
+    <string name="title_activity_bamapa"></string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_bamapa_maps">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TEXTO EMAIL -->
+
+    <string name="AsuntoEmailPagoRealizado">
+        Pago realizado correctamente, Publicación anuncio en GeoWork
+    </string>
+
+    <string name="CuerpoEmail01">
+                <![CDATA[
+        Pago realizado correctamente.
+        <br>-Concepto: Publicación oferta de empleo en GeoWork</br>
+        <br>-Importe del pago: 3 Euros</br>
+        <br>-La oferta de empleo caducará en 30 días</br>
+        <br>-Expedido por: GeoWork</br>
+]]>
+    </string>
+
+    <string name="CuerpoEmail02">
+            <![CDATA[
+<br></br>
+
+<br>Cualquier problema con la cuenta o duda nos puedes enviar un email a <a href="mailto:didact@didact.es">didact@didact.es</a></br>
+<br>o si lo prefieres llamarnos al teléfono: <a href="tel:+34956336613">956336613</a>
+<br></br>
+<br>Un saludo :)</br>
+
+<center><a href="http://www.didact.es" target="_blank"><img src="http://www.didact.es/almacen/l1_didact1.png" width="200" height="87" /><img src="http://www.didact.es/almacen/l2_blanco.png" width="50" height="43" /></a><a href="http://www.manipuladoronline.com" target="_blank"><img src="http://www.didact.es/almacen/l3_manipulador.png" width="200" height="69" /></a></center>
+
+ ]]>
+    </string>
+
+    <!-- TEXTO CATEGORIAS -->
+
+    <string name="Otros">Otros</string>
+    <string name="Administracion">Administración</string>
+    <string name="Agricultura">Agricultura</string>
+    <string name="Animacion">Animación</string>
+    <string name="Atencionalcliente">Atención al cliente</string>
+    <string name="CalidadID">Calidad I+D</string>
+    <string name="Comercial">Comercial</string>
+    <string name="Construccion">Construcción</string>
+    <string name="DisenoyArtesgraficas">Diseño y Artes gráficas</string>
+    <string name="Educacion">Educación</string>
+    <string name="Farmaceutica">Farmaceutica</string>
+    <string name="Finanzasybanca">Finanzas y banca</string>
+    <string name="Funerarias">Funerarias</string>
+    <string name="Hosteleria">Hostelería</string>
+    <string name="Informatica">Informática</string>
+    <string name="Ingenieriaytecnico">Ingeniería y técnico</string>
+    <string name="Legal">Legal</string>
+    <string name="Limpeza">Limpeza</string>
+    <string name="Logisticayalmacen">Logística y almacén</string>
+    <string name="Marketingycomunicaciones">"Marketing y comunicaciones</string>
+    <string name="Musica">Música</string>
+    <string name="Profesionesyoficios">Profesiones y oficios</string>
+    <string name="Recursoshumanos">Recursos humanos</string>
+    <string name="Sanidad">Sanidad</string>
+    <string name="Transportes">Transportes</string>
+    <string name="Turismo">Turismo</string>
+    <string name="Venta">Venta</string>
+    <string name="Veterinaria">Veterinaria</string>
+
+    <!-- TEXTO CATEGORIAS -->
+    <string name="Politicamensaje">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+
+
+    <string name="argentina_full_snippet">
+La República Argentina, conocida simplemente como Argentina,
+es un país soberano de América del Sur, ubicado en el extremo sur y sudeste
+de dicho subcontinente. Adopta la forma de gobierno republicana, representativa y federal.
+El Estado nacional convive federativamente con veinticuatro entidades
+estatales autónomas, de las cuales veintitrés son provincias
+que preservan todo el poder no delegado constitucionalmente
+a la Nación y una es la Ciudad Autónoma de Buenos Aires,
+designada por ley como capital federal.
+</string>
+    <string name="title_activity_bamapa_final">BAMapaFinalActivity</string>
 </resources>
