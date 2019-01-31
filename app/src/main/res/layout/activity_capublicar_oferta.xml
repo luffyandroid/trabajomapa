@@ -151,7 +151,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:hint="Escribe la dirección o pinchar en el icono de abajo para coger tu geolocalización (Obligatorio)"
+                            android:hint="Escribe la dirección, para que no haya errores formato calle / nº / ciudad (Obligatorio)"
                             android:layout_toRightOf="@+id/ic_magnify"
                             android:background="@null"
                             android:imeOptions="actionSearch" />
@@ -190,7 +190,10 @@
                         android:text=""
                         android:visibility="gone"/>
 
-                    //EditText GEO NEGOCIO:
+
+
+                    //BOTON GEO NEGOCIO:
+                //001 Deshabilitado hasta encontrar una forma de arreglar
 
                     <ImageView
                         android:id="@+id/imggeonegocioCA"
@@ -198,7 +201,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:srcCompat="@drawable/boton_geolocalizacion_c"
-                        android:onClick="obtenerdireccion"/>
+                        android:onClick="obtenerdireccion"
+                        android:visibility="gone"/>
 
                 //EditText TELEFONO NEGOCIO:
 

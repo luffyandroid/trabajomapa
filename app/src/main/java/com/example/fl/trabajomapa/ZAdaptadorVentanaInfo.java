@@ -2,11 +2,15 @@ package com.example.fl.trabajomapa;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
@@ -16,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
+public abstract class ZAdaptadorVentanaInfo implements View.OnTouchListener, GoogleMap.InfoWindowAdapter {
 
     private final View mWindow;
     private Context context;
@@ -25,6 +29,11 @@ public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
     ValueEventListener valueEventListener;
     ZOferta oferta = null;
     TextView nombre, detalles, salario, direccion, telefono, correo;
+
+
+    //001
+    Button btninfowindow_compartir;
+    private OnInfoWindowElemTouchListener infoButtonListener;
 
     public ZAdaptadorVentanaInfo(Context ctx){
         context = ctx;
@@ -39,6 +48,13 @@ public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
         direccion = view.findViewById(R.id.tvnfowindow_direccion);
         telefono = view.findViewById(R.id.tvnfowindow_telefono);
         correo = view.findViewById(R.id.tvnfowindow_correo);
+
+
+        //001
+
+        btninfowindow_compartir = view.findViewById(R.id.btninfowindow_compartir);
+
+
 
         nombre.setText(marker.getTitle().toString());
         //detalles.setText(marker.getSnippet().toString());
@@ -69,15 +85,12 @@ public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
         };
         dbRef.addValueEventListener(valueEventListener);
 
-
-
-
-
-
         //ZMarcador infoWindowData = (ZMarcador) marker.getTag();
 
 
     }
+
+
 
     /* void rellenardatos() {
         nombre.setText(oferta.getNombre());
@@ -123,5 +136,57 @@ public class ZAdaptadorVentanaInfo implements GoogleMap.InfoWindowAdapter {
         rendowWindowText(marker, mWindow);
 
         return mWindow;
+    }
+
+    //BOTONES DEL INFOWINDOWS
+
+    public void botontelefono (View v) {
+
+        if  (telefono.equals("no")) {
+            Toast.makeText(context.getApplicationContext(),
+                    nombre + " no tiene teléfono de contacto",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                Uri number = Uri.parse("tel:" + telefono);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                context.startActivity(callIntent);
+            } catch (android.content.ActivityNotFoundException ex) {
+
+            }
+        }
+    }
+
+
+
+
+    public void compartir (View v) {
+
+        Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
+        compartir.setType("text/plain");
+
+        TextView nombre = v.findViewById(R.id.tvinfowindow_titulo);
+        TextView detalle = v.findViewById(R.id.tvnfowindow_detalles);
+        TextView salario = v.findViewById(R.id.tvnfowindow_salario);
+        TextView direccion = v.findViewById(R.id.tvnfowindow_direccion);
+        TextView telefono = v.findViewById(R.id.tvnfowindow_telefono);
+        TextView correo = v.findViewById(R.id.tvnfowindow_correo);
+
+        nombre.getText().toString();
+        detalle.getText().toString();
+        salario.getText().toString();
+        direccion.getText().toString();
+        telefono.getText().toString();
+        correo.getText().toString();
+
+
+        compartir.putExtra(android.content.Intent.EXTRA_SUBJECT, "Empleo encontrado en GeoWork " + nombre);
+        //  compartir.putExtra(android.content.Intent.EXTRA_TEXT, nombre + detalle);
+        // startActivity(Intent.createChooser(compartir, "Compartir vía"));
+
+    }
+
+
+    private class OnInfoWindowElemTouchListener {
     }
 }
