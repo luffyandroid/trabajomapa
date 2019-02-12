@@ -29,7 +29,7 @@ public class AASplashActivity extends AppCompatActivity {
             public void run() {
 
                 Intent mainIntent = new Intent().setClass(
-                        AASplashActivity.this, com.example.fl.trabajomapa.BAMapaActivity.class);
+                        AASplashActivity.this, com.example.fl.trabajomapa.BAMapaFinalActivity.class);
                 startActivity(mainIntent);
 
                 finish();

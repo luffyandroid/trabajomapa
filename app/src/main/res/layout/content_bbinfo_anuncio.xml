@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".BBInfoAnuncio"
+    tools:showIn="@layout/activity_bbinfo_anuncio">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:padding="@dimen/paddinginterior"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/layoutmarker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imaginfowindow_detalles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    app:srcCompat="@drawable/ico_dialog_descripcion" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/tvnfowindow_detalles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="DETALLES"
+                    android:textSize="@dimen/txtingresardimens" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layoutmarker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imaginfowindow_salario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    app:srcCompat="@drawable/ico_dialog_salario" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/tvnfowindow_salario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="SALARIO"
+                    android:textSize="@dimen/txtingresardimens" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layoutmarker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imaginfowindow_direccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    app:srcCompat="@drawable/ico_dialog_direccion" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/tvnfowindow_direccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="DIRECCIÓN"
+                    android:textSize="@dimen/txtingresardimens" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layoutmarker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="clicktelefonoBB">
+
+                <ImageView
+                    android:id="@+id/imaginfowindow_telefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    android:onClick="botontelefono"
+                    app:srcCompat="@drawable/ico_dialog_telefono" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/tvnfowindow_telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="TELEFONO"
+                    android:textSize="@dimen/txtingresardimens" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layoutmarker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="clickMailBB">
+
+                <ImageView
+                    android:id="@+id/imaginfowindow_correo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    app:srcCompat="@drawable/ico_dialog_correo" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/tvnfowindow_correo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="CORREO"
+                    android:textSize="@dimen/txtingresardimens" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btninfowindow_compartirBB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_compartir"
+                android:drawableLeft="@drawable/ico_compartir"
+                android:drawableTint="@color/blanco"
+                android:padding="@dimen/paddingcabecera"
+                android:onClick="clickcompartirBB"
+                android:text="     COMPARTIR"
+                android:textColor="@color/blanco"
+                android:textSize="@dimen/txtingresardimens" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

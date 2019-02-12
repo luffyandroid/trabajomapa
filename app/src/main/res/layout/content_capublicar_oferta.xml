@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".CAPublicarOfertaActivity"
+    tools:showIn="@layout/activity_capublicar_oferta">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+                //EditText NOMBRE EMPRESA:
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:hint="Nombre de la empresa (obligatorio)"
+                    app:hintTextAppearance="@style/etflotante">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etnombreempresaCA"
+                        style="@style/etnormal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textIsSelectable="false" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                //EditText NOMBRE PUESTO:
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:focusableInTouchMode="true"
+                    android:hint="Nombre del puesto (obligatorio)"
+                    app:hintTextAppearance="@style/etflotante">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etnombrepuestoCA"
+                        style="@style/etnormal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textIsSelectable="false" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                //EditText DETALLES PUESTO:
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:hint="Detalles del puesto"
+                    app:hintTextAppearance="@style/etflotante"
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etdetallespuestoCA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        style="@style/etnormal"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                //EditText SALARIO PUESTO:
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:hint="Salario mensual"
+                    app:hintTextAppearance="@style/etflotante">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etsalariopuestoCA"
+                        style="@style/etnormal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Spinner
+                    android:id="@+id/spincategoriaCA"
+                    android:spinnerMode="dialog"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Spinner>
+
+
+                //EditText DIRECCION NEGOCIO:
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:hint="                                                         "
+                    app:hintTextAppearance="@style/etflotante">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/etdireccionnegocioAutoCA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:hint="Escribe la dirección, para que no haya errores formato calle / nº / ciudad (Obligatorio)"
+                        android:layout_toRightOf="@+id/ic_magnify"
+                        android:background="@null"
+                        android:imeOptions="actionSearch" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvocultoCA"
+                    style="@style/txtingresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tvocultopuestoCA"
+                    style="@style/txtingresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tvocultolatitudCA"
+                    style="@style/txtingresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tvocultolongitudCA"
+                    style="@style/txtingresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="gone"/>
+
+
+
+                //BOTON GEO NEGOCIO:
+                //001 Deshabilitado hasta encontrar una forma de arreglar
+
+                <ImageView
+                    android:id="@+id/imggeonegocioCA"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/boton_geolocalizacion_c"
+                    android:onClick="obtenerdireccion"
+                    android:visibility="gone"/>
+
+                //EditText TELEFONO NEGOCIO:
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:hint="Teléfono"
+                    app:hintTextAppearance="@style/etflotante">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/ettelefononegocioCA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="phone"
+                        style="@style/etnormal"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                //EditText CORREO NEGOCIO:
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:hint="Correo electrónico"
+                    app:hintTextAppearance="@style/etflotante"
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etcorreonegocioCA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textEmailAddress"
+                        style="@style/etnormal"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                //Texto FECHA+HORA
+                <TextView
+                    android:id="@+id/tvocultofechahoraCA"
+                    android:textSize="@dimen/d18"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="FECHA"
+                    android:visibility="invisible"/>
+
+                //Texto FECHA
+                <TextView
+                    android:id="@+id/tvocultofechaCA"
+                    android:textSize="@dimen/d18"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="FECHA"
+                    android:visibility="gone"/>
+
+                //EditText POLITICA:
+
+                <CheckBox
+                    android:id="@+id/checkpoliticaCA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:text="Política de privacidad y condiciones del anuncio"
+                    android:onClick="dialogopolitica"/>
+
+
+                //Boton PUBLICAR
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/googleBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                </com.google.android.gms.common.SignInButton>
+
+                <ImageView
+                    android:id="@+id/imgpublicarCA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:onClick="publicaroferta"
+                    app:srcCompat="@drawable/boton_publicar_c_selector" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

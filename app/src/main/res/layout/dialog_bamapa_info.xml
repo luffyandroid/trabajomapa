@@ -54,8 +54,9 @@
 
     </LinearLayout>
 
-        <LinearLayout
+        <Button
             style="@style/cabecera"
+            android:id="@+id/volverBotonDialog"
             android:background="@drawable/selector_btn_marron"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,19 +64,12 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingVertical="@dimen/paddingcabecera"
+            android:text="VOLVER AL A MENU"
+            android:textColor="@color/blanco"
             android:onClick="clickAtrasDialog">
 
 
-        <TextView
-            android:id="@+id/tvFooterDialogBA"
-            style="@style/txtcabecera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VOLVER AL A MENU"
-            android:textSize="@dimen/txtfooter"/>
-
-
-    </LinearLayout>
+    </Button>
 
     </LinearLayout>
 

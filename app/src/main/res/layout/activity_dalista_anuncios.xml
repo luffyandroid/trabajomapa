@@ -1,41 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".DAListaAnunciosActivity">
 
-    <LinearLayout
-        style="@style/cabecera"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingVertical="@dimen/paddingcabecera">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <ImageView
-            android:id="@+id/imgcabeceraDA"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/icono_superior_publicar" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <TextView
-            android:id="@+id/tvcabeceraDA"
-            style="@style/txtcabecera"
+            <LinearLayout
+                style="@style/cabecera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/paddingcabecera">
+
+                    <ImageView
+                        android:id="@+id/imgcabeceraDA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/icono_superior_publicar" />
+
+                    <TextView
+                        android:id="@+id/tvcabeceraDA"
+                        style="@style/txtcabecera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TUS ANUNCIOS"
+                        android:textSize="@dimen/txtcabecera" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <include layout="@layout/content_dalista_anuncios" />
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/menu_fabDA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        fab:fab_addButtonColorNormal="?attr/colorPrimary"
+        fab:fab_addButtonSize="normal"
+        fab:fab_labelStyle="@style/Etiquetas"
+        fab:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapaPublicarDA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TUS ANUNCIOS"
-            android:textSize="@dimen/txtcabecera" />
+            fab:fab_colorNormal="@color/azuloscuro"
+            app:fab_colorPressed="@color/azul"
+            fab:fab_icon="@drawable/menu_float_05_publicar"
+            fab:fab_size="mini"
+            android:onClick="clickpublicarDA"
+            fab:fab_title="Publicar Oferta" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapaInfoDA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/azuloscuro"
+            app:fab_colorPressed="@color/azul"
+            fab:fab_icon="@drawable/menu_float_06_info"
+            fab:fab_size="mini"
+            android:onClick="clickinfoDA"
+            fab:fab_title="+ Info" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAtrasrDA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/marron"
+            app:fab_colorPressed="@color/marronoscuro"
+            fab:fab_icon="@drawable/ic_ico_btn_atras_02"
+            fab:fab_size="mini"
+            android:onClick="clicatrasDA"
+            fab:fab_title="Volver a mapa" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/listanunciosDA"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

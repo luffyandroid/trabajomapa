@@ -1,6 +1,7 @@
 package com.example.fl.trabajomapa;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fl.trabajomapa.Config.ZDialog;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -51,7 +53,13 @@ import java.util.Locale;
 
 public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+
+    FloatingActionsMenu fab;
+   // private FloatingActionButton menu_fab;
     private GoogleMap mMap;
+
+    final Context context = this;
+
     DatabaseReference dbRef;
     ValueEventListener valueEventListener;
     ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();
@@ -59,7 +67,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
     Double latitud, longitud;
     TextView tvmarcador, mensaje1, mensaje2;
-    Button normal, satelite, hibrido, locactual, btninfowindow_compartir;
+   //002 Button btninfowindow_compartir;
     ZOferta marcador;
 
 
@@ -68,18 +76,58 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bamapa_final);
 
-        btninfowindow_compartir = (Button) findViewById(R.id.btninfowindow_compartir);
+       //002 btninfowindow_compartir = (Button) findViewById(R.id.btninfowindow_compartir);
+       //FLOATING BUTTON
+        fab  = (FloatingActionsMenu) findViewById(R.id.menu_fab);
 
+
+
+        /*
+        final FloatingActionButton botonBAMapanormal = (FloatingActionButton) findViewById(R.id.botonBAMapanormal);
+        botonBAMapanormal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                //PARA QUE SE CIERRE AL PULSAR
+              //  fab.collapse();
+            }
+        });
+        */
+
+        /* //008
+
+        //BOTON FLOTANTE
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        */
 
 
-        SupportMapFragment vistaMapaFinal = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.vistaMapaFinal);
+        SupportMapFragment vistaMapaFinal = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.vistaMapaFinal);
+/*
+        //002 QUE SE CIERRE EL FLOAT MENU CUANDO PULSE FUERA DEL MENU
+        vistaMapaFinal.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //Log.d(TAG, "onTouch  " + "");
+                if (fab.isExpanded()) {
+                    fab.collapse();
+                    return true;
+                }
+                return false;
+
+            }
+        });
+        */
         vistaMapaFinal.getMapAsync(this);
         dbRef = FirebaseDatabase.getInstance().getReference();
 
-        tvmarcador = (TextView)findViewById(R.id.tvmarcador);
+        tvmarcador = (TextView) findViewById(R.id.tvmarcador);
+        mensaje1 = (TextView) findViewById(R.id.mensaje1);
+        mensaje2 = (TextView) findViewById(R.id.mensaje2);
+
+
+        //001 NO ESTOY SEGURO
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
@@ -87,36 +135,115 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
             locationStart();
         }
 
-        normal = (Button)findViewById(R.id.botonBAMapanormal);
-        normal.setOnClickListener(new View.OnClickListener() {
+        //BOTONES DEL FLOAT MENU
+        //008
+
+        /*
+
+        View Btnsatelite, Btnnormal, Btnhibrido, Btnlocalizacion, Btnpublicar, Btnrenovar, Btninfo;
+
+        Btnsatelite = findViewById(R.id.botonBAMapasatelite);
+        Btnnormal = findViewById(R.id.botonBAMapanormal);
+        Btnhibrido = findViewById(R.id.botonBAMapahibrido);
+        Btnlocalizacion = findViewById(R.id.botonBAMapaloc);
+        Btnpublicar = findViewById(R.id.botonBAMapaPublicar);
+        Btnrenovar = findViewById(R.id.botonBAMapaRenovar);
+        Btninfo = findViewById(R.id.botonBAMapaInfo);
+
+        //FLOATING BUTTON Y SUS DIFERENTES SECCIONES
+        fab  = (FloatingActionsMenu) findViewById(R.id.menu_fab);
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            public void onClick(View view) {
+
+              //003  Btnsatelite.getVisibility(View.VISIBLE);
+                fab.showContextMenu();
+
+                //Btnsatelite.setVisibility(View.VISIBLE);
+
+                //001 PARA QUE CIERRE SI PULSO FUERA
+                //fab.setClosedOnTouchOutside(true);
+                //PARA QUE SE CIERRE AL PULSAR
+                fab.collapse();
             }
+
         });
-        satelite = (Button)findViewById(R.id.botonBAMapasatelite);
-        satelite.setOnClickListener(new View.OnClickListener() {
+        Btnsatelite.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                //PARA QUE SE CIERRE AL PULSAR
+                fab.collapse();
             }
         });
-        hibrido = (Button)findViewById(R.id.botonBAMapahibrido);
-        hibrido.setOnClickListener(new View.OnClickListener() {
+        Btnnormal.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                //PARA QUE SE CIERRE AL PULSAR
+                fab.collapse();
+            }
+        });
+        Btnhibrido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                //PARA QUE SE CIERRE AL PULSAR
+                fab.collapse();
             }
         });
-        locactual = (Button)findViewById(R.id.botonBAMapaloc);
-        locactual.setOnClickListener(new View.OnClickListener() {
+        Btnlocalizacion.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 locationStart();
             }
         });
+        Btnpublicar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent().setClass(
+                        BAMapaFinalActivity.this, CAPublicarOfertaActivity.class);
+                startActivity(mainIntent);
+                //PARA QUE SE CIERRE AL PULSAR
+                fab.collapse();
+            }
+        });
+        Btnrenovar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent().setClass(
+                        BAMapaFinalActivity.this, DAListaAnunciosActivity.class);
+                startActivity(mainIntent);
+                //PARA QUE SE CIERRE AL PULSAR
+                fab.collapse();
+            }
+        });
+        Btninfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_bamapa_info);
 
+                TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+
+                volvermenu.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                dialog.show();
+                //PARA QUE SE CIERRE AL PULSAR
+                fab.collapse();
+            }
+        });*/
     }
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -127,12 +254,11 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 //for(Marker marker:realTimeMarkers){
-                    //marker.remove();
+                //marker.remove();
                 //}
 
 
-
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ZOferta ofe = snapshot.getValue(ZOferta.class);
                     latitud = ofe.getLatitud();
                     longitud = ofe.getLongitud();
@@ -147,6 +273,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
                     //ZAdaptadorVentanaInfo custominfowindow = new ZAdaptadorVentanaInfo(getApplicationContext());
                     //mMap.setInfoWindowAdapter(custominfowindow);
+
                     mMap.setInfoWindowAdapter
                             (new ZAdaptadorVentanaInfo(BAMapaFinalActivity.this) {
                                 @Override
@@ -156,90 +283,89 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                             });
 
 
-
                     MarkerOptions markerOptions = new MarkerOptions();
-                    if (ofe.getTipopuesto().equals("Otros")){
+                    if (ofe.getTipopuesto().equals("Otros")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_otros));
                     }
-                    if (ofe.getTipopuesto().equals("Administración")){
+                    if (ofe.getTipopuesto().equals("Administración")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_administracion));
                     }
-                    if (ofe.getTipopuesto().equals("Agricultura")){
+                    if (ofe.getTipopuesto().equals("Agricultura")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_agricultura));
                     }
-                    if (ofe.getTipopuesto().equals("Animación")){
+                    if (ofe.getTipopuesto().equals("Animación")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_animacion));
                     }
-                    if (ofe.getTipopuesto().equals("Atención al cliente")){
+                    if (ofe.getTipopuesto().equals("Atención al cliente")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_atencionalcliente));
                     }
-                    if (ofe.getTipopuesto().equals("Calidad I+D")){
+                    if (ofe.getTipopuesto().equals("Calidad I+D")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_calidadimasd));
                     }
-                    if (ofe.getTipopuesto().equals("Comercial")){
+                    if (ofe.getTipopuesto().equals("Comercial")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_comercial));
                     }
-                    if (ofe.getTipopuesto().equals("Construcción")){
+                    if (ofe.getTipopuesto().equals("Construcción")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_construccion));
                     }
-                    if (ofe.getTipopuesto().equals("Diseño y Artes gráficas")){
+                    if (ofe.getTipopuesto().equals("Diseño y Artes gráficas")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_disenoyartesgraficas));
                     }
-                    if (ofe.getTipopuesto().equals("Educación")){
+                    if (ofe.getTipopuesto().equals("Educación")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_educacion));
                     }
-                    if (ofe.getTipopuesto().equals("Farmaceutica")){
+                    if (ofe.getTipopuesto().equals("Farmaceutica")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_famaceutica));
                     }
-                    if (ofe.getTipopuesto().equals("Finanzas y banca")){
+                    if (ofe.getTipopuesto().equals("Finanzas y banca")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_finanzasybanca));
                     }
-                    if (ofe.getTipopuesto().equals("Funerarias")){
+                    if (ofe.getTipopuesto().equals("Funerarias")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_funerarias));
                     }
-                    if (ofe.getTipopuesto().equals("Hostelería")){
+                    if (ofe.getTipopuesto().equals("Hostelería")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_hosteleria));
                     }
-                    if (ofe.getTipopuesto().equals("Informática")){
+                    if (ofe.getTipopuesto().equals("Informática")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_informatica));
                     }
-                    if (ofe.getTipopuesto().equals("Ingeniería y técnico")){
+                    if (ofe.getTipopuesto().equals("Ingeniería y técnico")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_ingenieriaytecnicos));
                     }
-                    if (ofe.getTipopuesto().equals("Legal")){
+                    if (ofe.getTipopuesto().equals("Legal")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_legal));
                     }
-                    if (ofe.getTipopuesto().equals("Limpieza")){
+                    if (ofe.getTipopuesto().equals("Limpieza")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_limpeza));
                     }
-                    if (ofe.getTipopuesto().equals("Logística y almacén")){
+                    if (ofe.getTipopuesto().equals("Logística y almacén")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_logisticayalmacen));
                     }
-                    if (ofe.getTipopuesto().equals("Marketing y comunicaciones")){
+                    if (ofe.getTipopuesto().equals("Marketing y comunicaciones")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_marketingycomunicaciones));
                     }
-                    if (ofe.getTipopuesto().equals("Música")){
+                    if (ofe.getTipopuesto().equals("Música")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_musica));
                     }
-                    if (ofe.getTipopuesto().equals("Profesiones y oficios")){
+                    if (ofe.getTipopuesto().equals("Profesiones y oficios")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_profesionesyoficios));
                     }
-                    if (ofe.getTipopuesto().equals("Recursos humanos")){
+                    if (ofe.getTipopuesto().equals("Recursos humanos")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_recursoshumanos));
                     }
-                    if (ofe.getTipopuesto().equals("Sanidad")){
+                    if (ofe.getTipopuesto().equals("Sanidad")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_sanidad));
                     }
-                    if (ofe.getTipopuesto().equals("Transportes")){
+                    if (ofe.getTipopuesto().equals("Transportes")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_transportes));
                     }
-                    if (ofe.getTipopuesto().equals("Turismo")){
+                    if (ofe.getTipopuesto().equals("Turismo")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_turismo));
                     }
-                    if (ofe.getTipopuesto().equals("Venta")){
+                    if (ofe.getTipopuesto().equals("Venta")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_venta));
                     }
-                    if (ofe.getTipopuesto().equals("Veterinaria")){
+                    if (ofe.getTipopuesto().equals("Veterinaria")) {
                         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_veterinaria));
                     }
                     markerOptions.title(ofe.getUid());
@@ -262,14 +388,14 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
     }
 
 
-//COMPARTIR EN REDES SOCIALES
+    //COMPARTIR EN REDES SOCIALES
 
-//001
-/*
+    //001
+            /*
     btninfowindow_compartir.setOnClickListener(new View.OnClickListener(){
         @Override
         public void onClick(View v){
-*/
+            */
 
     private void locationStart() {
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -286,6 +412,8 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
+
+
 
         mensaje1.setText("Localizacion agregada");
         mensaje2.setText("");
@@ -312,8 +440,8 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                     mensaje2.setText("Mi direccion es: \n"
                             + DirCalle.getAddressLine(0));*/
                     CameraUpdate locactual =
-                            CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(),loc.getLongitude()),17);
-                    mMap.moveCamera(locactual);
+                            CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 17);
+                    mMap.animateCamera(locactual);
 
                 }
 
@@ -322,6 +450,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
             }
         }
     }
+
     /* Aqui empieza la Clase Localizacion */
     public class Localizacion implements LocationListener {
         BAMapaFinalActivity baMapaFinalActivity;
@@ -375,11 +504,9 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
             }
         }
     }
-
-
-
-    public void compartir (View v) {
-
+//002
+/*
+    public void compartir(View v) {
 
 
         Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
@@ -405,7 +532,71 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         startActivity(Intent.createChooser(compartir, "Compartir vía"));
 
     }
+*/
 
 
+
+//ONCLICK FLOAT BUTTON
+
+    public void clicksatelite(View v) {
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab.collapse();
+    }
+
+    public void clicknormal(View v) {
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab.collapse();
+    }
+
+    public void clickhibrido(View v) {
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab.collapse();
+    }
+
+    public void clicklocalizacion(View v) {
+        locationStart();
+        //009 DONDE Y QUE PONER onStop();
+        fab.collapse();
+    }
+
+    public void clickpublicar(View v) {
+        Intent mainIntent = new Intent().setClass(
+                BAMapaFinalActivity.this, CAPublicarOfertaActivity.class);
+        startActivity(mainIntent);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab.collapse();
+    }
+
+    public void clickrenovar(View v) {
+        Intent mainIntent = new Intent().setClass(
+                BAMapaFinalActivity.this, DAListaAnunciosActivity.class);
+        startActivity(mainIntent);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab.collapse();
+    }
+
+    public void clickinfo(View v) {
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_bamapa_info);
+
+        //TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+        Button volvermenu = (Button) dialog.findViewById(R.id.volverBotonDialog);
+
+
+        volvermenu.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+        dialog.show();
+        //PARA QUE SE CIERRE AL PULSAR
+        fab.collapse();
+    }
 
 }

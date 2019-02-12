@@ -1,5 +1,7 @@
 package com.example.fl.trabajomapa;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,11 +12,17 @@ import java.util.TimerTask;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 public class DAListaAnunciosActivity extends AppCompatActivity {
+
+    private FloatingActionsMenu fab4;
+    final Context context = this;
 
     //VARIANTES DE DECLARADAS
     private ListView listanunciosDA;
@@ -23,6 +31,9 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dalista_anuncios);
+
+        //FLOATING BUTTON
+        fab4  = (FloatingActionsMenu) findViewById(R.id.menu_fabDA);
 
         ArrayList<ZOferta> anunciospublicadosusuario = new ArrayList<ZOferta>();
 
@@ -82,5 +93,45 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
     private void clickBorrar() {
 
     }
+
+    public void clickpublicarDA(View v) {
+        Intent mainIntent = new Intent().setClass(
+                DAListaAnunciosActivity.this, CAPublicarOfertaActivity.class);
+        startActivity(mainIntent);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab4.collapse();
+    }
+
+
+    public void clicatrasDA(View v) {
+        Intent mainIntent = new Intent().setClass(
+                DAListaAnunciosActivity.this, BAMapaFinalActivity.class);
+        startActivity(mainIntent);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab4.collapse();
+    }
+
+    public void clickinfoDA(View v) {
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_bamapa_info);
+
+        //TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+        Button volvermenu = (Button) dialog.findViewById(R.id.volverBotonDialog);
+
+
+        volvermenu.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+        dialog.show();
+        //PARA QUE SE CIERRE AL PULSAR
+        fab4.collapse();
+    }
+
+
 }
 

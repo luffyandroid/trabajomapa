@@ -21,8 +21,7 @@
         android:roundIcon="@drawable/appicon_circulo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AAAPlaceActivity"></activity>
-        <activity android:name=".AAAPruebaResultActivity" />
+        <activity android:name=".BBInfoAnuncio"></activity>
         <activity android:name=".AASplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,6 +53,7 @@
         <activity
             android:name=".BAMapaFinalActivity"
             android:label="@string/title_activity_bamapa_final"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
     </application>
 

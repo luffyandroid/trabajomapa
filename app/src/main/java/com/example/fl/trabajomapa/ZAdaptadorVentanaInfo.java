@@ -159,7 +159,7 @@ public abstract class ZAdaptadorVentanaInfo implements View.OnTouchListener, Goo
 
 
 
-
+/*
     public void compartir (View v) {
 
         Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
@@ -185,8 +185,12 @@ public abstract class ZAdaptadorVentanaInfo implements View.OnTouchListener, Goo
         // startActivity(Intent.createChooser(compartir, "Compartir vía"));
 
     }
+    */
 
 
     private class OnInfoWindowElemTouchListener {
+        // 004 CREO QUE AQUÍ SE PONE EL BOTON CLICK DEL INFOWINDOWS
+
+
     }
 }

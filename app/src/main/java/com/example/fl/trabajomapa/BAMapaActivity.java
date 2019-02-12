@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -151,7 +152,9 @@ public class BAMapaActivity extends AppCompatActivity implements NavigationView.
             final Dialog dialog = new Dialog(context);
             dialog.setContentView(R.layout.dialog_bamapa_info);
 
-            TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+            //TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+            Button volvermenu = (Button) dialog.findViewById(R.id.volverBotonDialog);
+
 
             volvermenu.setOnClickListener(
                     new View.OnClickListener() {

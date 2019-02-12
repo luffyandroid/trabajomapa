@@ -16,11 +16,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +30,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -40,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -86,9 +90,14 @@ import java.io.IOException;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Pattern;
 
 public class CAPublicarOfertaActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+    private FloatingActionsMenu fab3;
+    final Context context = this;
 
     //PARTE CODIGO AUTOOMPLETE
     @Override
@@ -143,6 +152,9 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capublicar_oferta);
 
+        //FLOATING BUTTON
+        fab3  = (FloatingActionsMenu) findViewById(R.id.menu_fabCA);
+
         //TOAST COMPROBACIÓN SI HAY INTERNET
         if (!verificaConexion(this)) {
             Toast.makeText(getBaseContext(),
@@ -151,7 +163,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         }
 
         tvocultopuestoCA = (TextView)findViewById(R.id.tvocultopuestoCA);
-        //COSAS DEL BOTTON DE GOOGLE SIGN IN
+        //COSAS DEL BOTON DE GOOGLE SIGN IN
         button = (SignInButton)findViewById(R.id.googleBtn);
         mAuth = FirebaseAuth.getInstance();
 
@@ -263,6 +275,63 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         tvocultolongitudCA = (TextView) findViewById(R.id.tvocultolongitudCA);
 
         checkpoliticaCA = (CheckBox) findViewById(R.id.checkpoliticaCA);
+
+        /*
+
+        //BOTON FLOTANTE
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //BOTONES DEL FLOAT MENU
+
+        View Btnrenovar, Btnatras, Btninfo;
+
+        Btnrenovar = findViewById(R.id.botonBAMapaRenovarCA);
+        Btnatras = findViewById(R.id.btnAtrasrCA);
+        Btninfo = findViewById(R.id.botonBAMapaInfoCA);
+
+        //FLOATING BUTTON Y SUS DIFERENTES SECCIONES
+        FloatingActionsMenu fab = (FloatingActionsMenu) findViewById(R.id.menu_fabCA);
+
+        fab.setOnClickListener(this);
+
+        Btnrenovar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent().setClass(
+                        CAPublicarOfertaActivity.this, DAListaAnunciosActivity.class);
+                startActivity(mainIntent);
+            }
+        });
+        Btnatras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent().setClass(
+                        CAPublicarOfertaActivity.this, BAMapaFinalActivity.class);
+                startActivity(mainIntent);
+            }
+        });
+        Btninfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_bamapa_info);
+
+                TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+
+                volvermenu.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                dialog.show();
+            }
+        });
+        */
+
 
     }//FIN ONCREATE
 
@@ -591,9 +660,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     }
 
 
-
-
-
     //COMIENZA GESTION DE LOCALIZACION
     public class Localizacion implements LocationListener {
         CAPublicarOfertaActivity CAPublicarOfertaActivity;
@@ -711,5 +777,42 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
+    public void clickrenovarCA(View v) {
+        Intent mainIntent = new Intent().setClass(
+                CAPublicarOfertaActivity.this, DAListaAnunciosActivity.class);
+        startActivity(mainIntent);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab3.collapse();
+    }
 
-}
+    public void clicatrasCA(View v) {
+        Intent mainIntent = new Intent().setClass(
+                CAPublicarOfertaActivity.this, BAMapaFinalActivity.class);
+        startActivity(mainIntent);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab3.collapse();
+    }
+
+    public void clickinfoCA(View v) {
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_bamapa_info);
+
+       // TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+        Button volvermenu = (Button) dialog.findViewById(R.id.volverBotonDialog);
+
+
+        volvermenu.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+        dialog.show();
+        //PARA QUE SE CIERRE AL PULSAR
+        fab3.collapse();
+    }
+
+
+        }

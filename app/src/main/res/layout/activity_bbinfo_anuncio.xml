@@ -5,8 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blanco"
     android:orientation="vertical"
-    tools:context=".CAPublicarOfertaActivity">
+    tools:context=".BBInfoAnuncio">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -26,34 +27,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/paddingcabecera">
 
+        <ImageView
+            android:id="@+id/imgcabeceraBABB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/icono_superior_publicar" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvcabeceraCABB"
+            style="@style/txtcabecera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingVertical="@dimen/paddingcabecera">
-
-            <ImageView
-                android:id="@+id/imgcabeceraCA"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/icono_superior_publicar" />
-
-            <TextView
-                android:id="@+id/tvcabeceraCA"
-                style="@style/txtcabecera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PUBLICAR OFERTA"
-                android:textSize="@dimen/txtcabecera" />
-
-        </LinearLayout>
-
+            android:text="ANUNCIO"
+            android:textSize="@dimen/txtcabecera" />
     </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
@@ -61,10 +50,10 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include layout="@layout/content_capublicar_oferta" />
+    <include layout="@layout/content_bbinfo_anuncio" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/menu_fabCA"
+        android:id="@+id/menu_fabBB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
@@ -74,40 +63,53 @@
         fab:fab_labelStyle="@style/Etiquetas"
         fab:fab_labelsPosition="left">
 
+
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/botonBAMapaRenovarCA"
+            android:id="@+id/botonBAMapaPublicarBB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/azuloscuro"
+            app:fab_colorPressed="@color/azul"
+            fab:fab_icon="@drawable/menu_float_05_publicar"
+            fab:fab_size="mini"
+            android:onClick="clickpublicarBB"
+            fab:fab_title="Publicar Oferta" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapaRenovarBB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/azuloscuro"
             app:fab_colorPressed="@color/azul"
             fab:fab_icon="@drawable/menu_float_07_renovar"
             fab:fab_size="mini"
-            android:onClick="clickrenovarCA"
+            android:onClick="clickrenovarBB"
             fab:fab_title="Renovar Oferta" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/botonBAMapaInfoCA"
+            android:id="@+id/botonBAMapaInfoBB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/azuloscuro"
             app:fab_colorPressed="@color/azul"
             fab:fab_icon="@drawable/menu_float_06_info"
             fab:fab_size="mini"
-            android:onClick="clickinfoCA"
+            android:onClick="clickinfoBB"
             fab:fab_title="+ Info" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnAtrasrCA"
+            android:id="@+id/botonBAMapaAtrasBB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/marron"
             app:fab_colorPressed="@color/marronoscuro"
             fab:fab_icon="@drawable/ic_ico_btn_atras_02"
             fab:fab_size="mini"
-            android:onClick="clicatrasCA"
+            android:onClick="clicatrasBB"
             fab:fab_title="Volver a mapa" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
 
 
 </android.support.design.widget.CoordinatorLayout>
