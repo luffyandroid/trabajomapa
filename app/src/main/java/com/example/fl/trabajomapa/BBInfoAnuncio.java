@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,12 +18,24 @@ import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class BBInfoAnuncio extends AppCompatActivity {
+    static final String EXTRA_ANUNCIO = "ANUNCIO";
+
+    //ETIQUETAS SUBIDA DE BASE DE DATOS
+    DatabaseReference dbRef;
+    ValueEventListener valueEventListener;
+    ZOferta anuncio = null;
 
     private FloatingActionsMenu fab2;
     final Context context = this;
     Button btninfowindow_compartirBB;
+    TextView detalles, salario, direccion, telefono, correo, nombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +110,25 @@ public class BBInfoAnuncio extends AppCompatActivity {
             }
         });
         */
+        nombre = (TextView) findViewById(R.id.tvnfowindow_titulobb);
+        detalles = (TextView) findViewById(R.id.tvnfowindow_detalles);
+        salario = (TextView) findViewById(R.id.tvnfowindow_salario);
+        direccion = (TextView) findViewById(R.id.tvnfowindow_direccion);
+        telefono = (TextView) findViewById(R.id.tvnfowindow_telefono);
+        correo = (TextView) findViewById(R.id.tvnfowindow_correo);
+
+        Bundle b = getIntent().getExtras();
+
+        if (b!=null){
+            anuncio = b.getParcelable(BAMapaFinalActivity.EXTRA_ANUNCIO);
+            nombre.setText(anuncio.getNombre());
+            detalles.setText(anuncio.getDetalles());
+            salario.setText(anuncio.getSalario());
+            direccion.setText(anuncio.getDireccion());
+            telefono.setText(anuncio.getTelefono());
+            correo.setText(anuncio.getCorreo());
+
+        }
     }
 
 

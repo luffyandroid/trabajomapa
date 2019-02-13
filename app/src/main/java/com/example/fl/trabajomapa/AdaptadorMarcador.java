@@ -38,9 +38,9 @@ public class AdaptadorMarcador extends ArrayAdapter<ZOferta> {
                 item.findViewById(R.id.tvnombremarcador);
         tvNombre.setText(oferta.get(position).getNombre() );
 
-        TextView tvDetalle = (TextView)
+        TextView tvDetalles = (TextView)
                 item.findViewById(R.id.tvdetallemarcador);
-        tvDetalle.setText(oferta.get(position).getDetalle() );
+        tvDetalles.setText(oferta.get(position).getDetalles() );
 
         TextView tvSalario = (TextView)
                 item.findViewById(R.id.tvsalariomarcador);

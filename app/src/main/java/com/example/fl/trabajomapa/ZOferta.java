@@ -8,7 +8,7 @@ public class ZOferta implements Parcelable {
     String uidempresa;
     String uid;
     String nombre;
-    String detalle;
+    String detalles;
     String salario;
     String tipopuesto;
     String direccion;
@@ -32,11 +32,11 @@ public class ZOferta implements Parcelable {
                 }
             };
 
-    public ZOferta(String uidempresa, String uid, String nombre, String detalle, String salario, String tipopuesto, String direccion, Double latitud, Double longitud, String telefono, String correo, String fecha, String disponible) {
+    public ZOferta(String uidempresa, String uid, String nombre, String detalles, String salario, String tipopuesto, String direccion, Double latitud, Double longitud, String telefono, String correo, String fecha, String disponible) {
         this.uidempresa = uidempresa;
         this.uid = uid;
         this.nombre = nombre;
-        this.detalle = detalle;
+        this.detalles = detalles;
         this.salario = salario;
         this.tipopuesto = tipopuesto;
         this.direccion = direccion;
@@ -80,12 +80,12 @@ public class ZOferta implements Parcelable {
         this.nombre = nombre;
     }
 
-    public String getDetalle() {
-        return detalle;
+    public String getDetalles() {
+        return detalles;
     }
 
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
     }
 
     public String getSalario() {
@@ -170,7 +170,7 @@ public class ZOferta implements Parcelable {
         dest.writeString(this.uidempresa);
         dest.writeString(this.uid);
         dest.writeString(this.nombre);
-        dest.writeString(this.detalle);
+        dest.writeString(this.detalles);
         dest.writeString(this.salario);
         dest.writeString(this.tipopuesto);
         dest.writeString(this.direccion);
@@ -186,7 +186,7 @@ public class ZOferta implements Parcelable {
         this.uidempresa = p.readString();
         this.uid = p.readString();
         this.nombre = p.readString();
-        this.detalle = p.readString();
+        this.detalles = p.readString();
         this.salario = p.readString();
         this.tipopuesto = p.readString();
         this.direccion = p.readString();

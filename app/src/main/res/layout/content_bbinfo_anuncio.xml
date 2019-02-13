@@ -27,6 +27,35 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/imaginfowindow_titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    app:srcCompat="@drawable/ico_dialog_descripcion" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/tvnfowindow_titulobb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="DETALLES"
+                    android:textSize="@dimen/txtingresardimens" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layoutmarker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
                     android:id="@+id/imaginfowindow_detalles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

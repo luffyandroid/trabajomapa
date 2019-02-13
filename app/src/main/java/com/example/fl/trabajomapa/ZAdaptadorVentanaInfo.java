@@ -69,7 +69,7 @@ public abstract class ZAdaptadorVentanaInfo implements View.OnTouchListener, Goo
                 oferta = dataSnapshot.getValue(ZOferta.class);
 
                 nombre.setText(oferta.getNombre());
-                detalles.setText(oferta.getDetalle());
+                detalles.setText(oferta.getDetalles());
                 salario.setText(oferta.getSalario());
                 direccion.setText(oferta.getDireccion());
                 telefono.setText(oferta.getTelefono());

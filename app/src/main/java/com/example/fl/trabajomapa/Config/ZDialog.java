@@ -51,7 +51,7 @@ public class ZDialog implements GoogleMap.InfoWindowAdapter {
         ZOferta infoWindowData = (ZOferta) m.getTag();
 
         nombre.setText(infoWindowData.getNombre());
-        detalle.setText(infoWindowData.getDetalle());
+        detalle.setText(infoWindowData.getDetalles());
         salario.setText(infoWindowData.getSalario());
         direccion.setText(infoWindowData.getDireccion());
         telefono.setText(infoWindowData.getTelefono());

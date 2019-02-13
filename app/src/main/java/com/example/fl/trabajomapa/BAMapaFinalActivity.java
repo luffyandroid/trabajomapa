@@ -56,6 +56,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
     FloatingActionsMenu fab;
    // private FloatingActionButton menu_fab;
+    static final String EXTRA_ANUNCIO = "ANUNCIO";
     private GoogleMap mMap;
 
     final Context context = this;
@@ -66,9 +67,10 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
     ArrayList<Marker> realTimeMarkers = new ArrayList<>();
 
     Double latitud, longitud;
-    TextView tvmarcador, mensaje1, mensaje2;
-   //002 Button btninfowindow_compartir;
-    ZOferta marcador;
+    TextView tvmarcador, mensaje1, mensaje2, tvocultoba;
+    Button normal, satelite, hibrido, locactual, btninfowindow_compartir;
+    //002 Button btninfowindow_compartir;
+    ZOferta marcador, anuncio;
 
 
     @Override
@@ -128,6 +130,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
 
         //001 NO ESTOY SEGURO
+        tvocultoba = (TextView)findViewById(R.id.tvocultoba);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
@@ -265,7 +268,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
                     ZMarcador info = new ZMarcador();
                     info.setNombre(ofe.getNombre());
-                    info.setDetalles(ofe.getDetalle());
+                    info.setDetalles(ofe.getDetalles());
                     info.setSalario(ofe.getSalario());
                     info.setDireccion(ofe.getDireccion());
                     info.setTelefono(ofe.getTelefono());
@@ -274,13 +277,14 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                     //ZAdaptadorVentanaInfo custominfowindow = new ZAdaptadorVentanaInfo(getApplicationContext());
                     //mMap.setInfoWindowAdapter(custominfowindow);
 
-                    mMap.setInfoWindowAdapter
+                    /*mMap.setInfoWindowAdapter
                             (new ZAdaptadorVentanaInfo(BAMapaFinalActivity.this) {
                                 @Override
                                 public boolean onTouch(View view, MotionEvent motionEvent) {
                                     return false;
                                 }
-                            });
+                            });*/
+
 
 
                     MarkerOptions markerOptions = new MarkerOptions();
@@ -385,6 +389,19 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
             }
         });
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String idmarcador = marker.getTitle().toString();
+                tvocultoba.setText(idmarcador);
+                pasarinfo();
+
+
+                //Toast.makeText(BAMapaFinalActivity.this, idmarcador, Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
     }
 
 
@@ -413,10 +430,8 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
 
-
-
-        mensaje1.setText("Localizacion agregada");
-        mensaje2.setText("");
+        //mensaje1.setText("Localizacion agregada");
+        //mensaje2.setText("");
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -473,20 +488,20 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
             String Text = "Mi ubicacion actual es: " + "\n Lat = "
                     + loc.getLatitude() + "\n Long = " + loc.getLongitude();
-            mensaje1.setText(Text);
+            //mensaje1.setText(Text);
             this.baMapaFinalActivity.setLocation(loc);
         }
 
         @Override
         public void onProviderDisabled(String provider) {
             // Este metodo se ejecuta cuando el GPS es desactivado
-            mensaje1.setText("GPS Desactivado");
+            //mensaje1.setText("GPS Desactivado");
         }
 
         @Override
         public void onProviderEnabled(String provider) {
             // Este metodo se ejecuta cuando el GPS es activado
-            mensaje1.setText("GPS Activado");
+            //mensaje1.setText("GPS Activado");
         }
 
         @Override
@@ -504,6 +519,28 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
             }
         }
     }
+
+    private void pasarinfo() {
+        dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/" + tvocultoba.getText().toString());
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                anuncio = dataSnapshot.getValue(ZOferta.class);
+                Intent i = new Intent().setClass(BAMapaFinalActivity.this, BBInfoAnuncio.class);
+                i.putExtra(EXTRA_ANUNCIO, anuncio);
+                startActivity(i);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("LoginActivity", "DATABASE ERROR");
+            }
+        };
+        dbRef.addValueEventListener(valueEventListener);
+    }
+
+    /*public void compartir (View v) {
 //002
 /*
     public void compartir(View v) {

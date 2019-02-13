@@ -62,6 +62,13 @@
         android:visibility="gone"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/tvocultoba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="" />
+
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/menu_fab"
         android:layout_width="wrap_content"
@@ -72,6 +79,9 @@
         fab:fab_addButtonSize="normal"
         fab:fab_labelStyle="@style/Etiquetas"
         fab:fab_labelsPosition="left">
+
+
+
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/botonBAMapasatelite"
