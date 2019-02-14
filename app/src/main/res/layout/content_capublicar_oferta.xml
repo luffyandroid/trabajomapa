@@ -156,7 +156,7 @@
                     style="@style/txtingresar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="0"
                     android:visibility="gone"/>
 
                 <TextView
@@ -164,7 +164,7 @@
                     style="@style/txtingresar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="0"
                     android:visibility="gone"/>
 
 

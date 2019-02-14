@@ -49,11 +49,25 @@
     <include layout="@layout/content_bamapa_final" />
 
     <TextView
+        android:id="@+id/latocul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/longocul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="" />
+
+    <TextView
         android:id="@+id/mensaje1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:text="TextView" />
+        android:text="si" />
 
     <TextView
         android:id="@+id/mensaje2"

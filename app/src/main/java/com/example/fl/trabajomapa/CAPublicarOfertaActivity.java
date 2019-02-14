@@ -404,7 +404,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
 
         //COMPROBAR SI LOS CAMPOS NO ESTAN VACIOS
-        if (nombreempresaCA.equals("")||nombrepuestoCA.equals("") || direccionnegocioCA.equals("")) {
+        if (nombreempresaCA.equals("")||nombrepuestoCA.equals("") || direccionnegocioCA.equals("") || latitudint.equals(0) || longitudint.equals(0)){
 
             Toast.makeText(getApplicationContext(),
                     "Rellena los campos obligatorios",
@@ -438,6 +438,12 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
             //VALIDAR MAIL
             if (!Pattern.matches("[a-zA-Z0-9._-]+@[a-z0-9]+[.]+[a-z]+", correonegocioCA)) {
                 etcorreonegocioCA.setError("Correo no válido");
+                error = true;
+            }
+
+            //VALIDAR DIRECCION
+            if (direccionnegocioCA.equals("")){
+                etdireccionnegocioAutoCA.setError("Dirección no valida");
                 error = true;
             }
 

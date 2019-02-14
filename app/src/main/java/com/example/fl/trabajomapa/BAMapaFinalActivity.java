@@ -55,7 +55,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
 
     FloatingActionsMenu fab;
-   // private FloatingActionButton menu_fab;
+    // private FloatingActionButton menu_fab;
     static final String EXTRA_ANUNCIO = "ANUNCIO";
     private GoogleMap mMap;
 
@@ -67,16 +67,18 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
     ArrayList<Marker> realTimeMarkers = new ArrayList<>();
 
     Double latitud, longitud;
-    TextView tvmarcador, mensaje1, mensaje2, tvocultoba;
+    TextView tvmarcador, mensaje1, mensaje2, tvocultoba, latocul, longocul;
     Button normal, satelite, hibrido, locactual, btninfowindow_compartir;
     //002 Button btninfowindow_compartir;
     ZOferta marcador, anuncio;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bamapa_final);
+
 
        //002 btninfowindow_compartir = (Button) findViewById(R.id.btninfowindow_compartir);
        //FLOATING BUTTON
@@ -127,6 +129,8 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         tvmarcador = (TextView) findViewById(R.id.tvmarcador);
         mensaje1 = (TextView) findViewById(R.id.mensaje1);
         mensaje2 = (TextView) findViewById(R.id.mensaje2);
+        latocul = (TextView) findViewById(R.id.latocul);
+        longocul = (TextView) findViewById(R.id.longocul);
 
 
         //001 NO ESTOY SEGURO
@@ -450,13 +454,18 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 List<Address> list = geocoder.getFromLocation(
                         loc.getLatitude(), loc.getLongitude(), 1);
+
                 if (!list.isEmpty()) {
                     /*Address DirCalle = list.get(0);
                     mensaje2.setText("Mi direccion es: \n"
                             + DirCalle.getAddressLine(0));*/
-                    CameraUpdate locactual =
-                            CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 17);
-                    mMap.animateCamera(locactual);
+                        if(mensaje1.getText().equals("si")) {
+                            CameraUpdate locactual =
+                                    CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 17);
+                            mMap.animateCamera(locactual);
+                            mensaje1.setText("no");
+                        }
+
 
                 }
 
@@ -483,25 +492,27 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
             // Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
             // debido a la deteccion de un cambio de ubicacion
 
-            loc.getLatitude();
-            loc.getLongitude();
+                loc.getLatitude();
+                loc.getLongitude();
 
-            String Text = "Mi ubicacion actual es: " + "\n Lat = "
-                    + loc.getLatitude() + "\n Long = " + loc.getLongitude();
-            //mensaje1.setText(Text);
+
             this.baMapaFinalActivity.setLocation(loc);
+
+
         }
 
         @Override
         public void onProviderDisabled(String provider) {
             // Este metodo se ejecuta cuando el GPS es desactivado
             //mensaje1.setText("GPS Desactivado");
+
         }
 
         @Override
         public void onProviderEnabled(String provider) {
             // Este metodo se ejecuta cuando el GPS es activado
             //mensaje1.setText("GPS Activado");
+
         }
 
         @Override
@@ -594,7 +605,9 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
     }
 
     public void clicklocalizacion(View v) {
+        mensaje1.setText("si");
         locationStart();
+
         //009 DONDE Y QUE PONER onStop();
         fab.collapse();
     }
