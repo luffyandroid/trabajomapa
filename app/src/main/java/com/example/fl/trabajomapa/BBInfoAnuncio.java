@@ -137,7 +137,7 @@ public class BBInfoAnuncio extends AppCompatActivity {
         Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
         compartir.setType("text/plain");
 
-        TextView nombre = v.findViewById(R.id.tvinfowindow_titulo);
+        TextView nombre = v.findViewById(R.id.tvnfowindow_titulobb);
         TextView detalle = v.findViewById(R.id.tvnfowindow_detalles);
         TextView salario = v.findViewById(R.id.tvnfowindow_salario);
         TextView direccion = v.findViewById(R.id.tvnfowindow_direccion);
@@ -157,11 +157,20 @@ public class BBInfoAnuncio extends AppCompatActivity {
 
     }
 
+    public void clickdireccionBB(View v){
+        try {
+            Uri location = Uri.parse("https://www.google.es/maps/@"+anuncio.getLatitud()+","+anuncio.getLongitud()+",20z");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+            startActivity(mapIntent);
+        }catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(BBInfoAnuncio.this, "No hay aplicación para ver la dirección", Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void clicktelefonoBB(View v) {
         try {
-            TextView telefono = v.findViewById(R.id.tvnfowindow_telefono);
-            telefono.getText().toString();
-            Uri number = Uri.parse("tel:"+ telefono);
+
+            Uri number = Uri.parse("tel:"+ telefono.getText().toString());
             Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
             startActivity(callIntent);
         } catch (android.content.ActivityNotFoundException ex) {
@@ -171,10 +180,8 @@ public class BBInfoAnuncio extends AppCompatActivity {
     }
     public void clickMailBB (View v){
 
-        TextView correo = v.findViewById(R.id.tvnfowindow_correo);
-        correo.getText().toString();
 
-        String[] TO = {"info@didact.es"}; //001 AQUI DEBERÍA IR CORREO
+        String[] TO = {correo.getText().toString()}; //001 AQUI DEBERÍA IR CORREO
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
         emailIntent.setData(Uri.parse("mailto:"));
@@ -209,11 +216,12 @@ public class BBInfoAnuncio extends AppCompatActivity {
     }
 
     public void clicatrasBB(View v) {
-        Intent mainIntent = new Intent().setClass(
+        /*Intent mainIntent = new Intent().setClass(
                 BBInfoAnuncio.this, BAMapaFinalActivity.class);
-        startActivity(mainIntent);
+        startActivity(mainIntent);*/
         //PARA QUE SE CIERRE AL PULSAR
         fab2.collapse();
+        onBackPressed();
     }
 
     public void clickinfoBB(View v) {
