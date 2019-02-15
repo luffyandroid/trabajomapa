@@ -14,8 +14,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="iappicon_cuadra" />
-                            <entry key="sourceFile" value="F:\appicon_cuadra.svg" />
+                            <entry key="height" value="512" />
+                            <entry key="outputName" value="ic_share_alt_01" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="F:\share-alt-01.svg" />
+                            <entry key="width" value="1330" />
                           </map>
                         </option>
                       </PersistentState>

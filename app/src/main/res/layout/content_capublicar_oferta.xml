@@ -81,7 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="textPersonName"
+                        android:inputType="textMultiLine"
                         style="@style/etnormal" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -113,7 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingHorizontal="@dimen/paddinginterior"
-                    android:text="  Selecciona una categoría que aparecerá en el mapa"/>
+                    android:text="Selecciona una categoría para el mapa"/>
 
                 <Spinner
                     android:id="@+id/spincategoriaCA"

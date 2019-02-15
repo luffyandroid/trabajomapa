@@ -21,47 +21,22 @@
             android:padding="@dimen/paddinginterior"
             android:orientation="vertical">
 
+            
+
             <LinearLayout
                 style="@style/layoutmarker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/imaginfowindow_titulo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="true"
-                    app:srcCompat="@drawable/ico_dialog_descripcion" />
 
                 <Space
-                    android:layout_width="15dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0" />
-
-                <TextView
-                    android:id="@+id/tvnfowindow_titulobb"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="DETALLES"
-                    android:textSize="@dimen/txtingresardimens" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                style="@style/layoutmarker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_width="@dimen/paddingcabecera"
+                    android:layout_height="@dimen/paddingcabecera" />
 
                 <ImageView
                     android:id="@+id/imaginfowindow_detalles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="true"
+                    android:layout_gravity="center"
                     app:srcCompat="@drawable/ico_dialog_descripcion" />
 
                 <Space
@@ -75,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="DETALLES"
-                    android:textSize="@dimen/txtingresardimens" />
+                    android:textSize="@dimen/txtanuncio" />
 
             </LinearLayout>
 
@@ -84,13 +59,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <Space
+                    android:layout_width="@dimen/paddingcabecera"
+                    android:layout_height="@dimen/paddingcabecera" />
+
                 <ImageView
                     android:id="@+id/imaginfowindow_salario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="true"
+                    android:layout_gravity="center"
                     app:srcCompat="@drawable/ico_dialog_salario" />
 
                 <Space
@@ -104,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="SALARIO"
-                    android:textSize="@dimen/txtingresardimens" />
+                    android:textSize="@dimen/txtanuncio" />
 
             </LinearLayout>
 
@@ -112,15 +89,18 @@
                 style="@style/layoutmarker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/selector_background_layout"
                 android:onClick="clickdireccionBB">
+
+                <Space
+                    android:layout_width="@dimen/paddingcabecera"
+                    android:layout_height="@dimen/paddingcabecera" />
 
                 <ImageView
                     android:id="@+id/imaginfowindow_direccion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="true"
+                    android:layout_gravity="center"
                     app:srcCompat="@drawable/ico_dialog_direccion" />
 
                 <Space
@@ -134,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="DIRECCIÓN"
-                    android:textSize="@dimen/txtingresardimens" />
+                    android:textSize="@dimen/txtanuncio" />
 
             </LinearLayout>
 
@@ -142,16 +122,18 @@
                 style="@style/layoutmarker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/selector_background_layout"
                 android:onClick="clicktelefonoBB">
+
+                <Space
+                    android:layout_width="@dimen/paddingcabecera"
+                    android:layout_height="@dimen/paddingcabecera" />
 
                 <ImageView
                     android:id="@+id/imaginfowindow_telefono"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="true"
-                    android:onClick="botontelefono"
+                    android:layout_gravity="center"
                     app:srcCompat="@drawable/ico_dialog_telefono" />
 
                 <Space
@@ -165,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="TELEFONO"
-                    android:textSize="@dimen/txtingresardimens" />
+                    android:textSize="@dimen/txtanuncio" />
 
             </LinearLayout>
 
@@ -173,15 +155,18 @@
                 style="@style/layoutmarker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/selector_background_layout"
                 android:onClick="clickMailBB">
+
+                <Space
+                    android:layout_width="@dimen/paddingcabecera"
+                    android:layout_height="@dimen/paddingcabecera" />
 
                 <ImageView
                     android:id="@+id/imaginfowindow_correo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="true"
+                    android:layout_gravity="center"
                     app:srcCompat="@drawable/ico_dialog_correo" />
 
                 <Space
@@ -195,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="CORREO"
-                    android:textSize="@dimen/txtingresardimens" />
+                    android:textSize="@dimen/txtanuncio" />
 
             </LinearLayout>
 
@@ -218,8 +203,9 @@
                 android:padding="@dimen/paddingcabecera"
                 android:onClick="clickcompartirBB"
                 android:text="     COMPARTIR"
+                android:textAlignment="textStart"
                 android:textColor="@color/blanco"
-                android:textSize="@dimen/txtingresardimens" />
+                android:textSize="@dimen/txtanuncio" />
 
         </LinearLayout>
 

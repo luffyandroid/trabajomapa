@@ -31,6 +31,10 @@
     <!-- TAMAÑOS BOTONES -->
     <dimen name="txtboton">30dp</dimen>
 
+    <!-- EDIT TEXT -->
+    <dimen name="txtanuncio">28dp</dimen>
+
+
 
 
     <!-- Default screen margins, per the Android Design guidelines. -->

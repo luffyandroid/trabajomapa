@@ -18,7 +18,7 @@
     <dimen name="txtcabeceradialogomarker">21dp</dimen>
 
     <!-- EDIT TEXT -->
-    <dimen name="txtingresardimens">21dp</dimen>
+    <dimen name="txtingresardimens">29dp</dimen>
 
     <!-- PADDING INTERIORES -->
     <dimen name="paddinginterior">15dp</dimen>
@@ -30,6 +30,10 @@
 
     <!-- TAMAÑOS BOTONES -->
     <dimen name="txtboton">15dp</dimen>
+
+    <!-- EDIT TEXT -->
+    <dimen name="txtanuncio">32dp</dimen>
+
 
 
 
