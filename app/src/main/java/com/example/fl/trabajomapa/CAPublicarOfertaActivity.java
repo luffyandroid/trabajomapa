@@ -440,6 +440,11 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                     }
                     }
                     Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
+
+                    //005
+                    Intent mainIntent = new Intent().setClass(
+                            CAPublicarOfertaActivity.this, com.example.fl.trabajomapa.CBPayPalActivity.class);
+                    startActivity(mainIntent);
                 }
             }
 

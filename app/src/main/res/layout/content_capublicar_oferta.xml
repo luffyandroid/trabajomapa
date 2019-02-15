@@ -25,7 +25,9 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/paddinginterior" />
 
                 //EditText NOMBRE EMPRESA:
 
@@ -138,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:hint="Escribe la dirección, para que no haya errores formato calle / nº / ciudad (Obligatorio)"
+                        android:hint="Escribe la dirección, formato calle / nº / ciudad (Obligatorio)"
                         android:layout_toRightOf="@+id/ic_magnify"
                         android:background="@null"
                         android:imeOptions="actionSearch" />
