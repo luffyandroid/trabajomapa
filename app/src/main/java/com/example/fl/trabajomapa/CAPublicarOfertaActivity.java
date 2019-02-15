@@ -276,61 +276,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
         checkpoliticaCA = (CheckBox) findViewById(R.id.checkpoliticaCA);
 
-        /*
-
-        //BOTON FLOTANTE
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //BOTONES DEL FLOAT MENU
-
-        View Btnrenovar, Btnatras, Btninfo;
-
-        Btnrenovar = findViewById(R.id.botonBAMapaRenovarCA);
-        Btnatras = findViewById(R.id.btnAtrasrCA);
-        Btninfo = findViewById(R.id.botonBAMapaInfoCA);
-
-        //FLOATING BUTTON Y SUS DIFERENTES SECCIONES
-        FloatingActionsMenu fab = (FloatingActionsMenu) findViewById(R.id.menu_fabCA);
-
-        fab.setOnClickListener(this);
-
-        Btnrenovar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent().setClass(
-                        CAPublicarOfertaActivity.this, DAListaAnunciosActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-        Btnatras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent().setClass(
-                        CAPublicarOfertaActivity.this, BAMapaFinalActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-        Btninfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.dialog_bamapa_info);
-
-                TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
-
-                volvermenu.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
-
-                dialog.show();
-            }
-        });
-        */
 
 
     }//FIN ONCREATE
@@ -792,6 +737,12 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     }
 
     public void clicatrasCA(View v) {
+            onBackPressed();
+            fab3.collapse();
+
+        }
+
+    public void clicknormalCA(View v) {
         Intent mainIntent = new Intent().setClass(
                 CAPublicarOfertaActivity.this, BAMapaFinalActivity.class);
         startActivity(mainIntent);

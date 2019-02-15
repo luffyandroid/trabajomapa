@@ -12,7 +12,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -31,6 +32,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/paddinginterior"
                     android:focusableInTouchMode="true"
                     android:hint="Nombre de la empresa (obligatorio)"
                     app:hintTextAppearance="@style/etflotante">
@@ -72,8 +74,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/paddinginterior"
                     android:hint="Detalles del puesto"
-                    app:hintTextAppearance="@style/etflotante"
-                    >
+                    app:hintTextAppearance="@style/etflotante">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/etdetallespuestoCA"
@@ -81,8 +82,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="textPersonName"
-                        style="@style/etnormal"
-                        />
+                        style="@style/etnormal" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -104,6 +104,16 @@
                         android:inputType="number" />
 
                 </android.support.design.widget.TextInputLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/paddinginterior" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/paddinginterior"
+                    android:text="  Selecciona una categoría que aparecerá en el mapa"/>
 
                 <Spinner
                     android:id="@+id/spincategoriaCA"
@@ -196,8 +206,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="phone"
-                        style="@style/etnormal"
-                        />
+                        style="@style/etnormal" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -208,8 +217,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/paddinginterior"
                     android:hint="Correo electrónico"
-                    app:hintTextAppearance="@style/etflotante"
-                    >
+                    app:hintTextAppearance="@style/etflotante">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/etcorreonegocioCA"
@@ -217,8 +225,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="textEmailAddress"
-                        style="@style/etnormal"
-                        />
+                        style="@style/etnormal" />
 
                 </android.support.design.widget.TextInputLayout>
 

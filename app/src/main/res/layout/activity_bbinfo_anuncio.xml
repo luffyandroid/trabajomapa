@@ -43,6 +43,12 @@
             android:layout_height="wrap_content"
             android:text="ANUNCIO"
             android:textSize="@dimen/txtcabecera" />
+
+        <TextView
+            android:id="@+id/tvenviadoBB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
     </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
@@ -58,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
+        app:fab_addButtonColorPressed="@color/marronoscuro"
         fab:fab_addButtonColorNormal="?attr/colorPrimary"
         fab:fab_addButtonSize="normal"
         fab:fab_labelStyle="@style/Etiquetas"
@@ -106,7 +113,7 @@
             fab:fab_icon="@drawable/ic_ico_btn_atras_02"
             fab:fab_size="mini"
             android:onClick="clicatrasBB"
-            fab:fab_title="Volver a mapa" />
+            fab:fab_title="Volver a atrás" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

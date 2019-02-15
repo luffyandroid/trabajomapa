@@ -102,13 +102,19 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
         fab4.collapse();
     }
 
-
-    public void clicatrasDA(View v) {
+    public void clicknormalDA(View v) {
         Intent mainIntent = new Intent().setClass(
                 DAListaAnunciosActivity.this, BAMapaFinalActivity.class);
         startActivity(mainIntent);
         //PARA QUE SE CIERRE AL PULSAR
         fab4.collapse();
+    }
+
+
+    public void clicatrasDA(View v) {
+        onBackPressed();
+        fab4.collapse();
+
     }
 
     public void clickinfoDA(View v) {

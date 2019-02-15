@@ -62,16 +62,30 @@
 
     <include layout="@layout/content_dalista_anuncios" />
 
+
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/menu_fabDA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
+        app:fab_addButtonColorPressed="@color/marronoscuro"
         fab:fab_addButtonColorNormal="?attr/colorPrimary"
         fab:fab_addButtonSize="normal"
         fab:fab_labelStyle="@style/Etiquetas"
         fab:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapanormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/marron"
+            app:fab_colorPressed="@color/marronoscuro"
+            fab:fab_icon="@drawable/menu_float_02_calles"
+            fab:fab_size="mini"
+            android:onClick="clicknormalDA"
+            fab:fab_title="Mapa" />
+
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/botonBAMapaPublicarDA"
@@ -104,7 +118,7 @@
             fab:fab_icon="@drawable/ic_ico_btn_atras_02"
             fab:fab_size="mini"
             android:onClick="clicatrasDA"
-            fab:fab_title="Volver a mapa" />
+            fab:fab_title="Volver a atrás" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

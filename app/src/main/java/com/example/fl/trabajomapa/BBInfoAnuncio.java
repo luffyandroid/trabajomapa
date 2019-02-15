@@ -3,13 +3,18 @@ package com.example.fl.trabajomapa;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.Layout;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,69 +52,7 @@ public class BBInfoAnuncio extends AppCompatActivity {
         //FLOATING BUTTON
         fab2  = (FloatingActionsMenu) findViewById(R.id.menu_fabBB);
 
-        /*
-        //BOTON FLOTANTE
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        //BOTONES DEL FLOAT MENU
-
-        View Btnpublicar, Btnrenovar, Btnatras, Btninfo;
-
-        Btnpublicar = findViewById(R.id.botonBAMapaPublicar);
-        Btnrenovar = findViewById(R.id.botonBAMapaRenovar);
-        Btnatras = findViewById(R.id.botonBAMapaAtrasBB);
-        Btninfo = findViewById(R.id.botonBAMapaInfo);
-
-        //FLOATING BUTTON Y SUS DIFERENTES SECCIONES
-        FloatingActionsMenu fab = (FloatingActionsMenu) findViewById(R.id.menu_fabBB);
-
-        fab.setOnClickListener(this);
-
-        Btnpublicar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent().setClass(
-                        BBInfoAnuncio.this, CAPublicarOfertaActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-        Btnrenovar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent().setClass(
-                        BBInfoAnuncio.this, DAListaAnunciosActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-        Btnatras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent().setClass(
-                        BBInfoAnuncio.this, BAMapaFinalActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-        Btninfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.dialog_bamapa_info);
-
-                TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
-
-                volvermenu.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
-
-                dialog.show();
-            }
-        });
-        */
         nombre = (TextView) findViewById(R.id.tvnfowindow_titulobb);
         detalles = (TextView) findViewById(R.id.tvnfowindow_detalles);
         salario = (TextView) findViewById(R.id.tvnfowindow_salario);
@@ -132,27 +75,44 @@ public class BBInfoAnuncio extends AppCompatActivity {
     }
 
 
+
+    //ESTE FUNCIONA BIEN PERO NO EN WHASAPP (HTML)
     public void clickcompartirBB(View v) {
 
         Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
         compartir.setType("text/plain");
+        //compartir.setType("text/plain");
+        String detalles_ = detalles.getText().toString();
+        String salario_ = salario.getText().toString();
+        String direccion_ = direccion.getText().toString();
+        String telefono_ = telefono.getText().toString();
+        String correo_ = correo.getText().toString();
+        String nombre_ = nombre.getText().toString();
 
-        TextView nombre = v.findViewById(R.id.tvnfowindow_titulobb);
-        TextView detalle = v.findViewById(R.id.tvnfowindow_detalles);
-        TextView salario = v.findViewById(R.id.tvnfowindow_salario);
-        TextView direccion = v.findViewById(R.id.tvnfowindow_direccion);
-        TextView telefono = v.findViewById(R.id.tvnfowindow_telefono);
-        TextView correo = v.findViewById(R.id.tvnfowindow_correo);
+        String enviado = "Enviado desde GeoWork";
 
-        nombre.getText().toString();
-        detalle.getText().toString();
-        salario.getText().toString();
-        direccion.getText().toString();
-        telefono.getText().toString();
-        correo.getText().toString();
+        SpannableString en = new SpannableString(enviado);
 
-        compartir.putExtra(android.content.Intent.EXTRA_SUBJECT, "Empleo encontrado en GeoWork " + nombre);
-        compartir.putExtra(android.content.Intent.EXTRA_TEXT, (Parcelable) nombre);
+        //ESTILO DE FUENTE
+
+        StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
+        StyleSpan italicSpan = new StyleSpan(Typeface.ITALIC);
+        StyleSpan bolditalicSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+
+        //ESTILO EJECUTADO
+        en.setSpan(bolditalicSpan, 0, 21, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        //TEXTO CON ESTILO
+
+        compartir.putExtra(android.content.Intent.EXTRA_SUBJECT, "Compartir oferta de" + nombre_);
+        compartir.putExtra(android.content.Intent.EXTRA_TEXT, ("Empleo de " + nombre_ + "\n"
+                + "\uD83D\uDD38" + " " + detalles_ + "\n"
+                + "\uD83D\uDCB6" + " " + "salario de " + salario_ + "\n"
+                + "\uD83D\uDCCD" + " " + direccion_ + "\n"
+                + "\uD83D\uDCDE" + " " + telefono_ + "\n"
+                + "\uD83D\uDCE7" + " " + correo_ + "\n"
+                + en));
+        //compartir.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtm"Oferta de " + nombre_ );
         startActivity(Intent.createChooser(compartir, "Compartir vía"));
 
     }
@@ -216,15 +176,12 @@ public class BBInfoAnuncio extends AppCompatActivity {
     }
 
     public void clicatrasBB(View v) {
-        /*Intent mainIntent = new Intent().setClass(
-                BBInfoAnuncio.this, BAMapaFinalActivity.class);
-        startActivity(mainIntent);*/
-        //PARA QUE SE CIERRE AL PULSAR
-        fab2.collapse();
         onBackPressed();
+        fab2.collapse();
+
     }
 
-    public void clickinfoBB(View v) {
+       public void clickinfoBB(View v) {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_bamapa_info);
 

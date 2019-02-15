@@ -16,7 +16,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/appicon_cuadrado"
+        android:icon="@drawable/appicon_cuadra"
         android:label="@string/app_name"
         android:roundIcon="@drawable/appicon_circulo"
         android:supportsRtl="true"
@@ -52,7 +52,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCqvcbMXwR12clzymdCJa3JqMPAdLLA4GE" />
 
-        <activity android:name=".DAListaAnunciosActivity" />
+        <activity android:name=".DAListaAnunciosActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".CBPegoteActivity" />
         <activity
             android:name=".BAMapaFinalActivity"
