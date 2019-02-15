@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -18,6 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DAListaAnunciosActivity extends AppCompatActivity {
 
@@ -25,17 +31,21 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
     final Context context = this;
 
     //VARIANTES DE DECLARADAS
-    private ListView listanunciosDA;
+    ListView listanunciosDA;
+    ArrayList<ZOferta> listaoferta = new ArrayList<ZOferta>();
+
+    DatabaseReference dbRef;
+    ValueEventListener valueEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dalista_anuncios);
-
+        cargarDatosFirebase();
         //FLOATING BUTTON
         fab4  = (FloatingActionsMenu) findViewById(R.id.menu_fabDA);
 
-        ArrayList<ZOferta> anunciospublicadosusuario = new ArrayList<ZOferta>();
+        /*ArrayList<ZOferta> anunciospublicadosusuario = new ArrayList<ZOferta>();
 
         anunciospublicadosusuario.add(new ZOferta("1234", "1234", "Diseñador", "1234", "1234", "tipouesto", "direccion", 6845.54, 68.24, "telefono", "correo", "27/12/1989", "disponible"));
         anunciospublicadosusuario.add(new ZOferta("5678", "5678", "Cineasta", "5678", "5678", "tipouesto", "direccion", 6845.89, 6845.47, "telefono", "correo", "08/12/1859", "disponible"));
@@ -78,21 +88,63 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
                 toast.show();
 
             }
-        });
+        });*/
+
+        listanunciosDA = (ListView)findViewById(R.id.listanunciosDA);
 
 
     }//FIN ONCREATE
 
+    //COMIENZO COSAS DE LUFFY
+
+    private void cargarListView (DataSnapshot dataSnapshot){
+        listaoferta.add(dataSnapshot.getValue(ZOferta.class));
+
+        AdaptadorAnuncio adaptadorAnuncio=new AdaptadorAnuncio(this, listaoferta);
+        listanunciosDA.setAdapter(adaptadorAnuncio);
+
+
+    }
+
+    private void cargarDatosFirebase(){
+
+        dbRef= FirebaseDatabase.getInstance().getReference().child("anuncios");
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listaoferta.clear();
+                for (DataSnapshot ofertaDataSnapshot: dataSnapshot.getChildren()){
+                    cargarListView(ofertaDataSnapshot);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("DAListaAnunciosActivity", "DATABASE ERROR");
+            }
+        };
+
+        dbRef.addValueEventListener(valueEventListener);
+
+    }
+
+    //FIN COSAS DE LUFFY
+
+
+
+
+
     //BOTONES DE ELIMINAR Y O MODIFICAR
 
-    private void clickRenovar() {
+    /*private void clickRenovar() {
 
     }
 
 
     private void clickBorrar() {
 
-    }
+    }*/
 
     public void clickpublicarDA(View v) {
         Intent mainIntent = new Intent().setClass(

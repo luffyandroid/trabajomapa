@@ -24,6 +24,14 @@
             android:layout_weight="0.5"
             android:text="TITULO" />
 
+        <TextView
+            android:id="@+id/tvocultoDA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/txtcabecera"
+            android:visibility="gone"
+            android:text="" />
+
         <Button
             android:id="@+id/btnrenovarDA"
             android:layout_width="match_parent"
