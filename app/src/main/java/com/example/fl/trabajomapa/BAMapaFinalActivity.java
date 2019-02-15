@@ -256,6 +256,9 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        CameraUpdate inicioSatelite =
+                CameraUpdateFactory.newLatLngZoom(new LatLng(36.6178533,-6.3685917),5);
+        mMap.moveCamera(inicioSatelite);
         dbRef.child("anuncios").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
