@@ -3,12 +3,14 @@ package com.example.fl.trabajomapa;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -173,8 +175,11 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_bamapa_info);
 
-        //TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+        TextView tvDialog = (TextView) dialog.findViewById(R.id.tvDialog);
+        TextView tvDialogCorreo = (TextView) dialog.findViewById(R.id.tvDialogCorreo);
         Button volvermenu = (Button) dialog.findViewById(R.id.volverBotonDialog);
+
+        tvDialog.setText(Html.fromHtml(getString(R.string.Infomensaje)));
 
 
         volvermenu.setOnClickListener(
@@ -184,6 +189,31 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+
+        tvDialogCorreo.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String[] TO = {"fulgenll@hotmail.com"};
+                        String[] CC = {""};
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                        emailIntent.setData(Uri.parse("mailto:"));
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+
+                        try {
+                            startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
+                            //finish();
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(DAListaAnunciosActivity.this,
+                                    "No tienes clientes de email instalados.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
 
         dialog.show();
         //PARA QUE SE CIERRE AL PULSAR

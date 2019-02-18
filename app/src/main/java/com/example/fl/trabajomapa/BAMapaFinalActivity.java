@@ -5,25 +5,31 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,9 +74,8 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
     Double latitud, longitud;
     TextView tvmarcador, mensaje1, mensaje2, tvocultoba, latocul, longocul;
-    Button normal, satelite, hibrido, locactual, btninfowindow_compartir;
-    //002 Button btninfowindow_compartir;
     ZOferta marcador, anuncio;
+    LinearLayout LinearLayoutBuscar;
 
 
 
@@ -80,49 +85,13 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         setContentView(R.layout.activity_bamapa_final);
 
 
-       //002 btninfowindow_compartir = (Button) findViewById(R.id.btninfowindow_compartir);
-       //FLOATING BUTTON
+        //FLOATING BUTTON
         fab  = (FloatingActionsMenu) findViewById(R.id.menu_fab);
 
 
 
-        /*
-        final FloatingActionButton botonBAMapanormal = (FloatingActionButton) findViewById(R.id.botonBAMapanormal);
-        botonBAMapanormal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                //PARA QUE SE CIERRE AL PULSAR
-              //  fab.collapse();
-            }
-        });
-        */
-
-        /* //008
-
-        //BOTON FLOTANTE
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        */
-
-
         SupportMapFragment vistaMapaFinal = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.vistaMapaFinal);
-/*
-        //002 QUE SE CIERRE EL FLOAT MENU CUANDO PULSE FUERA DEL MENU
-        vistaMapaFinal.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //Log.d(TAG, "onTouch  " + "");
-                if (fab.isExpanded()) {
-                    fab.collapse();
-                    return true;
-                }
-                return false;
 
-            }
-        });
-        */
         vistaMapaFinal.getMapAsync(this);
         dbRef = FirebaseDatabase.getInstance().getReference();
 
@@ -131,6 +100,8 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         mensaje2 = (TextView) findViewById(R.id.mensaje2);
         latocul = (TextView) findViewById(R.id.latocul);
         longocul = (TextView) findViewById(R.id.longocul);
+
+        LinearLayoutBuscar = (LinearLayout) findViewById(R.id.LinearLayoutBuscar);
 
 
         //001 NO ESTOY SEGURO
@@ -142,112 +113,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
             locationStart();
         }
 
-        //BOTONES DEL FLOAT MENU
-        //008
 
-        /*
-
-        View Btnsatelite, Btnnormal, Btnhibrido, Btnlocalizacion, Btnpublicar, Btnrenovar, Btninfo;
-
-        Btnsatelite = findViewById(R.id.botonBAMapasatelite);
-        Btnnormal = findViewById(R.id.botonBAMapanormal);
-        Btnhibrido = findViewById(R.id.botonBAMapahibrido);
-        Btnlocalizacion = findViewById(R.id.botonBAMapaloc);
-        Btnpublicar = findViewById(R.id.botonBAMapaPublicar);
-        Btnrenovar = findViewById(R.id.botonBAMapaRenovar);
-        Btninfo = findViewById(R.id.botonBAMapaInfo);
-
-        //FLOATING BUTTON Y SUS DIFERENTES SECCIONES
-        fab  = (FloatingActionsMenu) findViewById(R.id.menu_fab);
-
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-              //003  Btnsatelite.getVisibility(View.VISIBLE);
-                fab.showContextMenu();
-
-                //Btnsatelite.setVisibility(View.VISIBLE);
-
-                //001 PARA QUE CIERRE SI PULSO FUERA
-                //fab.setClosedOnTouchOutside(true);
-                //PARA QUE SE CIERRE AL PULSAR
-                fab.collapse();
-            }
-
-        });
-        Btnsatelite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                //PARA QUE SE CIERRE AL PULSAR
-                fab.collapse();
-            }
-        });
-        Btnnormal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                //PARA QUE SE CIERRE AL PULSAR
-                fab.collapse();
-            }
-        });
-        Btnhibrido.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-                //PARA QUE SE CIERRE AL PULSAR
-                fab.collapse();
-            }
-        });
-        Btnlocalizacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                locationStart();
-            }
-        });
-        Btnpublicar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent().setClass(
-                        BAMapaFinalActivity.this, CAPublicarOfertaActivity.class);
-                startActivity(mainIntent);
-                //PARA QUE SE CIERRE AL PULSAR
-                fab.collapse();
-            }
-        });
-        Btnrenovar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent().setClass(
-                        BAMapaFinalActivity.this, DAListaAnunciosActivity.class);
-                startActivity(mainIntent);
-                //PARA QUE SE CIERRE AL PULSAR
-                fab.collapse();
-            }
-        });
-        Btninfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.dialog_bamapa_info);
-
-                TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
-
-                volvermenu.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
-
-                dialog.show();
-                //PARA QUE SE CIERRE AL PULSAR
-                fab.collapse();
-            }
-        });*/
     }
 
 
@@ -428,14 +294,6 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
     }
 
 
-    //COMPARTIR EN REDES SOCIALES
-
-    //001
-            /*
-    btninfowindow_compartir.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            */
 
     private void locationStart() {
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -570,36 +428,6 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         dbRef.addValueEventListener(valueEventListener);
     }
 
-    /*public void compartir (View v) {
-//002
-/*
-    public void compartir(View v) {
-
-
-        Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
-        compartir.setType("text/plain");
-
-        TextView nombre = v.findViewById(R.id.tvinfowindow_titulo);
-        TextView detalle = v.findViewById(R.id.tvnfowindow_detalles);
-        TextView salario = v.findViewById(R.id.tvnfowindow_salario);
-        TextView direccion = v.findViewById(R.id.tvnfowindow_direccion);
-        TextView telefono = v.findViewById(R.id.tvnfowindow_telefono);
-        TextView correo = v.findViewById(R.id.tvnfowindow_correo);
-
-        nombre.getText().toString();
-        detalle.getText().toString();
-        salario.getText().toString();
-        direccion.getText().toString();
-        telefono.getText().toString();
-        correo.getText().toString();
-
-
-        compartir.putExtra(android.content.Intent.EXTRA_SUBJECT, "Empleo encontrado en GeoWork " + nombre);
-        compartir.putExtra(android.content.Intent.EXTRA_TEXT, (Parcelable) nombre);
-        startActivity(Intent.createChooser(compartir, "Compartir vía"));
-
-    }
-*/
 
 
 
@@ -626,8 +454,6 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
     public void clicklocalizacion(View v) {
         mensaje1.setText("si");
         locationStart();
-
-        //009 DONDE Y QUE PONER onStop();
         fab.collapse();
     }
 
@@ -647,12 +473,27 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         fab.collapse();
     }
 
+    public void clickbuscar(View v) {
+        LinearLayoutBuscar.setVisibility(View.VISIBLE);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab.collapse();
+    }
+
+    public void clickbuscarbuscar(View v) {
+        LinearLayoutBuscar.setVisibility(View.GONE);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab.collapse();
+    }
+
     public void clickinfo(View v) {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_bamapa_info);
 
-        //TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+        TextView tvDialog = (TextView) dialog.findViewById(R.id.tvDialog);
+        TextView tvDialogCorreo = (TextView) dialog.findViewById(R.id.tvDialogCorreo);
         Button volvermenu = (Button) dialog.findViewById(R.id.volverBotonDialog);
+
+        tvDialog.setText(Html.fromHtml(getString(R.string.Infomensaje)));
 
 
         volvermenu.setOnClickListener(
@@ -663,9 +504,37 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                     }
                 });
 
+        tvDialogCorreo.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String[] TO = {"fulgenll@hotmail.com"};
+                        String[] CC = {""};
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                        emailIntent.setData(Uri.parse("mailto:"));
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+
+                        try {
+                            startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
+                            //finish();
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(BAMapaFinalActivity.this,
+                                    "No tienes clientes de email instalados.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+
         dialog.show();
         //PARA QUE SE CIERRE AL PULSAR
         fab.collapse();
     }
+
+
+
 
 }

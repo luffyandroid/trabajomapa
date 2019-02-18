@@ -23,6 +23,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -256,10 +257,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         tvocultofechaCA.setText(fechaString);
 
 
-
-
-
-
         //ENLAZO VARIANTES
         etnombreempresaCA = (EditText) findViewById(R.id.etnombreempresaCA);
         etnombrepuestoCA = (EditText) findViewById(R.id.etnombrepuestoCA);
@@ -391,9 +388,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 etdireccionnegocioAutoCA.setError("Dirección no valida");
                 error = true;
             }
-
-            //00 AQUI PONER COMPROBACIÓN CHECK
-
 
             if (!error) {
                 if (!checkpoliticaCA.isChecked()) {
@@ -674,19 +668,20 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     //DIALOGO DE POLITICA
     public void dialogopolitica(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("POLITICAS DE PRIVACIDAD Y CONDICIONES");
-        builder.setMessage(R.string.Politicamensaje);
+        //builder.setTitle("POLITICAS DE PRIVACIDAD, CONDICIONES Y PRECIOS");
+        builder.setMessage(Html.fromHtml(getString(R.string.Politicamensaje)));
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 checkpoliticaCA.setChecked(true);
 
-
             }
         });
 
         builder.setNegativeButton("Rechazar", null);
+                checkpoliticaCA.setChecked(false);
+
         Dialog dialog = builder.create();
         dialog.show();
 

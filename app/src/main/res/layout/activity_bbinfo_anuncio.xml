@@ -30,12 +30,6 @@
         android:orientation="horizontal"
         android:paddingVertical="@dimen/paddingcabecera">
 
-        <ImageView
-            android:id="@+id/imgcabeceraBABB"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/icono_superior_publicar" />
-
         <TextView
             android:id="@+id/tvnfowindow_titulobb"
             style="@style/txtcabecera"
@@ -91,7 +85,7 @@
             fab:fab_icon="@drawable/menu_float_07_renovar"
             fab:fab_size="mini"
             android:onClick="clickrenovarBB"
-            fab:fab_title="Renovar Oferta" />
+            fab:fab_title="Renovar / Borrar Oferta" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/botonBAMapaInfoBB"

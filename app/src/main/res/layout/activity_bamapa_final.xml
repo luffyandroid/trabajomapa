@@ -132,6 +132,17 @@
             fab:fab_title="Híbrido" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapabuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/marron"
+            app:fab_colorPressed="@color/marronoscuro"
+            fab:fab_icon="@drawable/menu_float_08_buscar"
+            fab:fab_size="mini"
+            android:onClick="clickbuscar"
+            fab:fab_title="Buscar" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/botonBAMapaloc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -162,7 +173,7 @@
             fab:fab_icon="@drawable/menu_float_07_renovar"
             fab:fab_size="mini"
             android:onClick="clickrenovar"
-            fab:fab_title="Renovar Oferta" />
+            fab:fab_title="Renovar / Borrar Oferta" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/botonBAMapaInfo"
@@ -176,5 +187,35 @@
             fab:fab_title="+ Info" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutBuscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/azul"
+        android:visibility="gone"
+        android:layout_margin="@dimen/paddinginterior"
+        android:padding="@dimen/paddinginterior"
+        android:layout_gravity="bottom">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Escribe lo que quieres buscar"
+            android:textColor="@color/blanco"
+            android:layout_weight="0.2"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/selector_btn_buscar"
+            android:layout_weight="0.9"
+            android:onClick="clickbuscarbuscar"
+            tools:ignore="VectorDrawableCompat" />
+
+    </LinearLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

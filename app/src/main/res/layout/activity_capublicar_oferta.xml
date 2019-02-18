@@ -97,7 +97,7 @@
             fab:fab_icon="@drawable/menu_float_07_renovar"
             fab:fab_size="mini"
             android:onClick="clickrenovarCA"
-            fab:fab_title="Renovar Oferta" />
+            fab:fab_title="Renovar / Borrar Oferta" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/botonBAMapaInfoCA"

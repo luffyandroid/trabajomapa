@@ -256,7 +256,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/paddinginterior"
-                    android:text="Política de privacidad y condiciones del anuncio"
+                    android:text="Política de privacidad, condiciones del anuncio y precios"
                     android:onClick="dialogopolitica"/>
 
 

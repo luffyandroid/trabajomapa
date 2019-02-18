@@ -79,13 +79,31 @@
     <string name="Venta">Venta</string>
     <string name="Veterinaria">Veterinaria</string>
 
-    <!-- TEXTO CATEGORIAS -->
-    <string name="Politicamensaje">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <!-- TEXTO POLITICA -->
+    <string name="Politicamensaje">
+        <![CDATA[
+        <b>POLÍTICA DE PRIVACIDAD</b>
+        <br></br>
+<br>Los datos que <b>usted rellena son datos que se harán público</b> para que los usuarios puedan ponerse en contacto con el anunciante, no ponga datos falsos o datos que no quiera que sean visibles.
+Se requerirá su inicio de sesión en Google para que en un futuro si fuera necesario, pueda eliminar y/o renovar algunos de los anuncios que ya había publicado.
+<b>Todos estos datos se guardan en el servicio Firebase</b> de la empresa Alphabet Inc. (Google). Solo ellos y los administradores de la aplicación GeoWork, pueden acceder a estos datos ya mencionados.</br>
+<br>Usuarios que publiquen datos falsos puede suponer el bloqueo de la cuenta en esta app.</br>
+<br></br>
+<br><b>DURACIÓN Y PRECIOS DEL ANUNCIO</b></br>
+<br></br>
+<br><b>El anuncio estará visible en la app durante 30 días</b>, pasado el tiempo desaparecerá del mapa. Si se necesita y quiere renovar el anuncio, el anuncio original estará 180 días, pasado ese tiempo el anuncio se eliminará de la base de datos y no se podrá recuperar.</br>
+<br><b>El precio será de 3€</b> y es gestionada por los servicios de PayPal. El pago se puede hacer a través de este servicio o puede optar por poner una tarjeta de crédito.</br>
+]]>
+    </string>
+
+    <!-- TEXTO INFO -->
+    <string name="Infomensaje">
+        <![CDATA[
+        Esta App sirve para la búsqueda de trabajo.
+<br><b>No recogemos datos de los usuarios que empleen esta app en la búsqueda de empleo</b>, solo empresas o particulares que deseen anunciarse que publicarán los datos necesarios.
+Si necesitas contactar con nosotros nos puedes enviar un email a esta cuenta:</br>
+]]>
+    </string>
 
     <string name="title_activity_bamapa_final">BAMapaFinalActivity</string>
 </resources>
