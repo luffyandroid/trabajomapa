@@ -28,7 +28,7 @@ public abstract class ZAdaptadorVentanaInfo implements View.OnTouchListener, Goo
     DatabaseReference dbRef;
     ValueEventListener valueEventListener;
     ZOferta oferta = null;
-    TextView nombre, detalles, salario, direccion, telefono, correo;
+    TextView nombre, detalles, salario, direccion, telefono, correo, ultimo;
 
 
     //001
@@ -37,12 +37,12 @@ public abstract class ZAdaptadorVentanaInfo implements View.OnTouchListener, Goo
 
     public ZAdaptadorVentanaInfo(Context ctx){
         context = ctx;
-        mWindow = LayoutInflater.from(ctx).inflate(R.layout.infowindow_layout, null);
+        mWindow = LayoutInflater.from(ctx).inflate(R.layout.activity_bcultimo_pulsado, null);
     }
 
     private void rendowWindowText(Marker marker, View view){
-
-        nombre = view.findViewById(R.id.tvinfowindow_titulo);
+        ultimo = (TextView)view.findViewById(R.id.tvultimopulsado);
+        /*nombre = view.findViewById(R.id.tvinfowindow_titulo);
         detalles = view.findViewById(R.id.tvnfowindow_detalles);
         salario = view.findViewById(R.id.tvnfowindow_salario);
         direccion = view.findViewById(R.id.tvnfowindow_direccion);
@@ -83,7 +83,7 @@ public abstract class ZAdaptadorVentanaInfo implements View.OnTouchListener, Goo
                 Log.e("LoginActivity", "DATABASE ERROR");
             }
         };
-        dbRef.addValueEventListener(valueEventListener);
+        dbRef.addValueEventListener(valueEventListener);*/
 
         //ZMarcador infoWindowData = (ZMarcador) marker.getTag();
 

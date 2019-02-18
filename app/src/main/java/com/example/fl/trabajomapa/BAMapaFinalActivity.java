@@ -53,7 +53,9 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -137,6 +139,26 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ZOferta ofe = snapshot.getValue(ZOferta.class);
 
+                    //COMIENZA METODO VER FECHA
+                    String fechaanuncio = ofe.getFecha().toString();
+                    String subfechaanuncioano = fechaanuncio.substring(0,4);
+                    int intsubfechaanuncioano = Integer.parseInt(subfechaanuncioano);
+                    String subfechaanunciomes = fechaanuncio.substring(5,7);
+                    int intsubfechaanunciomes = Integer.parseInt(subfechaanunciomes);
+                    String subfechaanunciodia = fechaanuncio.substring(8,10);
+                    int intsubfechaanunciodia = Integer.parseInt(subfechaanunciodia);
+                    String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                    String subfechaactualano = fechaactual.substring(0,4);
+                    int intsubfechaactualano = Integer.parseInt(subfechaactualano);
+                    String subfechaactualmes = fechaactual.substring(5,7);
+                    int intsubfechaactualmes = Integer.parseInt(subfechaactualmes);
+                    String subfechaactualdia = fechaactual.substring(8,10);
+                    int intsubfechaactualdia = Integer.parseInt(subfechaactualdia);
+
+                    if(intsubfechaanunciomes<intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia || intsubfechaanuncioano<intsubfechaactualano && intsubfechaanunciomes>intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia){
+                        ofe.setDisponible("no disponible");
+                    }
+                    //FINAL METODO VER FECHA
                     if(ofe.getDisponible().equals("disponible")) {
 
                         latitud = ofe.getLatitud();
@@ -150,16 +172,16 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                         info.setTelefono(ofe.getTelefono());
                         info.setCorreo(ofe.getCorreo());
 
-                        //ZAdaptadorVentanaInfo custominfowindow = new ZAdaptadorVentanaInfo(getApplicationContext());
+                        //ZAdaptadorVentanaInfo custominfowindow = new ZAdaptadorVentanaInfo(new ZAdaptadorVentanaInfo(getApplicationContext()))
                         //mMap.setInfoWindowAdapter(custominfowindow);
 
-                    /*mMap.setInfoWindowAdapter
+                    mMap.setInfoWindowAdapter
                             (new ZAdaptadorVentanaInfo(BAMapaFinalActivity.this) {
                                 @Override
                                 public boolean onTouch(View view, MotionEvent motionEvent) {
                                     return false;
                                 }
-                            });*/
+                            });
 
 
                         MarkerOptions markerOptions = new MarkerOptions();
@@ -280,6 +302,9 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                 return false;
             }
         });
+
+
+
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
