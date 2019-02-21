@@ -64,7 +64,7 @@ public class CBPayPalActivity extends AppCompatActivity {
 
                 //008 QUE SI SE CANCELA VAYA A LA ACTIVITY DEL MENU //NO PURULA
 
-                Intent u = new Intent().setClass(getApplicationContext(), BAMapaActivity.class);
+                Intent u = new Intent().setClass(getApplicationContext(), BAMapaFinalActivity.class);
                 startActivity(u);
                 finish();
                 Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show();

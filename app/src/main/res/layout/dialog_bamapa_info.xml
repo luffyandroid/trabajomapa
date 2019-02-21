@@ -28,18 +28,15 @@
             android:text="INFO DE LA APP"
             android:textSize="@dimen/txtcabecera" />
 
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvDialogCreadoresFullgen"
+                android:id="@+id/tvDialog"
                 android:paddingHorizontal="@dimen/paddingcabeceradialog"
                 android:paddingVertical="@dimen/paddingcabeceradialog"
                 android:layout_width="wrap_content"
@@ -47,15 +44,34 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:textSize="@dimen/txtfooter"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+                android:text="Esta App sirve para la busqueda de trabajo.
+No recogemos datos de los usuarios que empleen esta app en la búsqueda de empleo, solo empresas o particulares que deseen anunciarse que publicarán los datos necesarios.
+Si necesitas contactar con nosotros nos puedes enviar un email a esta cuenta:"/>
 
+        <TextView
+            android:id="@+id/tvDialogCorreo"
+            android:paddingHorizontal="@dimen/paddingcabeceradialog"
+            android:paddingVertical="@dimen/paddingcabeceradialog"
+            android:background="@drawable/selector_background_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="@dimen/txtfooter"
+            android:text="fulgenll@hotmail.com"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/paddinginterior" />
 
 
 
     </LinearLayout>
 
-        <LinearLayout
+        <Button
             style="@style/cabecera"
+            android:id="@+id/volverBotonDialog"
             android:background="@drawable/selector_btn_marron"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,19 +79,11 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingVertical="@dimen/paddingcabecera"
+            android:text="VOLVER AL A MENU"
+            android:textColor="@color/blanco"
             android:onClick="clickAtrasDialog">
 
-
-        <TextView
-            android:id="@+id/tvFooterDialogBA"
-            style="@style/txtcabecera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VOLVER AL A MENU"
-            android:textSize="@dimen/txtfooter"/>
-
-
-    </LinearLayout>
+    </Button>
 
     </LinearLayout>
 

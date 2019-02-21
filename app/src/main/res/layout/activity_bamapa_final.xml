@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,18 +17,205 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgcabeceraBA"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/icono_superior_mapa" />
+
+            <TextView
+                android:id="@+id/tvcabeceraCA"
+                style="@style/txtcabecera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAPA       "
+                android:textSize="@dimen/txtcabecera" />
+
+        </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_bamapa_final" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/latocul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/longocul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/mensaje1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="si" />
+
+    <TextView
+        android:id="@+id/mensaje2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvocultoba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="" />
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/menu_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:fab_addButtonColorPressed="@color/marronoscuro"
+        fab:fab_addButtonColorNormal="?attr/colorPrimary"
+        fab:fab_addButtonSize="normal"
+        fab:fab_labelStyle="@style/Etiquetas"
+        fab:fab_labelsPosition="left">
+
+
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapasatelite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/marron"
+            app:fab_colorPressed="@color/marronoscuro"
+            fab:fab_icon="@drawable/menu_float_01_satelite"
+            fab:fab_size="mini"
+            android:onClick="clicksatelite"
+             fab:fab_title="Satelite" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapanormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/marron"
+            app:fab_colorPressed="@color/marronoscuro"
+            fab:fab_icon="@drawable/menu_float_02_calles"
+            fab:fab_size="mini"
+            android:onClick="clicknormal"
+            fab:fab_title="Calles" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapahibrido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/marron"
+            app:fab_colorPressed="@color/marronoscuro"
+            fab:fab_icon="@drawable/menu_float_03_hibrido"
+            fab:fab_size="mini"
+            android:onClick="clickhibrido"
+            fab:fab_title="Híbrido" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapabuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/marron"
+            app:fab_colorPressed="@color/marronoscuro"
+            fab:fab_icon="@drawable/menu_float_08_buscar"
+            fab:fab_size="mini"
+            android:onClick="clickbuscar"
+            fab:fab_title="Buscar" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapaloc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/azuloscuro"
+            app:fab_colorPressed="@color/azul"
+            fab:fab_icon="@drawable/menu_float_04_geo"
+            fab:fab_size="mini"
+            android:onClick="clicklocalizacion"
+            fab:fab_title="Localización" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapaPublicar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/azuloscuro"
+            app:fab_colorPressed="@color/azul"
+            fab:fab_icon="@drawable/menu_float_05_publicar"
+            fab:fab_size="mini"
+            android:onClick="clickpublicar"
+            fab:fab_title="Publicar Oferta" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapaRenovar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/azuloscuro"
+            app:fab_colorPressed="@color/azul"
+            fab:fab_icon="@drawable/menu_float_07_renovar"
+            fab:fab_size="mini"
+            android:onClick="clickrenovar"
+            fab:fab_title="Renovar / Borrar Oferta" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botonBAMapaInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/azuloscuro"
+            app:fab_colorPressed="@color/azul"
+            fab:fab_icon="@drawable/menu_float_06_info"
+            fab:fab_size="mini"
+            android:onClick="clickinfo"
+            fab:fab_title="+ Info" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutBuscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/azul"
+        android:visibility="gone"
+        android:layout_margin="@dimen/paddinginterior"
+        android:padding="@dimen/paddinginterior"
+        android:layout_gravity="bottom">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Escribe lo que quieres buscar"
+            android:textColor="@color/blanco"
+            android:layout_weight="0.2"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/selector_btn_buscar"
+            android:layout_weight="0.9"
+            android:onClick="clickbuscarbuscar"
+            tools:ignore="VectorDrawableCompat" />
+
+    </LinearLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

@@ -34,6 +34,12 @@
         <item name="android:layout_margin">@dimen/paddingcabecera</item>
     </style>
 
+    <!-- LINEAL LAYOUT DIALOGO MARKER -->
+    <style name="layoutmarkeractivity">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_margin">@dimen/paddinginterior</item>
+    </style>
+
 
     <!-- TXT INGRESAR-->
     <style name="txtingresar">
@@ -59,6 +65,12 @@
         <item name="android:textSize">@dimen/txtingresardimens</item>
     </style>
 
+    <!-- MENU FLOTANTE-->
+    <style name="Etiquetas">
+        <item name="android:background">@drawable/background_label_fab</item>
+        <item name="android:textColor">@color/blanco</item>
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -66,5 +78,6 @@
 
     <!-- COMENTARIO CHORRA01-->
     <!-- COMENTARIO CHORRA02-->
+    <!-- COMENTARIO CHORRA03-->
 
 </resources>

@@ -48,6 +48,9 @@ dependencies {
     //GOOGLE PLACE
     implementation 'com.google.android.gms:play-services-places:16.0.0'
 
+    //HACER MENU CON FLOAT BUTTON
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

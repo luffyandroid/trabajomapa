@@ -2,6 +2,7 @@ package com.example.fl.trabajomapa.Config;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class ZDialog implements GoogleMap.InfoWindowAdapter {
         ZOferta infoWindowData = (ZOferta) m.getTag();
 
         nombre.setText(infoWindowData.getNombre());
-        detalle.setText(infoWindowData.getDetalle());
+        detalle.setText(infoWindowData.getDetalles());
         salario.setText(infoWindowData.getSalario());
         direccion.setText(infoWindowData.getDireccion());
         telefono.setText(infoWindowData.getTelefono());

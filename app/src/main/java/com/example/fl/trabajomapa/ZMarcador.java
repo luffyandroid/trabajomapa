@@ -1,5 +1,8 @@
 package com.example.fl.trabajomapa;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class ZMarcador {
 
     private String nombre;
@@ -8,6 +11,7 @@ public class ZMarcador {
     private String direccion;
     private String telefono;
     private String correo;
+
 
     public String getNombre() {
         return nombre;
@@ -56,5 +60,6 @@ public class ZMarcador {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
     
 }

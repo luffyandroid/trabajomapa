@@ -16,11 +16,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +31,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -40,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -86,9 +91,14 @@ import java.io.IOException;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Pattern;
 
 public class CAPublicarOfertaActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+    private FloatingActionsMenu fab3;
+    final Context context = this;
 
     //PARTE CODIGO AUTOOMPLETE
     @Override
@@ -143,6 +153,9 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capublicar_oferta);
 
+        //FLOATING BUTTON
+        fab3  = (FloatingActionsMenu) findViewById(R.id.menu_fabCA);
+
         //TOAST COMPROBACIÓN SI HAY INTERNET
         if (!verificaConexion(this)) {
             Toast.makeText(getBaseContext(),
@@ -151,7 +164,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         }
 
         tvocultopuestoCA = (TextView)findViewById(R.id.tvocultopuestoCA);
-        //COSAS DEL BOTTON DE GOOGLE SIGN IN
+        //COSAS DEL BOTON DE GOOGLE SIGN IN
         button = (SignInButton)findViewById(R.id.googleBtn);
         mAuth = FirebaseAuth.getInstance();
 
@@ -244,10 +257,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         tvocultofechaCA.setText(fechaString);
 
 
-
-
-
-
         //ENLAZO VARIANTES
         etnombreempresaCA = (EditText) findViewById(R.id.etnombreempresaCA);
         etnombrepuestoCA = (EditText) findViewById(R.id.etnombrepuestoCA);
@@ -263,6 +272,8 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         tvocultolongitudCA = (TextView) findViewById(R.id.tvocultolongitudCA);
 
         checkpoliticaCA = (CheckBox) findViewById(R.id.checkpoliticaCA);
+
+
 
     }//FIN ONCREATE
 
@@ -335,7 +346,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
 
         //COMPROBAR SI LOS CAMPOS NO ESTAN VACIOS
-        if (nombreempresaCA.equals("")||nombrepuestoCA.equals("") || direccionnegocioCA.equals("")) {
+        if (nombreempresaCA.equals("")||nombrepuestoCA.equals("") || direccionnegocioCA.equals("") || latitudint.equals(0) || longitudint.equals(0)){
 
             Toast.makeText(getApplicationContext(),
                     "Rellena los campos obligatorios",
@@ -372,8 +383,11 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 error = true;
             }
 
-            //00 AQUI PONER COMPROBACIÓN CHECK
-
+            //VALIDAR DIRECCION
+            if (direccionnegocioCA.equals("")){
+                etdireccionnegocioAutoCA.setError("Dirección no valida");
+                error = true;
+            }
 
             if (!error) {
                 if (!checkpoliticaCA.isChecked()) {
@@ -420,6 +434,11 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                     }
                     }
                     Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
+
+                    //005
+                    Intent mainIntent = new Intent().setClass(
+                            CAPublicarOfertaActivity.this, com.example.fl.trabajomapa.CBPayPalActivity.class);
+                    startActivity(mainIntent);
                 }
             }
 
@@ -591,9 +610,6 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     }
 
 
-
-
-
     //COMIENZA GESTION DE LOCALIZACION
     public class Localizacion implements LocationListener {
         CAPublicarOfertaActivity CAPublicarOfertaActivity;
@@ -652,19 +668,20 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
     //DIALOGO DE POLITICA
     public void dialogopolitica(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("POLITICAS DE PRIVACIDAD Y CONDICIONES");
-        builder.setMessage(R.string.Politicamensaje);
+        //builder.setTitle("POLITICAS DE PRIVACIDAD, CONDICIONES Y PRECIOS");
+        builder.setMessage(Html.fromHtml(getString(R.string.Politicamensaje)));
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 checkpoliticaCA.setChecked(true);
 
-
             }
         });
 
         builder.setNegativeButton("Rechazar", null);
+                checkpoliticaCA.setChecked(false);
+
         Dialog dialog = builder.create();
         dialog.show();
 
@@ -711,5 +728,48 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
+    public void clickrenovarCA(View v) {
+        Intent mainIntent = new Intent().setClass(
+                CAPublicarOfertaActivity.this, DAListaAnunciosActivity.class);
+        startActivity(mainIntent);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab3.collapse();
+    }
 
-}
+    public void clicatrasCA(View v) {
+            onBackPressed();
+            fab3.collapse();
+
+        }
+
+    public void clicknormalCA(View v) {
+        Intent mainIntent = new Intent().setClass(
+                CAPublicarOfertaActivity.this, BAMapaFinalActivity.class);
+        startActivity(mainIntent);
+        //PARA QUE SE CIERRE AL PULSAR
+        fab3.collapse();
+    }
+
+    public void clickinfoCA(View v) {
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_bamapa_info);
+
+       // TextView volvermenu = (TextView) dialog.findViewById(R.id.tvFooterDialogBA);
+        Button volvermenu = (Button) dialog.findViewById(R.id.volverBotonDialog);
+
+
+        volvermenu.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+        dialog.show();
+        //PARA QUE SE CIERRE AL PULSAR
+        fab3.collapse();
+    }
+
+
+        }
