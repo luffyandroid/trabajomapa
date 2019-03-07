@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -21,6 +22,7 @@ public class CBPayPalActivity extends AppCompatActivity {
     //PROTOCOLO PARA CODIGO PAYPAL
     public static final int PAYPAL_REQUEST_CODE = 7171;
 
+
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
@@ -36,6 +38,11 @@ public class CBPayPalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cbpay_pal);
+
+
+
+
+
         //COMENZAR PROTOCOLO PAYPAL
         Intent intent = new Intent(this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
@@ -49,7 +56,31 @@ public class CBPayPalActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PAYPAL_REQUEST_CODE){
 
+            String uidempresa = getIntent().getStringExtra("EXTRA_UIDEMPRESA");
+            String uid = getIntent().getStringExtra("EXTRA_UID");
+            String nombre = getIntent().getStringExtra("EXTRA_NOMBRE");
+            String detalles = getIntent().getStringExtra("EXTRA_DETALLES");
+            String salario = getIntent().getStringExtra("EXTRA_SALARIO");
+            String tipopuesto = getIntent().getStringExtra("EXTRA_TIPOPUESTO");
+            String direccion = getIntent().getStringExtra("EXTRA_DIRECCION");
+            String latitud = getIntent().getStringExtra("EXTRA_LATITUD");
+            String longitud = getIntent().getStringExtra("EXTRA_LONGITUD");
+            String telefono = getIntent().getStringExtra("EXTRA_TELEFONO");
+            String correo = getIntent().getStringExtra("EXTRA_CORREO");
+            String fecha = getIntent().getStringExtra("EXTRA_FECHA");
             Intent i = new Intent().setClass(getApplicationContext(), CCPublicadoActivity.class);
+            i.putExtra("EXTRA_UIDEMPRESAPP", uidempresa);
+            i.putExtra("EXTRA_UIDPP", uid);
+            i.putExtra("EXTRA_NOMBREPP", nombre);
+            i.putExtra("EXTRA_DETALLESPP", detalles);
+            i.putExtra("EXTRA_SALARIOPP", salario);
+            i.putExtra("EXTRA_TIPOPUESTOPP", tipopuesto);
+            i.putExtra("EXTRA_DIRECCIONPP", direccion);
+            i.putExtra("EXTRA_LATITUDPP", latitud);
+            i.putExtra("EXTRA_LONGITUDPP", longitud);
+            i.putExtra("EXTRA_TELEFONOPP", telefono);
+            i.putExtra("EXTRA_CORREOPP", correo);
+            i.putExtra("EXTRA_FECHAPP", fecha);
             startActivity(i);
             finish();
 

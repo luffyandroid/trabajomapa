@@ -9,6 +9,12 @@
     tools:context=".CCPublicadoActivity">
 
     //TEXT UID (para enviar el email):
+    <TextView
+        android:id="@+id/tvuidempresacc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="uidempresa"/>
 
     <TextView
         android:id="@+id/tvuidcc"
@@ -93,6 +99,13 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         android:text="longitud"/>
+
+    <TextView
+        android:id="@+id/tvfechapuestoCC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="fecha"/>
 
 
     <com.airbnb.lottie.LottieAnimationView

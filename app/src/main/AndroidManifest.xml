@@ -54,7 +54,8 @@
 
         <activity android:name=".DAListaAnunciosActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".CBPegoteActivity" />
+        <activity android:name=".CBPegoteActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".BAMapaFinalActivity"
             android:label="@string/title_activity_bamapa_final"
