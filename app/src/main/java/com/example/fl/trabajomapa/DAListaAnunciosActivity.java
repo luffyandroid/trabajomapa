@@ -4,9 +4,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,7 +26,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +46,10 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
     ListView listanunciosDA;
     ArrayList<ZOferta> listaoferta = new ArrayList<ZOferta>();
 
+    //LOGIN NUEVO
+    private static final int MY_REQUEST_CODE = 7117; //El numero que quieras
+    List<AuthUI.IdpConfig> providers;
+
     DatabaseReference dbRef;
     ValueEventListener valueEventListener;
 
@@ -43,68 +57,74 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dalista_anuncios);
-        cargarDatosFirebase();
+
+        //LOGIN NUEVO
+        providers = Arrays.asList(
+                new AuthUI.IdpConfig.GoogleBuilder().build() //Builder de GOOGLE
+        );
+
+        showSignInOptions();
+
+
         //FLOATING BUTTON
         fab4  = (FloatingActionsMenu) findViewById(R.id.menu_fabDA);
 
-        /*ArrayList<ZOferta> anunciospublicadosusuario = new ArrayList<ZOferta>();
 
-        anunciospublicadosusuario.add(new ZOferta("1234", "1234", "Diseñador", "1234", "1234", "tipouesto", "direccion", 6845.54, 68.24, "telefono", "correo", "27/12/1989", "disponible"));
-        anunciospublicadosusuario.add(new ZOferta("5678", "5678", "Cineasta", "5678", "5678", "tipouesto", "direccion", 6845.89, 6845.47, "telefono", "correo", "08/12/1859", "disponible"));
-        anunciospublicadosusuario.add(new ZOferta("9012", "9012", "9012", "9012", "9012", "tipouesto", "direccion", 684.74, 68.96, "telefono", "correo", "10/11/1459", "disponible"));
-        anunciospublicadosusuario.add(new ZOferta("3456", "3456", "Actor", "3456", "3456", "tipouesto", "direccion", 68451.78, 68.12, "telefono", "correo", "10/11/1459", "disponible"));
-        anunciospublicadosusuario.add(new ZOferta("3456", "3456", "Actor", "3456", "3456", "tipouesto", "direccion", 684515.49, 6878.18, "telefono", "correo", "10/11/1459", "disponible"));
-        anunciospublicadosusuario.add(new ZOferta("1234", "1234", "Actor", "1234", "1234", "tipouesto", "direccion", 6845.48, 68498468.98, "telefono", "correo", "10/11/1459", "disponible"));
-        anunciospublicadosusuario.add(new ZOferta("uidempresa", "uid", "Actor", "detalle", "salario", "tipouesto", "direccion", 6845.45, 684168.78, "telefono", "correo", "10/11/1459", "disponible"));
-        anunciospublicadosusuario.add(new ZOferta("uidempresa", "uid", "Actor", "detalle", "salario", "tipouesto", "direccion", 68451.78, 688468.78, "telefono", "correo", "10/11/1459", "disponible"));
-
-        //ENLAZO VARIANTES DECLARADAS
-        listanunciosDA = (ListView) findViewById(R.id.listanunciosDA);
-        listanunciosDA.setAdapter(new AdaptadorAnuncio(this, R.layout.list_da_anuncios, anunciospublicadosusuario) {
-
-            @Override
-            public void onAnuncio(Object anuncios, View view) {
-                if (anuncios != null) {
-
-                    TextView txtnombre = (TextView) view.findViewById(R.id.tvtituloDA);
-                    if (txtnombre != null)
-                        txtnombre.setText(((ZOferta) anuncios).getNombre());
-
-
-                    TextView txtfecha = (TextView) view.findViewById(R.id.tvfechaDA);
-                    if (txtfecha != null)
-                        txtfecha.setText(((ZOferta) anuncios).getFecha());
-                }
-            }
-        });
-
-
-
-        listanunciosDA.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> anunciomodificar, View view, int posicion, long id) {
-                ZOferta elegido = (ZOferta) anunciomodificar.getItemAtPosition(posicion);
-
-                CharSequence texto = "Seleccionado: " + elegido.getFecha();
-                Toast toast = Toast.makeText(DAListaAnunciosActivity.this, texto, Toast.LENGTH_LONG);
-                toast.show();
-
-            }
-        });*/
 
         listanunciosDA = (ListView)findViewById(R.id.listanunciosDA);
 
 
     }//FIN ONCREATE
 
+    //LOGIN NUEVO
+    private void showSignInOptions(){
+        startActivityForResult(
+                AuthUI.getInstance().createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .setTheme(R.style.MyTheme)
+                        .build(),MY_REQUEST_CODE
+        );
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == MY_REQUEST_CODE)
+        {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+            if(resultCode == RESULT_OK)
+            {
+                //Obtener usuario
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                //Muestra email en toast
+                Toast.makeText(context, "Loqueado con mail "+user.getEmail(), Toast.LENGTH_SHORT).show();
+                cargarDatosFirebase();
+
+            }
+        }
+    }
+
     //COMIENZO COSAS DE LUFFY
 
     private void cargarListView (DataSnapshot dataSnapshot){
+
+        //Obtener usuario
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //Muestra email en toast
+        //Toast.makeText(context, "Loqueado con mail "+user.getEmail(), Toast.LENGTH_SHORT).show();
+
+        ZOferta oferta = dataSnapshot.getValue(ZOferta.class);
+
+        if(oferta.getUidempresa().equals(user.getUid())) {
+
         listaoferta.add(dataSnapshot.getValue(ZOferta.class));
 
-        AdaptadorAnuncio adaptadorAnuncio=new AdaptadorAnuncio(this, listaoferta);
-        listanunciosDA.setAdapter(adaptadorAnuncio);
 
+
+            AdaptadorAnuncio adaptadorAnuncio = new AdaptadorAnuncio(this, listaoferta);
+            listanunciosDA.setAdapter(adaptadorAnuncio);
+
+        }
 
     }
 
