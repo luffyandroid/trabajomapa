@@ -21,7 +21,13 @@
         android:roundIcon="@drawable/appicon_circulo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:name=".DBPayPalActivity"></activity>
+        <activity android:name=".DBRenovadoActivity" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity android:name=".AASplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +47,6 @@
             android:name=".BBInfoAnuncio"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".CCPublicadoActivity"
             android:screenOrientation="portrait" />
@@ -53,10 +58,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCqvcbMXwR12clzymdCJa3JqMPAdLLA4GE" />
 
-        <activity android:name=".DAListaAnunciosActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CBPegoteActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".DAListaAnunciosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CBPegoteActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".BAMapaFinalActivity"
             android:label="@string/title_activity_bamapa_final"

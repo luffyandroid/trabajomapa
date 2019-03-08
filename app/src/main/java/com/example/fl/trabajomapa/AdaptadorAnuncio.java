@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
@@ -22,6 +27,8 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
     private ArrayList<ZOferta> anuncios;
     private Context context;
     DatabaseReference dbRef;
+    ValueEventListener valueEventListener;
+    ZOferta oferta;
 
     public AdaptadorAnuncio(Context context, ArrayList<ZOferta> anuncios) {
 
@@ -31,7 +38,7 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
 
     }
 
-    public View getView(int position, View view, ViewGroup anunciomodificar) {
+    public View getView(final int position, View view, ViewGroup anunciomodificar) {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View item = inflater.inflate(R.layout.list_da_anuncios, null);
@@ -53,13 +60,16 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
         btnrenovarDA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
 
-                Map<String, Object> creacion = new HashMap<>();
+                String uid = tvocultoDA.getText().toString();
 
-                creacion.put("disponible/", "disponible");
+                //dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/"+uid);
 
-                dbRef.child(tvocultoDA.getText().toString()).updateChildren(creacion);
+
+                Intent i = new Intent().setClass(context.getApplicationContext(), DBPayPalActivity.class);
+                i.putExtra("EXTRA_UIDDA", uid);
+                context.startActivity(i);
+
             }
         });
 
