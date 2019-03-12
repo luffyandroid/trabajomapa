@@ -79,7 +79,7 @@
             android:onClick="clickBorrar"
             android:padding="@dimen/paddingcabecera"
             android:stateListAnimator="@null"
-            android:text="BORRAR"
+            android:text="DESACTIVAR"
             android:textColor="@color/blanco"
             android:textSize="@dimen/txtboton" />
 
