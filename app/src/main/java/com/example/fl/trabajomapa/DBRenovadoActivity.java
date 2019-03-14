@@ -32,7 +32,6 @@ public class DBRenovadoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dbrenovado);
 
         //PROPIEDADES PANTALLA
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //TV PARA SUBIR COSAS
         tvuidDB = (TextView)findViewById(R.id.tvuidDB);

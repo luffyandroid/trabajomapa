@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -110,17 +112,34 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
                     }else{
                         if(btnborrarDA.getText().equals("BORRAR")){
 
-                            Toast.makeText(context, "Señor Stark, no me encuentro bien.....", Toast.LENGTH_LONG).show();
-                            remove(getItem(position));
-                            dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
-                            dbRef.child(tvocultoDA.getText().toString()).removeValue();
-                            notifyDataSetChanged();
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Borrar anuncio")
+                                    .setMessage("¿Seguro que desea borrar el anuncio?")
+                                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //TODO accion de salir de la app
+                                            remove(getItem(position));
+                                            dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
+                                            dbRef.child(tvocultoDA.getText().toString()).removeValue();
+                                            notifyDataSetChanged();
 
-                            btnborrarDA.setEnabled(false);
-                            btnborrarDA.setBackgroundColor(500065);
-                            btnrenovarDA.setEnabled(false);
-                            btnrenovarDA.setBackgroundColor(500065);
-                            item.setBackgroundColor(500065);
+                                            btnborrarDA.setEnabled(false);
+                                            btnborrarDA.setBackgroundColor(500065);
+                                            btnrenovarDA.setEnabled(false);
+                                            btnrenovarDA.setBackgroundColor(500065);
+                                            item.setBackgroundColor(500065);
+                                        }
+                                    })
+                                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //TODO accion de quedarse en el menu
+                                        }
+                                    })
+                                    .create().show();
+
+
                         }
                     }
                 }
