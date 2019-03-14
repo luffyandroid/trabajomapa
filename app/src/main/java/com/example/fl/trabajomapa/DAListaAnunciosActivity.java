@@ -139,6 +139,7 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
                 for (DataSnapshot ofertaDataSnapshot: dataSnapshot.getChildren()){
                     cargarListView(ofertaDataSnapshot);
                 }
+
             }
 
             @Override

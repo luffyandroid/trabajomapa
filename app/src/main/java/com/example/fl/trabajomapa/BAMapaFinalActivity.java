@@ -56,8 +56,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -156,10 +158,17 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                     int intsubfechaactualdia = Integer.parseInt(subfechaactualdia);
 
                     if(intsubfechaanunciomes<intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia || intsubfechaanuncioano<intsubfechaactualano && intsubfechaanunciomes>intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia){
-                        ofe.setDisponible("no disponible");
+                        ofe.setDisponible("borrar");
+                        Map<String, Object> creacion = new HashMap<>();
+
+                        creacion.put("disponible/", "borrar");
+                        Toast.makeText(context, ofe.getUid(), Toast.LENGTH_SHORT).show();
+                        dbRef.child("anuncios").child(ofe.getUid()).updateChildren(creacion);
+
                     }
                     //FINAL METODO VER FECHA
-                    if(ofe.getDisponible().equals("disponible")) {
+                    //if(ofe.getDisponible().equals("disponible"))
+                    else{
 
                         latitud = ofe.getLatitud();
                         longitud = ofe.getLongitud();
@@ -443,6 +452,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                 Intent i = new Intent().setClass(BAMapaFinalActivity.this, BBInfoAnuncio.class);
                 i.putExtra(EXTRA_ANUNCIO, anuncio);
                 startActivity(i);
+                finish();
             }
 
             @Override
@@ -486,6 +496,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         Intent mainIntent = new Intent().setClass(
                 BAMapaFinalActivity.this, CAPublicarOfertaActivity.class);
         startActivity(mainIntent);
+        finish();
         //PARA QUE SE CIERRE AL PULSAR
         fab.collapse();
     }
@@ -494,6 +505,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         Intent mainIntent = new Intent().setClass(
                 BAMapaFinalActivity.this, DAListaAnunciosActivity.class);
         startActivity(mainIntent);
+        finish();
         //PARA QUE SE CIERRE AL PULSAR
         fab.collapse();
     }

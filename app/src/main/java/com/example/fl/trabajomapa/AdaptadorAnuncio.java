@@ -8,6 +8,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,7 +45,7 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
     public View getView(final int position, View view, ViewGroup anunciomodificar) {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View item = inflater.inflate(R.layout.list_da_anuncios, null);
+        final View item = inflater.inflate(R.layout.list_da_anuncios, null);
 
         TextView tvtituloDA = (TextView)
                 item.findViewById(R.id.tvtituloDA);
@@ -60,7 +62,7 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
                 item.findViewById(R.id.tvocultoDA);
         tvocultoDA.setText(anuncios.get(position).getUid() );
 
-        Button btnrenovarDA = (Button)
+        final Button btnrenovarDA = (Button)
                 item.findViewById(R.id.btnrenovarDA);
         btnrenovarDA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,30 +89,15 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
             btnborrarDA.setText("ACTIVAR");
 
 
-
         }
-
-        //COMIENZA METODO VER FECHA
-        String fechaanuncio = anuncios.get(position).getFecha().toString();
-        String subfechaanuncioano = fechaanuncio.substring(0,4);
-        int intsubfechaanuncioano = Integer.parseInt(subfechaanuncioano);
-        String subfechaanunciomes = fechaanuncio.substring(5,7);
-        int intsubfechaanunciomes = Integer.parseInt(subfechaanunciomes);
-        String subfechaanunciodia = fechaanuncio.substring(8,10);
-        int intsubfechaanunciodia = Integer.parseInt(subfechaanunciodia);
-        String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        String subfechaactualano = fechaactual.substring(0,4);
-        int intsubfechaactualano = Integer.parseInt(subfechaactualano);
-        String subfechaactualmes = fechaactual.substring(5,7);
-        int intsubfechaactualmes = Integer.parseInt(subfechaactualmes);
-        String subfechaactualdia = fechaactual.substring(8,10);
-        int intsubfechaactualdia = Integer.parseInt(subfechaactualdia);
-
-        if(intsubfechaanunciomes<intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia || intsubfechaanuncioano<intsubfechaactualano && intsubfechaanunciomes>intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia){
-            btnborrarDA.setEnabled(false);
+        if (anuncios.get(position).getDisponible().equals("borrar")){
+            //btnborrarDA.setEnabled(false);
             btnborrarDA.setText("BORRAR");
+
         }
-        //FINAL METODO VER FECHA
+
+
+
 
         btnborrarDA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,9 +122,18 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
                         dbRef.child(tvocultoDA.getText().toString()).updateChildren(creacion);
                     }else{
                         if(btnborrarDA.getText().equals("BORRAR")){
-                            dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
 
+                            Toast.makeText(context, "Señor Stark, no me encuentro bien.....", Toast.LENGTH_LONG).show();
+                            remove(getItem(position));
+                            dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
                             dbRef.child(tvocultoDA.getText().toString()).removeValue();
+                            notifyDataSetChanged();
+
+                            btnborrarDA.setEnabled(false);
+                            btnborrarDA.setBackgroundColor(500065);
+                            btnrenovarDA.setEnabled(false);
+                            btnrenovarDA.setBackgroundColor(500065);
+                            item.setBackgroundColor(500065);
                         }
                     }
                 }
@@ -145,19 +141,6 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         return item;

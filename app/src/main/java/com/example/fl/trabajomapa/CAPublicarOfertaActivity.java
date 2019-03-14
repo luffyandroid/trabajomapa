@@ -346,7 +346,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 String longitudnegocioCA = tvocultolongitudCA.getText().toString();
                 Double longitudint = Double.parseDouble(longitudnegocioCA);
                 String uidempresa = "empresamolongui";
-                String hora = new SimpleDateFormat("H:M").format(new Date());
+                String hora = new SimpleDateFormat("HH:mm").format(new Date());
                 String fecha = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
                 Intent mainIntent = new Intent().setClass(
@@ -365,6 +365,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 mainIntent.putExtra("EXTRA_CORREO", correonegocioCA);
                 mainIntent.putExtra("EXTRA_FECHA", fecha);
                 startActivity(mainIntent);
+
 
 
 
@@ -403,6 +404,12 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent().setClass(this,BAMapaFinalActivity.class);
+        startActivity(i);
+    }
     //COMPROBACIÓN CONEXIÓN INTERNET
 
     public static boolean verificaConexion(Context ctx) {
