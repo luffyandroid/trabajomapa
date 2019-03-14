@@ -57,7 +57,6 @@ public class DBRenovadoActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent().setClass(
                         DBRenovadoActivity.this, BAMapaFinalActivity.class);
                 startActivity(mainIntent);
-
                 finish();
 
             }

@@ -5,20 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context=".DBRenovadoActivity">
 
     <TextView
         android:id="@+id/tvuidDB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="uid"/>
 
     <TextView
         android:id="@+id/tvuidempresaDB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="uidempresa"/>
 
 
@@ -28,7 +29,7 @@
         android:id="@+id/tvfechaDB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="fecha"/>
 
 

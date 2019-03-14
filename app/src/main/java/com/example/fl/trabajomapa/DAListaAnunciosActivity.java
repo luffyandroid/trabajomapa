@@ -96,8 +96,7 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
             {
                 //Obtener usuario
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                //Muestra email en toast
-                Toast.makeText(context, "Loqueado con mail "+user.getEmail(), Toast.LENGTH_SHORT).show();
+
                 cargarDatosFirebase();
 
             }
@@ -110,8 +109,7 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
 
         //Obtener usuario
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        //Muestra email en toast
-        //Toast.makeText(context, "Loqueado con mail "+user.getEmail(), Toast.LENGTH_SHORT).show();
+
 
         ZOferta oferta = dataSnapshot.getValue(ZOferta.class);
 
@@ -154,25 +152,12 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
 
     //FIN COSAS DE LUFFY
 
-
-
-
-
     //BOTONES DE ELIMINAR Y O MODIFICAR
-
-    /*private void clickRenovar() {
-
-    }
-
-
-    private void clickBorrar() {
-
-    }*/
-
     public void clickpublicarDA(View v) {
         Intent mainIntent = new Intent().setClass(
                 DAListaAnunciosActivity.this, CAPublicarOfertaActivity.class);
         startActivity(mainIntent);
+        finish();
         //PARA QUE SE CIERRE AL PULSAR
         fab4.collapse();
     }
@@ -181,6 +166,7 @@ public class DAListaAnunciosActivity extends AppCompatActivity {
         Intent mainIntent = new Intent().setClass(
                 DAListaAnunciosActivity.this, BAMapaFinalActivity.class);
         startActivity(mainIntent);
+        finish();
         //PARA QUE SE CIERRE AL PULSAR
         fab4.collapse();
     }

@@ -8,22 +8,16 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
@@ -31,7 +25,6 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
     private ArrayList<ZOferta> anuncios;
     private Context context;
     DatabaseReference dbRef;
-    ValueEventListener valueEventListener;
     ZOferta oferta;
 
     public AdaptadorAnuncio(Context context, ArrayList<ZOferta> anuncios) {
@@ -70,10 +63,6 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
 
 
                 String uid = tvocultoDA.getText().toString();
-
-                //dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/"+uid);
-
-
                 Intent i = new Intent().setClass(context.getApplicationContext(), DBPayPalActivity.class);
                 i.putExtra("EXTRA_UIDDA", uid);
                 context.startActivity(i);
@@ -85,13 +74,11 @@ public class AdaptadorAnuncio extends ArrayAdapter<ZOferta> {
                 item.findViewById(R.id.btnborrarDA);
 
         if (anuncios.get(position).getDisponible().equals("no disponible")){
-            //btnborrarDA.setEnabled(false);
             btnborrarDA.setText("ACTIVAR");
 
 
         }
         if (anuncios.get(position).getDisponible().equals("borrar")){
-            //btnborrarDA.setEnabled(false);
             btnborrarDA.setText("BORRAR");
 
         }

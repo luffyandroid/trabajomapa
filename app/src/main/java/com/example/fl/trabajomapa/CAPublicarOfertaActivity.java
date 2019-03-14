@@ -365,41 +365,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
                 mainIntent.putExtra("EXTRA_CORREO", correonegocioCA);
                 mainIntent.putExtra("EXTRA_FECHA", fecha);
                 startActivity(mainIntent);
-
-
-
-
-
-
-
-
-                /*Map<String, Object> creacion = new HashMap<>();
-                creacion.put("uidempresa/", nombreempresaCA);
-                creacion.put("uid/", nombreempresaCA + fecha + hora);
-                creacion.put("nombre/", nombrepuestoCA);
-                creacion.put("detalles/", detallespuestoCA);
-                creacion.put("salario/", salariopuestoCA);
-                creacion.put("tipopuesto/", tvocultopuestoCA.getText().toString());
-                creacion.put("direccion/", direccionnegocioCA);
-                creacion.put("latitud/", latitudint);
-                creacion.put("longitud/", longitudint);
-                creacion.put("telefono/", telefononegocioCA);
-                creacion.put("correo/", correonegocioCA);
-                creacion.put("fecha/", fecha);
-                creacion.put("disponible/", "disponible");
-
-                dbRef.child(user.getUid() + fecha + hora).updateChildren(creacion);
-
-                {
-                    if (user != null){
-
-                    }
-                }
-                Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
-                */
-                //005
-
-
+                finish();
             }
         }
     }
@@ -409,6 +375,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         super.onBackPressed();
         Intent i = new Intent().setClass(this,BAMapaFinalActivity.class);
         startActivity(i);
+        finish();
     }
     //COMPROBACIÓN CONEXIÓN INTERNET
 
@@ -535,40 +502,10 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
 
                 }else {
 
-                        //signIn();
+
                     showSignInOptions();
 
-                    //PA PUBLICAR ACTIVITY
-                    /*dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios");
 
-                    Map<String, Object> creacion = new HashMap<>();
-                    creacion.put("uidempresa/", nombreempresaCA);
-                    creacion.put("uid/", nombreempresaCA + fecha + hora);
-                    creacion.put("nombre/", nombrepuestoCA);
-                    creacion.put("detalles/", detallespuestoCA);
-                    creacion.put("salario/", salariopuestoCA);
-                    creacion.put("tipopuesto/", tvocultopuestoCA.getText().toString());
-                    creacion.put("direccion/", direccionnegocioCA);
-                    creacion.put("latitud/", latitudint);
-                    creacion.put("longitud/", longitudint);
-                    creacion.put("telefono/", telefononegocioCA);
-                    creacion.put("correo/", correonegocioCA);
-                    creacion.put("fecha/", fecha);
-                    creacion.put("disponible/", "disponible");
-
-                    dbRef.child(nombreempresaCA + fecha + hora).updateChildren(creacion);
-
-                    {
-                    if (user != null){
-
-                    }
-                    }
-                    Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
-
-                    //005
-                    Intent mainIntent = new Intent().setClass(
-                            CAPublicarOfertaActivity.this, com.example.fl.trabajomapa.CBPayPalActivity.class);
-                    startActivity(mainIntent);*/
                 }
             }
 
@@ -576,105 +513,7 @@ public class CAPublicarOfertaActivity extends AppCompatActivity implements Googl
         }
     }
 
-    //Metodo por el que se loguea con la cuenta de google
-    ////////////////////////////////////////////////////
-    /*private void signIn() {
 
-            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
-
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
-                // ...
-            }
-        }
-    }
-    /////////////////////////////////////////////////////////////////////
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-
-                            String nombreempresaCA = etnombreempresaCA.getText().toString();
-                            String nombrepuestoCA = etnombrepuestoCA.getText().toString();
-                            String detallespuestoCA = etdetallespuestoCA.getText().toString();
-                            String salariopuestoCA = etsalariopuestoCA.getText().toString();
-                            String tipodepuesto = tvocultopuestoCA.getText().toString();
-                            //TODO poner el autocompletar aqui
-                            //prueba de pillar latitud y longitud INICIO
-                            try {
-                                String direccionnegocioCA = etdireccionnegocioAutoCA.getText().toString();
-
-                                List<Address> addressList = geocoder.getFromLocationName(
-                                        direccionnegocioCA, 5);
-                                if (addressList != null && addressList.size() > 0) {
-                                    int lat = (int) (addressList.get(0).getLatitude() * 1e6);
-                                    int lng = (int) (addressList.get(0).getLongitude() * 1e6);
-                                    String latitudint = Integer.toString(lat);
-                                    tvocultolatitudCA.setText(latitudint);
-                                    String longitudint = Integer.toString(lng);
-                                    tvocultolongitudCA.setText(longitudint);
-
-                                    //Toast.makeText(CAPublicarOfertaActivity.this, "Latitud:"+latitudint+" y longitud:"+longitudint, Toast.LENGTH_LONG).show();
-
-                                }
-                            }catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            //prueba de pillar latitud y longitud FIN
-                            String direccionnegocioCA =etdireccionnegocioAutoCA.getText().toString();
-                            String telefononegocioCA = ettelefononegocioCA.getText().toString();
-                            String correonegocioCA = etcorreonegocioCA.getText().toString();
-                            String latitudnegocioCA = tvocultolatitudCA.getText().toString();
-                            //Double latitudint = Double.parseDouble(latitudnegocioCA);
-                            String longitudnegocioCA = tvocultolongitudCA.getText().toString();
-                            //Double longitudint = Double.parseDouble(longitudnegocioCA);
-
-                            Intent intent = new Intent().setClass(getApplicationContext(),CBPegoteActivity.class);
-                            intent.putExtra("NOMBRE EMPRESA",nombreempresaCA);
-                            intent.putExtra("NOMBRE PUESTO",nombrepuestoCA);
-                            intent.putExtra("DETALLE PUESTO",detallespuestoCA);
-                            intent.putExtra("SALARIO PUESTO",salariopuestoCA);
-                            intent.putExtra("TIPO PUESTO",tipodepuesto);
-                            intent.putExtra("DIRECCION PUESTO",direccionnegocioCA);
-                            intent.putExtra("TELEFONO PUESTO",telefononegocioCA);
-                            intent.putExtra("CORREO PUESTO",correonegocioCA);
-                            intent.putExtra("LATITUD PUESTO",latitudnegocioCA);
-                            intent.putExtra("LONGITUD PUESTO",longitudnegocioCA);
-                            startActivity(intent);
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(CAPublicarOfertaActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
-                        // ...
-                    }
-                });
-    }*/
 
 
 

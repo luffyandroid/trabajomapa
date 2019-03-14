@@ -1,8 +1,10 @@
 package com.example.fl.trabajomapa;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -147,6 +149,7 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                     int intsubfechaanuncioano = Integer.parseInt(subfechaanuncioano);
                     String subfechaanunciomes = fechaanuncio.substring(5,7);
                     int intsubfechaanunciomes = Integer.parseInt(subfechaanunciomes);
+                    int intsubfechaanunciomes3meses = intsubfechaanunciomes+2;
                     String subfechaanunciodia = fechaanuncio.substring(8,10);
                     int intsubfechaanunciodia = Integer.parseInt(subfechaanunciodia);
                     String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -157,133 +160,141 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
                     String subfechaactualdia = fechaactual.substring(8,10);
                     int intsubfechaactualdia = Integer.parseInt(subfechaactualdia);
 
-                    if(intsubfechaanunciomes<intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia || intsubfechaanuncioano<intsubfechaactualano && intsubfechaanunciomes>intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia){
-                        ofe.setDisponible("borrar");
-                        Map<String, Object> creacion = new HashMap<>();
+                    if(intsubfechaanunciomes3meses<intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia || intsubfechaanuncioano<intsubfechaactualano && intsubfechaanunciomes<intsubfechaactualmes && intsubfechaanunciodia<intsubfechaactualdia ||intsubfechaanuncioano<intsubfechaactualano && intsubfechaanunciomes==12 && intsubfechaactualmes>=3 && intsubfechaanunciodia<intsubfechaactualdia
+                            || intsubfechaanuncioano<intsubfechaactualano && intsubfechaanunciomes==11 && intsubfechaactualmes>=2 && intsubfechaanunciodia<intsubfechaactualdia || intsubfechaanuncioano<intsubfechaactualano && intsubfechaanunciomes==10 && intsubfechaactualmes>=1 && intsubfechaanunciodia<intsubfechaactualdia){
+                        dbRef.child("anuncios").child(ofe.getUid()).removeValue();
+                    }else {
 
-                        creacion.put("disponible/", "borrar");
-                        Toast.makeText(context, ofe.getUid(), Toast.LENGTH_SHORT).show();
-                        dbRef.child("anuncios").child(ofe.getUid()).updateChildren(creacion);
+                        if (intsubfechaanunciomes < intsubfechaactualmes && intsubfechaanunciodia < intsubfechaactualdia || intsubfechaanuncioano < intsubfechaactualano && intsubfechaanunciodia < intsubfechaactualdia) {
+                            ofe.setDisponible("borrar");
+                            Map<String, Object> creacion = new HashMap<>();
 
+                            creacion.put("disponible/", "borrar");
+                            Toast.makeText(context, ofe.getUid(), Toast.LENGTH_SHORT).show();
+                            dbRef.child("anuncios").child(ofe.getUid()).updateChildren(creacion);
+
+
+                        }
+                        //FINAL METODO VER FECHA
+                        //if(ofe.getDisponible().equals("disponible"))
+                        else {
+
+                            latitud = ofe.getLatitud();
+                            longitud = ofe.getLongitud();
+
+                            ZMarcador info = new ZMarcador();
+                            info.setNombre(ofe.getNombre());
+                            info.setDetalles(ofe.getDetalles());
+                            info.setSalario(ofe.getSalario());
+                            info.setDireccion(ofe.getDireccion());
+                            info.setTelefono(ofe.getTelefono());
+                            info.setCorreo(ofe.getCorreo());
+
+                            //ZAdaptadorVentanaInfo custominfowindow = new ZAdaptadorVentanaInfo(new ZAdaptadorVentanaInfo(getApplicationContext()))
+                            //mMap.setInfoWindowAdapter(custominfowindow);
+
+                            mMap.setInfoWindowAdapter
+                                    (new ZAdaptadorVentanaInfo(BAMapaFinalActivity.this) {
+                                        @Override
+                                        public boolean onTouch(View view, MotionEvent motionEvent) {
+                                            return false;
+                                        }
+                                    });
+
+
+                            MarkerOptions markerOptions = new MarkerOptions();
+                            if (ofe.getTipopuesto().equals("Otros")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_otros));
+                            }
+                            if (ofe.getTipopuesto().equals("Administración")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_administracion));
+                            }
+                            if (ofe.getTipopuesto().equals("Agricultura")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_agricultura));
+                            }
+                            if (ofe.getTipopuesto().equals("Animación")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_animacion));
+                            }
+                            if (ofe.getTipopuesto().equals("Atención al cliente")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_atencionalcliente));
+                            }
+                            if (ofe.getTipopuesto().equals("Calidad I+D")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_calidadimasd));
+                            }
+                            if (ofe.getTipopuesto().equals("Comercial")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_comercial));
+                            }
+                            if (ofe.getTipopuesto().equals("Construcción")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_construccion));
+                            }
+                            if (ofe.getTipopuesto().equals("Diseño y Artes gráficas")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_disenoyartesgraficas));
+                            }
+                            if (ofe.getTipopuesto().equals("Educación")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_educacion));
+                            }
+                            if (ofe.getTipopuesto().equals("Farmaceutica")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_famaceutica));
+                            }
+                            if (ofe.getTipopuesto().equals("Finanzas y banca")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_finanzasybanca));
+                            }
+                            if (ofe.getTipopuesto().equals("Funerarias")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_funerarias));
+                            }
+                            if (ofe.getTipopuesto().equals("Hostelería")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_hosteleria));
+                            }
+                            if (ofe.getTipopuesto().equals("Informática")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_informatica));
+                            }
+                            if (ofe.getTipopuesto().equals("Ingeniería y técnico")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_ingenieriaytecnicos));
+                            }
+                            if (ofe.getTipopuesto().equals("Legal")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_legal));
+                            }
+                            if (ofe.getTipopuesto().equals("Limpieza")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_limpeza));
+                            }
+                            if (ofe.getTipopuesto().equals("Logística y almacén")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_logisticayalmacen));
+                            }
+                            if (ofe.getTipopuesto().equals("Marketing y comunicaciones")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_marketingycomunicaciones));
+                            }
+                            if (ofe.getTipopuesto().equals("Música")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_musica));
+                            }
+                            if (ofe.getTipopuesto().equals("Profesiones y oficios")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_profesionesyoficios));
+                            }
+                            if (ofe.getTipopuesto().equals("Recursos humanos")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_recursoshumanos));
+                            }
+                            if (ofe.getTipopuesto().equals("Sanidad")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_sanidad));
+                            }
+                            if (ofe.getTipopuesto().equals("Transportes")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_transportes));
+                            }
+                            if (ofe.getTipopuesto().equals("Turismo")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_turismo));
+                            }
+                            if (ofe.getTipopuesto().equals("Venta")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_venta));
+                            }
+                            if (ofe.getTipopuesto().equals("Veterinaria")) {
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_veterinaria));
+                            }
+                            markerOptions.title(ofe.getUid());
+                            markerOptions.position(new LatLng(latitud, longitud));
+                            tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
+
+
+                        }
                     }
-                    //FINAL METODO VER FECHA
-                    //if(ofe.getDisponible().equals("disponible"))
-                    else{
 
-                        latitud = ofe.getLatitud();
-                        longitud = ofe.getLongitud();
-
-                        ZMarcador info = new ZMarcador();
-                        info.setNombre(ofe.getNombre());
-                        info.setDetalles(ofe.getDetalles());
-                        info.setSalario(ofe.getSalario());
-                        info.setDireccion(ofe.getDireccion());
-                        info.setTelefono(ofe.getTelefono());
-                        info.setCorreo(ofe.getCorreo());
-
-                        //ZAdaptadorVentanaInfo custominfowindow = new ZAdaptadorVentanaInfo(new ZAdaptadorVentanaInfo(getApplicationContext()))
-                        //mMap.setInfoWindowAdapter(custominfowindow);
-
-                    mMap.setInfoWindowAdapter
-                            (new ZAdaptadorVentanaInfo(BAMapaFinalActivity.this) {
-                                @Override
-                                public boolean onTouch(View view, MotionEvent motionEvent) {
-                                    return false;
-                                }
-                            });
-
-
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        if (ofe.getTipopuesto().equals("Otros")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_otros));
-                        }
-                        if (ofe.getTipopuesto().equals("Administración")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_administracion));
-                        }
-                        if (ofe.getTipopuesto().equals("Agricultura")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_agricultura));
-                        }
-                        if (ofe.getTipopuesto().equals("Animación")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_animacion));
-                        }
-                        if (ofe.getTipopuesto().equals("Atención al cliente")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_atencionalcliente));
-                        }
-                        if (ofe.getTipopuesto().equals("Calidad I+D")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_calidadimasd));
-                        }
-                        if (ofe.getTipopuesto().equals("Comercial")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_comercial));
-                        }
-                        if (ofe.getTipopuesto().equals("Construcción")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_construccion));
-                        }
-                        if (ofe.getTipopuesto().equals("Diseño y Artes gráficas")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_disenoyartesgraficas));
-                        }
-                        if (ofe.getTipopuesto().equals("Educación")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_educacion));
-                        }
-                        if (ofe.getTipopuesto().equals("Farmaceutica")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_famaceutica));
-                        }
-                        if (ofe.getTipopuesto().equals("Finanzas y banca")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_finanzasybanca));
-                        }
-                        if (ofe.getTipopuesto().equals("Funerarias")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_funerarias));
-                        }
-                        if (ofe.getTipopuesto().equals("Hostelería")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_hosteleria));
-                        }
-                        if (ofe.getTipopuesto().equals("Informática")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_informatica));
-                        }
-                        if (ofe.getTipopuesto().equals("Ingeniería y técnico")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_ingenieriaytecnicos));
-                        }
-                        if (ofe.getTipopuesto().equals("Legal")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_legal));
-                        }
-                        if (ofe.getTipopuesto().equals("Limpieza")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_limpeza));
-                        }
-                        if (ofe.getTipopuesto().equals("Logística y almacén")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_logisticayalmacen));
-                        }
-                        if (ofe.getTipopuesto().equals("Marketing y comunicaciones")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_marketingycomunicaciones));
-                        }
-                        if (ofe.getTipopuesto().equals("Música")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_musica));
-                        }
-                        if (ofe.getTipopuesto().equals("Profesiones y oficios")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_profesionesyoficios));
-                        }
-                        if (ofe.getTipopuesto().equals("Recursos humanos")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_recursoshumanos));
-                        }
-                        if (ofe.getTipopuesto().equals("Sanidad")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_sanidad));
-                        }
-                        if (ofe.getTipopuesto().equals("Transportes")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_transportes));
-                        }
-                        if (ofe.getTipopuesto().equals("Turismo")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_turismo));
-                        }
-                        if (ofe.getTipopuesto().equals("Venta")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_venta));
-                        }
-                        if (ofe.getTipopuesto().equals("Veterinaria")) {
-                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_veterinaria));
-                        }
-                        markerOptions.title(ofe.getUid());
-                        markerOptions.position(new LatLng(latitud, longitud));
-                        tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
-
-
-                    }
 
                 }
 
@@ -444,23 +455,26 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
 
     private void pasarinfo() {
         dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/" + tvocultoba.getText().toString());
-        valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                anuncio = dataSnapshot.getValue(ZOferta.class);
-                Intent i = new Intent().setClass(BAMapaFinalActivity.this, BBInfoAnuncio.class);
-                i.putExtra(EXTRA_ANUNCIO, anuncio);
-                startActivity(i);
-                finish();
-            }
+            valueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("LoginActivity", "DATABASE ERROR");
-            }
-        };
-        dbRef.addValueEventListener(valueEventListener);
+
+                    anuncio = dataSnapshot.getValue(ZOferta.class);
+                    Intent i = new Intent().setClass(BAMapaFinalActivity.this, BBInfoAnuncio.class);
+                    i.putExtra(EXTRA_ANUNCIO, anuncio);
+                    startActivity(i);
+                    finish();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("LoginActivity", "DATABASE ERROR");
+                }
+            };
+            dbRef.addValueEventListener(valueEventListener);
+
     }
 
 
@@ -505,7 +519,6 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         Intent mainIntent = new Intent().setClass(
                 BAMapaFinalActivity.this, DAListaAnunciosActivity.class);
         startActivity(mainIntent);
-        finish();
         //PARA QUE SE CIERRE AL PULSAR
         fab.collapse();
     }
@@ -571,7 +584,25 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
         fab.collapse();
     }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        new AlertDialog.Builder(this)
+                .setTitle("Salir de la aplicación")
+                .setMessage("¿Seguro que desea salir de la aplicación?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //TODO accion de salir de la app
+                        finishAffinity();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //TODO accion de quedarse en el menu
+                    }
+                })
+                .create().show();
+    }
 }

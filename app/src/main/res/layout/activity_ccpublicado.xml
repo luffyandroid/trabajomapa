@@ -13,98 +13,98 @@
         android:id="@+id/tvuidempresacc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="uidempresa"/>
 
     <TextView
         android:id="@+id/tvuidcc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="uid"/>
 
     <TextView
         android:id="@+id/tvmailempresacc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="mailempresa"/>
 
     <TextView
         android:id="@+id/tvnombreempresaCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="nombreempresa"/>
 
     <TextView
         android:id="@+id/tvnombrepuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="nombrepuesto"/>
 
     <TextView
         android:id="@+id/tvdetallepuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="detallepuesto"/>
 
     <TextView
         android:id="@+id/tvsalariopuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="salariopuesto"/>
 
     <TextView
         android:id="@+id/tvtipopuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="tipopuesto"/>
 
     <TextView
         android:id="@+id/tvtelefonopuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="telefono"/>
 
     <TextView
         android:id="@+id/tvcorreopuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="correo"/>
 
     <TextView
         android:id="@+id/tvdireccionpuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="direccion"/>
 
     <TextView
         android:id="@+id/tvlatitudpuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="latitud"/>
 
     <TextView
         android:id="@+id/tvlongitudpuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="longitud"/>
 
     <TextView
         android:id="@+id/tvfechapuestoCC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="fecha"/>
 
 

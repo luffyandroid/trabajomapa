@@ -56,9 +56,6 @@ public class DBPayPalActivity extends AppCompatActivity {
 
             Intent i = new Intent().setClass(getApplicationContext(), DBRenovadoActivity.class);
             i.putExtra("EXTRA_UIDDB", uid);
-            /*i.putExtra("EXTRA_UIDEMPRESADB", uidempresa);
-            i.putExtra("EXTRA_UIDDB", uid);
-            i.putExtra("EXTRA_FECHADB", fecha);*/
             startActivity(i);
             finish();
 
@@ -75,8 +72,8 @@ public class DBPayPalActivity extends AppCompatActivity {
 
                 Intent u = new Intent().setClass(getApplicationContext(), BAMapaFinalActivity.class);
                 startActivity(u);
-                finish();
                 Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show();
+                finish();
             }
         }//SI LOS DATOS METIDOS NO SON CORRECTOS
         if (requestCode == PaymentActivity.RESULT_EXTRAS_INVALID){
