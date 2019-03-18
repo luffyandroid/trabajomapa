@@ -42,6 +42,7 @@ dependencies {
     //MAIL
     implementation 'com.sun.mail:android-mail:1.6.0'
     implementation 'com.sun.mail:android-activation:1.6.0'
+    //implementation 'com.google.apis:google-api-services-gmail:v1-rev98-1.25.0'
 
     //PAYPAL
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'

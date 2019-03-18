@@ -8,9 +8,17 @@
     tools:context=".DAListaAnunciosActivity"
     tools:showIn="@layout/activity_dalista_anuncios">
 
-    <ListView
-        android:id="@+id/listanunciosDA"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listanunciosDA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="65dp"
+            android:clipToPadding="false"/>
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

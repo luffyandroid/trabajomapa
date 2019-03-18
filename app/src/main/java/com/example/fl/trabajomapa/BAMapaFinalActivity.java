@@ -454,26 +454,268 @@ public class BAMapaFinalActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void pasarinfo() {
+
+        //DIALOGO INFO ANUNCIO
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_bamapa_infowindow);
+
         dbRef = FirebaseDatabase.getInstance().getReference().child("anuncios/" + tvocultoba.getText().toString());
 
-            valueEventListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                    anuncio = dataSnapshot.getValue(ZOferta.class);
-                    Intent i = new Intent().setClass(BAMapaFinalActivity.this, BBInfoAnuncio.class);
-                    i.putExtra(EXTRA_ANUNCIO, anuncio);
-                    startActivity(i);
-                    finish();
+                anuncio = dataSnapshot.getValue(ZOferta.class);
+                final TextView nombre = (TextView) dialog.findViewById(R.id.tvinfowindows_titulobb);
+                final TextView detalles = (TextView) dialog.findViewById(R.id.tvinfowindows_detalles);
+                final TextView salario = (TextView) dialog.findViewById(R.id.tvinfowindows_salario);
+                final TextView direccion = (TextView) dialog.findViewById(R.id.tvinfowindows_direccion);
+                final TextView telefono = (TextView) dialog.findViewById(R.id.tvinfowindows_telefono);
+                final TextView correo = (TextView) dialog.findViewById(R.id.tvinfowindows_correo);
+                final LinearLayout llprofesional = (LinearLayout) dialog.findViewById(R.id.LinearLayoutProfesion);
+
+                nombre.setText(anuncio.getNombre());
+                detalles.setText(anuncio.getDetalles());
+                salario.setText(anuncio.getSalario());
+                direccion.setText(anuncio.getDireccion());
+                telefono.setText(anuncio.getTelefono());
+                correo.setText(anuncio.getCorreo());
+
+                //CAMBIAR DE COLOR EL BORDE SUPERIOR
+
+                if (anuncio.getTipopuesto().equals("Otros")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#E84E1B"));
+                }
+                if (anuncio.getTipopuesto().equals("Administración")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#009EE2"));
+                }
+                if (anuncio.getTipopuesto().equals("Agricultura")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#DDDB00"));
+                }
+                if (anuncio.getTipopuesto().equals("Animación")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#FF394C"));
+                }
+                if (anuncio.getTipopuesto().equals("Atención al cliente")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#F29100"));
+                }
+                if (anuncio.getTipopuesto().equals("Calidad I+D")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#006633"));
+                }
+                if (anuncio.getTipopuesto().equals("Comercial")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#312782"));
+                }
+                if (anuncio.getTipopuesto().equals("Construcción")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#E84E1B"));
+                }
+                if (anuncio.getTipopuesto().equals("Diseño y Artes gráficas")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#E61B72"));
+                }
+                if (anuncio.getTipopuesto().equals("Educación")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#39A935"));
+                }
+                if (anuncio.getTipopuesto().equals("Farmaceutica")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#009540"));
+                }
+                if (anuncio.getTipopuesto().equals("Finanzas y banca")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#C4B316"));
+                }
+                if (anuncio.getTipopuesto().equals("Funerarias")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#1D1D1B"));
+                }
+                if (anuncio.getTipopuesto().equals("Hostelería")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#120F51"));
+                }
+                if (anuncio.getTipopuesto().equals("Informática")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#7FA50C"));
+                }
+                if (anuncio.getTipopuesto().equals("Ingeniería y técnico")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#634E42"));
+                }
+                if (anuncio.getTipopuesto().equals("Legal")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#7E4E24"));
+                }
+                if (anuncio.getTipopuesto().equals("Limpieza")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#0685B7"));
+                }
+                if (anuncio.getTipopuesto().equals("Logística y almacén")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#B17F49"));
+                }
+                if (anuncio.getTipopuesto().equals("Marketing y comunicaciones")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#E20613"));
+                }
+                if (anuncio.getTipopuesto().equals("Música")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#941B80"));
+                }
+                if (anuncio.getTipopuesto().equals("Profesiones y oficios")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#868686"));
+                }
+                if (anuncio.getTipopuesto().equals("Recursos humanos")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#1D70B7"));
+                }
+                if (anuncio.getTipopuesto().equals("Sanidad")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#BD1622"));
+                }
+                if (anuncio.getTipopuesto().equals("Transportes")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#6F6F6E"));
+                }
+                if (anuncio.getTipopuesto().equals("Turismo")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#E5332A"));
+                }
+                if (anuncio.getTipopuesto().equals("Venta")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#A2195B"));
+                }
+                if (anuncio.getTipopuesto().equals("Veterinaria")) {
+                    llprofesional.setBackgroundColor(Color.parseColor("#683B11"));
                 }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.e("LoginActivity", "DATABASE ERROR");
+
+
+
+                final LinearLayout LayoutDetalles = (LinearLayout) dialog.findViewById(R.id.LayoutDetalless);
+                final LinearLayout LayoutSalario = (LinearLayout) dialog.findViewById(R.id.LayoutSalarios);
+                final LinearLayout LayoutDireccion = (LinearLayout) dialog.findViewById(R.id.LayoutDireccion);
+                final LinearLayout LayoutTelefono = (LinearLayout) dialog.findViewById(R.id.LayoutTelefonos);
+                final LinearLayout LayoutCorreo = (LinearLayout) dialog.findViewById(R.id.LayoutCorreos);
+
+                LayoutDireccion.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Uri location = Uri.parse("https://www.google.es/maps/@"+anuncio.getLatitud()+","+anuncio.getLongitud()+",20z");
+                            Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                            startActivity(mapIntent);
+                        }catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(BAMapaFinalActivity.this, "No hay aplicación para ver la dirección", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                LayoutTelefono.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+
+                            Uri number = Uri.parse("tel:"+ telefono.getText().toString());
+                            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                            startActivity(callIntent);
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(BAMapaFinalActivity.this,
+                                    "No hay apliación para llamar", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                LayoutCorreo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String[] TO = {correo.getText().toString()}; //001 AQUI DEBERÍA IR CORREO
+                        String[] CC = {""};
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                        emailIntent.setData(Uri.parse("mailto:"));
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+
+                        try {
+                            startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
+                            //finish();
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(BAMapaFinalActivity.this,
+                                    "No tienes clientes de email instalados.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+
+
+                if (detalles.equals("") ){
+                    LayoutDetalles.setVisibility(View.GONE);
                 }
-            };
-            dbRef.addValueEventListener(valueEventListener);
+
+                if (salario.equals("") ){
+                    LayoutSalario.setVisibility(View.GONE);
+                }
+
+                if (telefono.equals("") ){
+                    LayoutTelefono.setVisibility(View.GONE);
+                }
+
+                if (correo.equals("") ){
+                    LayoutCorreo.setVisibility(View.GONE);
+                }
+
+
+
+                Button compartir = (Button) dialog.findViewById(R.id.btninfowindows_compartirBB);
+                compartir.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                final String detalles_f, salario_f, telefono_f, correo_f;
+
+
+                                Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
+                                compartir.setType("text/plain");
+                                //compartir.setType("text/plain");
+                                String detalles_ = detalles.getText().toString();
+                                String salario_ = salario.getText().toString();
+                                String direccion_ = direccion.getText().toString();
+                                String telefono_ = telefono.getText().toString();
+                                String correo_ = correo.getText().toString();
+                                String nombre_ = nombre.getText().toString();
+
+                                //EN CASO DE QUE NO HAYA DATOS NO MANDE DATOS VACÍOS
+
+                                if (detalles_.equals("") ){
+                                    detalles_f = detalles_;}
+                                else { detalles_f = "\uD83D\uDD38" + " " + detalles_ + "\n";
+                                }
+
+                                if (salario_.equals("")){
+                                    salario_f = salario_;}
+                                else { salario_f = "\uD83D\uDCB6" + " " + "salario: " + salario_ + "\n";
+                                }
+
+                                if (telefono_.equals("") ){
+                                    telefono_f = telefono_;}
+                                else { telefono_f = "\uD83D\uDCDE" + " " + telefono_ + "\n";
+                                }
+
+                                if (correo_.equals("") ){
+                                    correo_f = correo_;}
+                                else { correo_f = "\uD83D\uDCE7" + " " + correo_ + "\n";
+                                }
+
+                                String en = "Enviado desde GeoWork";
+
+                                //TEXTO CON ESTILO
+
+                                compartir.putExtra(android.content.Intent.EXTRA_SUBJECT, "Compartir oferta de" + nombre_);
+                                compartir.putExtra(android.content.Intent.EXTRA_TEXT, ("Empleo de " + nombre_ + "\n"
+                                        + detalles_f
+                                        + salario_f
+                                        + "\uD83D\uDCCD" + " " + direccion_ + "\n"
+                                        + telefono_f
+                                        + correo_f
+                                        + en));
+                                //compartir.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtm"Oferta de " + nombre_ );
+                                startActivity(Intent.createChooser(compartir, "Compartir vía"));
+
+                            }
+
+
+
+                        });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("LoginActivity", "DATABASE ERROR");
+            }
+        };
+        dbRef.addValueEventListener(valueEventListener);
+        dialog.show();
 
     }
 

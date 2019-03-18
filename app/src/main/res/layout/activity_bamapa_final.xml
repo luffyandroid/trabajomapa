@@ -106,7 +106,7 @@
             app:fab_colorPressed="@color/marronoscuro"
             fab:fab_icon="@drawable/menu_float_01_satelite"
             fab:fab_size="mini"
-            android:onClick="clicksatelite"
+            android:onClick="clickhibrido"
              fab:fab_title="Satelite" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -120,16 +120,6 @@
             android:onClick="clicknormal"
             fab:fab_title="Calles" />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/botonBAMapahibrido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/marron"
-            app:fab_colorPressed="@color/marronoscuro"
-            fab:fab_icon="@drawable/menu_float_03_hibrido"
-            fab:fab_size="mini"
-            android:onClick="clickhibrido"
-            fab:fab_title="Híbrido" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/botonBAMapabuscar"

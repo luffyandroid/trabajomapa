@@ -19,4 +19,35 @@
 
 
 
+    <color name="administracion">#009EE2</color>
+    <color name="agricultura">#DDDB00</color>
+    <color name="animacion">#FF394C</color>
+    <color name="atencionalclientes">#F29100</color>
+    <color name="calidadimasd">#006633</color>
+    <color name="comercial">#312782</color>
+    <color name="construccion">#E84E1B</color>
+    <color name="disenoyartesgraficas">#E61B72</color>
+    <color name="educacion">#39A935</color>
+    <color name="famaceutica">#009540</color>
+    <color name="finanzasybanca">#C4B316</color>
+    <color name="funerarias">#1D1D1B</color>
+    <color name="hosteleria">#120F51</color>
+    <color name="informatica">#7FA50C</color>
+    <color name="ingenieriaytecnicos">#634E42</color>
+    <color name="legal">#7E4E24</color>
+    <color name="limpeza">#0685B7</color>
+    <color name="logisticayalmacen">#B17F49</color>
+    <color name="marketingycomunicaciones">#E20613</color>
+    <color name="musica">#941B80</color>
+    <color name="otros">#E84E1B</color>
+    <color name="profesionesyoficios">#868686</color>
+    <color name="recursoshumanos">#1D70B7</color>
+    <color name="sanidad">#BD1622</color>
+    <color name="transportes">#6F6F6E</color>
+    <color name="turismo">#E5332A</color>
+    <color name="venta">#A2195B</color>
+    <color name="veterinaria">#683B11</color>
+
+
+
 </resources>

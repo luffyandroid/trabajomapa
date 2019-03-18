@@ -122,7 +122,7 @@ public class CCPublicadoActivity extends AppCompatActivity {
         creacion.put("disponible/", "disponible");
 
         dbRef.child(tvuidcc.getText().toString()).updateChildren(creacion);
-
+        enviarEmailUsuario();
         {
             if (oferta != null){
 
@@ -130,6 +130,26 @@ public class CCPublicadoActivity extends AppCompatActivity {
         }
         Toast.makeText(this, "Subido con exito", Toast.LENGTH_SHORT).show();
 
+    }
+
+    private void enviarEmailUsuario() {
+
+        try {
+            //ENVIAR EMAIL USUARIO
+            String email = tvuidcc.getText().toString();
+
+            //RECOGER
+            String to = email;
+            String subject = getString(R.string.AsuntoEmailPagoRealizado);
+            String cuerpo01 = getString(R.string.CuerpoEmail01);
+            String cuerpo02 = getString(R.string.CuerpoEmail02);
+            String message = cuerpo01 + cuerpo02;
+            //everything is filled out
+            //send email
+            new ZSimpleMail().sendEmail(to, subject, message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

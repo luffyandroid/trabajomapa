@@ -65,6 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
+                        android:maxLength="15"
                         android:textIsSelectable="false" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -129,20 +130,16 @@
                 //EditText DIRECCION NEGOCIO:
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/paddinginterior"
-                    android:hint="                                                         "
+                    android:hint="Escribe la dirección (Obligatorio)"
                     app:hintTextAppearance="@style/etflotante">
 
                     <AutoCompleteTextView
                         android:id="@+id/etdireccionnegocioAutoCA"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:hint="Escribe la dirección, formato calle / nº / ciudad (Obligatorio)"
-                        android:layout_toRightOf="@+id/ic_magnify"
-                        android:background="@null"
                         android:imeOptions="actionSearch" />
 
                 </android.support.design.widget.TextInputLayout>

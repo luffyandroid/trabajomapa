@@ -29,7 +29,8 @@
         Pago realizado correctamente.
         <br>-Concepto: Publicación oferta de empleo en GeoWork</br>
         <br>-Importe del pago: 3 Euros</br>
-        <br>-La oferta de empleo caducará en 30 días</br>
+        <br>-La oferta de empleo caducará en 30 días y no será visible para los usuarios.</br>
+        <br>-El anuncio permanecerá 180 dias en nuestro servidor, pasado ese tiempo se eliminará y no se podrá recuperar</br>
         <br>-Expedido por: GeoWork</br>
 ]]>
     </string>
@@ -38,12 +39,12 @@
             <![CDATA[
 <br></br>
 
-<br>Cualquier problema con la cuenta o duda nos puedes enviar un email a <a href="mailto:fulgenll@gmail.es">fulgenll@gmail.es</a></br>
+<br>Cualquier problema con la cuenta o duda nos puedes enviar un email a <a href="mailto:nomegustaapp@gmail.es">nomegustaapp@gmail.es</a></br>
 <br>o si lo prefieres llamarnos al teléfono: <a href="tel:+34654665674">654665674</a>
 <br></br>
 <br>Un saludo :)</br>
 
-<center><a href="https://www.fullgen.ga" target="_blank"><img src="http://www.didact.es/almacen/l1_didact1.png" width="200" height="87" /><img src="http://www.didact.es/almacen/l2_blanco.png" width="50" height="43" /></a><a href="http://www.manipuladoronline.com" target="_blank"><img src="http://www.didact.es/almacen/l3_manipulador.png" width="200" height="69" /></a></center>
+
 
  ]]>
     </string>

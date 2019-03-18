@@ -26,18 +26,18 @@ public class ZSimpleMail {
     //private static final String SMTP_HOST_NAME = "smtp.gmail.com"; //can be your host server smtp@yourdomain.com
 
     //PARA HOTMAIL
-    //private static final String SMTP_HOST_NAME = "smtp-mail.outlook.com"; //can be your host server smtp@yourdomain.com
+    private static final String SMTP_HOST_NAME = "smtp-mail.outlook.com"; //can be your host server smtp@yourdomain.com
 
     //PARA SERVICIODECORREO
-    private static final String SMTP_HOST_NAME = "smtp.serviciodecorreo.es"; //can be your host server smtp@yourdomain.com
+    //private static final String SMTP_HOST_NAME = "smtp.serviciodecorreo.es"; //can be your host server smtp@yourdomain.com
 
     /////////////////////////////////
 
     //PONER EMAIL
-    private static final String SMTP_AUTH_USER = "info@didact.es"; //your login username/email
+    private static final String SMTP_AUTH_USER = "nomegustaapp@outlook.es"; //your login username/email
 
     //PONER CONTRASEÑA DEL EMAIL
-    private static final String SMTP_AUTH_PWD  = "3Naranjas3"; //password/secret
+    private static final String SMTP_AUTH_PWD  = "LuffyFull1734"; //password/secret
 
     private static Message message;
 
@@ -46,7 +46,7 @@ public class ZSimpleMail {
         // Recipient's email ID needs to be mentioned.
 
         // PONER EL EMAIL QUE ENVIA
-        String from = "info@didact.es"; //from
+        String from = "nomegustaapp@outlook.es"; //from
 
         final String username = SMTP_AUTH_USER;
         final String password = SMTP_AUTH_PWD;
@@ -63,17 +63,17 @@ public class ZSimpleMail {
         /////////////////////////////////
 
         //PARA PROTOCOLOS SSL (EL DE DIDACT ES serviciodecorreo)
-        props.put("mail.smtp.ssl.enable","true");
+        //props.put("mail.smtp.ssl.enable","true");
         //PARA PROTOCOLOS TTL (GMAIL Y HOTMAIL)
-        //props.put("mail.smtp.starttls.enable","true");
+        props.put("mail.smtp.starttls.enable","true");
 
         /////////////////////////////////
 
         //PUERTOS
         //PARA GMAIL Y HOTMAIL
-        //props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.port", "587");
         //PARA EL serviciodecorreo (DIDACT)
-        props.put("mail.smtp.port", "465");
+        //props.put("mail.smtp.port", "465");
 
         /////////////////////////////////
 
